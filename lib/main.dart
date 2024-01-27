@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:ramadan/ui/splash/SplashPage.dart';
 import 'package:ramadan/utils/initialize/ProjectInitialize.dart';
 
 GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey();
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'E-Ramadan App',
           debugShowCheckedModeBanner: false,
-          home: Container(),
+          home: SplashPage(),
           navigatorKey: mainNavigatorKey,
         );
       },

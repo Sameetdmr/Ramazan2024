@@ -37,14 +37,21 @@ dependencies:
   kartal: ^3.5.0
   easy_logger: ^0.0.2
   logger: ^2.0.2+1
+  animated_text_kit: ^4.2.2
+  intro_slider: ^4.2.1
+  hexcolor: ^3.0.1
 
   #Other
   cupertino_icons: ^1.0.6
+  google_fonts: ^6.1.0
 
 dev_dependencies:
-  very_good_analysis: ^5.1.0
+  
 
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/lottie/
+    - assets/lottie/splash_slider_lottie/
 

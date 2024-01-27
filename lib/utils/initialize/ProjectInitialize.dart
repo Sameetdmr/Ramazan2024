@@ -1,10 +1,8 @@
 // ignore_for_file: public_member_api_docs, lines_longer_than_80_chars
 
 import 'dart:async';
-import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kartal/kartal.dart';
@@ -26,7 +24,7 @@ final class ProjectInitialize {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await DeviceUtility.instance.initPackageInfo(); // System data read or kartal package
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
-
+/*
     FlutterError.onError = (FlutterErrorDetails details) async {
       await FirebaseCrashlytics.instance.log('${StackTrace.current} / ${details.exceptionAsString()}');
       await FirebaseCrashlytics.instance.recordError(details.exceptionAsString(), StackTrace.current, printDetails: true, fatal: true);
@@ -34,5 +32,6 @@ final class ProjectInitialize {
 
       exit(1);
     };
+    */
   }
 }
