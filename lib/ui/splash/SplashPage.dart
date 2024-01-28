@@ -17,7 +17,20 @@ class SplashPage extends StatelessWidget {
     return IntroSlider(
       key: UniqueKey(),
       listContentConfig: _splashPageViewModel.slides,
-      onDonePress: _splashPageViewModel.onDonePress,
+      onDonePress: () {
+        if (_splashPageViewModel.isLocationOk.value) {
+          print('Başarılı');
+        } else {
+          print('Başarısız');
+        }
+      },
+      onTabChangeCompleted: (index) {
+        _splashPageViewModel.updateCurrentIndex(index);
+      },
+      onNextPress: () async {
+        await _splashPageViewModel.handleNextPress();
+      },
+      isShowSkipBtn: false,
       renderNextBtn: Text('Sonraki',
           style: GoogleFonts.nunito(
             textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
@@ -26,16 +39,11 @@ class SplashPage extends StatelessWidget {
           style: GoogleFonts.nunito(
             textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
           )),
-      renderSkipBtn: Text('Atla',
-          style: GoogleFonts.nunito(
-            textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
-          )),
-      renderDoneBtn: TextButton(
-        onPressed: () {},
-        child: Text('Başla!',
-            style: GoogleFonts.nunito(
-              textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
-            )),
+      renderDoneBtn: Text(
+        'Başla!',
+        style: GoogleFonts.nunito(
+          textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
+        ),
       ),
     );
   }
