@@ -17,10 +17,11 @@ dependencies:
   get: ^4.6.6
 
   #Firebase
-  firebase_core: ^1.24.0
-  firebase_crashlytics: ^2.9.0
-  firebase_analytics: ^9.3.8
-  firebase_core_platform_interface: ^4.5.1
+  firebase_core: ^2.24.2
+  firebase_crashlytics: ^3.4.9
+  firebase_analytics: ^10.8.0
+  firebase_core_platform_interface: ^5.0.0
+  firebase_auth: ^4.10.0
 
   #Maps
   permission_handler: ^11.0.1
@@ -32,7 +33,7 @@ dependencies:
   http: ^1.0.0
 
   #UI Operations
-  lottie: ^1.4.1
+  lottie: ^2.7.0
   flutter_screenutil: ^5.9.0
   kartal: ^3.5.0
   easy_logger: ^0.0.2
@@ -54,4 +55,5 @@ flutter:
   assets:
     - assets/lottie/
     - assets/lottie/splash_slider_lottie/
+    - assets/image/login/
 

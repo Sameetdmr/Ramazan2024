@@ -1,0 +1,4 @@
+enum LoginTypeEnum {
+  EMAIL,
+  PASSWORD,
+}
