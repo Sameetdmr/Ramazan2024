@@ -1,0 +1,5 @@
+enum CustomSnackBarType {
+  SUCCESS,
+
+  ERROR
+}

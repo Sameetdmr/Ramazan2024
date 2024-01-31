@@ -19,6 +19,7 @@ class CustomTextField extends StatelessWidget {
         color: Colors.grey.shade100,
       ),
       child: TextFormField(
+        autofocus: true,
         controller: textEditingController,
         obscureText: obscureText,
         validator: validator,

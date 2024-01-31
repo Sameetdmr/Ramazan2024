@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kartal/kartal.dart';
+import 'package:ramadan/ui/common/button/CustomLoginButton.dart';
+
 import 'package:ramadan/ui/login/LoginPageViewModel.dart';
-import 'package:ramadan/ui/login/components/CustomLoginButton.dart';
 import 'package:ramadan/ui/login/components/CustomLoginButtonType.dart';
 import 'package:ramadan/ui/login/components/CustomTextField.dart';
 import 'package:ramadan/ui/login/components/SocialLoginButton.dart';
-
+import 'package:ramadan/ui/login/passwordReset/PasswordResetPage.dart';
+import 'package:ramadan/ui/login/register/RegisterPage.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/image_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
+import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
 
 class LoginPage extends StatelessWidget {
@@ -23,12 +26,13 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     _loginPageViewModel = Get.put(LoginPageViewModel());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: ColorBackgroundConstant.white,
       appBar: AppBar(
         backgroundColor: ColorBackgroundConstant.white,
         elevation: 0,
         title: Text(
-          'Sign In',
+          'Giriş Yap',
           style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -36,96 +40,131 @@ class LoginPage extends StatelessWidget {
       body: Padding(
         padding: context.padding.low,
         child: Form(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Spacer(),
-              CustomTextField(
-                textEditingController: _loginPageViewModel.emailTextController,
-                hintText: 'Email-Adress',
-                prefixIcon: Icons.mail_outlined,
-                validator: (value) {
-                  final result = LoginValidator.validateLogin(value, LoginTypeEnum.EMAIL);
-                  if (result != null) {
-                    return result;
-                  }
-                  return null;
-                },
-                onChanged: (String? value) {
-                  _loginPageViewModel.loginTextFormFieldOnChanged(value, _loginPageViewModel.emailTextController, LoginTypeEnum.EMAIL);
-                },
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Obx(
-                () => CustomTextField(
-                  textEditingController: _loginPageViewModel.passwordTextController,
-                  hintText: 'Password',
-                  prefixIcon: Icons.lock_outlined,
-                  suffixIcon: InkWell(
-                      onTap: () {
-                        _loginPageViewModel.obscureText.value = !_loginPageViewModel.obscureText.value;
-                      },
-                      child: Icon(_loginPageViewModel.obscureText.value ? Icons.visibility_outlined : Icons.visibility_off_outlined)),
-                  obscureText: !_loginPageViewModel.obscureText.value,
+          key: _loginPageViewModel.formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomTextField(
+                  textEditingController: _loginPageViewModel.emailTextController,
+                  hintText: 'E-posta Adresi',
+                  prefixIcon: Icons.mail_outlined,
                   validator: (value) {
-                    final result = LoginValidator.validateLogin(value, LoginTypeEnum.PASSWORD);
-                    if (result != null) {
-                      return result;
+                    if (value != null) {
+                      final result = LoginValidator.validateLogin(value, LoginTypeEnum.EMAIL);
+                      if (result != null) {
+                        return result;
+                      }
+                      return null;
+                    } else {
+                      return null;
                     }
-                    return null;
                   },
                   onChanged: (String? value) {
-                    _loginPageViewModel.loginTextFormFieldOnChanged(
-                      value,
-                      _loginPageViewModel.passwordTextController,
-                      LoginTypeEnum.PASSWORD,
-                    );
+                    _loginPageViewModel.loginTextFormFieldOnChanged(value, _loginPageViewModel.emailTextController, LoginTypeEnum.EMAIL);
                   },
                 ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CustomButton.getButton(
-                    onPressed: () {},
-                    customLoginButtonType: CustomLoginButtonType.TEXT,
-                    text: 'Forgot password?',
-                    textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Obx(
+                  () => CustomTextField(
+                    textEditingController: _loginPageViewModel.passwordTextController,
+                    hintText: 'Şifre',
+                    prefixIcon: Icons.lock_outlined,
+                    suffixIcon: InkWell(
+                        onTap: () {
+                          _loginPageViewModel.obscureText.value = !_loginPageViewModel.obscureText.value;
+                        },
+                        child: Icon(_loginPageViewModel.obscureText.value ? Icons.visibility_outlined : Icons.visibility_off_outlined)),
+                    obscureText: !_loginPageViewModel.obscureText.value,
+                    validator: (value) {
+                      if (value != null) {
+                        final result = LoginValidator.validateLogin(value, LoginTypeEnum.PASSWORD);
+                        if (result != null) {
+                          return result;
+                        }
+                        return null;
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (String? value) {
+                      _loginPageViewModel.loginTextFormFieldOnChanged(value, _loginPageViewModel.passwordTextController, LoginTypeEnum.PASSWORD);
+                    },
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              CustomButton.getButton(
-                onPressed: () async {
-                  await _loginPageViewModel.signInWithEmailAndPassword(_loginPageViewModel.emailTextController.text, _loginPageViewModel.passwordTextController.text);
-                },
-                customLoginButtonType: CustomLoginButtonType.PRIMARY,
-                text: 'Sign In',
-                textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.white),
-              ),
-              _CustomDivider(),
-              _SocialLoginRow(),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Not registered yet? '),
-                  CustomButton.getButton(
-                    onPressed: () {},
-                    customLoginButtonType: CustomLoginButtonType.TEXT,
-                    text: 'Create Account',
-                    textStyle: context.textTheme.bodyMedium?.copyWith(decoration: TextDecoration.underline, color: ColorTextConstant.black, fontWeight: FontWeight.bold),
-                  )
-                ],
-              )
-            ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomButton.getButton(
+                      onPressed: () async {
+                        dynamic result = await showModalBottomSheet<dynamic>(
+                            context: context,
+                            isScrollControlled: true,
+                            isDismissible: false,
+                            builder: (context) {
+                              return PasswordResetScreen(
+                                textEditingController: _loginPageViewModel.forgotPasswordTextController,
+                                formKey: _loginPageViewModel.forgotPasswordFormKey,
+                              );
+                            });
+                        if (result[0] != null && result[0]) {
+                          await _loginPageViewModel.resetPassword(context, result[1].toString().trim());
+                        } else {
+                          print('false');
+                        }
+                      },
+                      customLoginButtonType: CustomLoginButtonType.TEXT,
+                      text: 'Şifremi unuttum',
+                      textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomButton.getButton(
+                        onPressed: () async {
+                          if (_loginPageViewModel.formKey.currentState!.validate()) {
+                            await _loginPageViewModel.signInWithEmailAndPassword(context, _loginPageViewModel.emailTextController.text, _loginPageViewModel.passwordTextController.text);
+                          }
+                        },
+                        customLoginButtonType: CustomLoginButtonType.PRIMARY,
+                        text: 'Giriş Yap',
+                        textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.white),
+                      ),
+                    ),
+                  ],
+                ),
+                _CustomDivider(),
+                _SocialLoginRow(
+                  googleOnTap: () async {
+                    await _loginPageViewModel.signInGoogle(context);
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Hesabınız yok mu? '),
+                    CustomButton.getButton(
+                      onPressed: () {
+                        CustomNavigator().pushToMain(RegisterPage());
+                      },
+                      customLoginButtonType: CustomLoginButtonType.TEXT,
+                      text: 'Ücretsiz Kayıt Olun',
+                      textStyle: context.textTheme.bodyMedium?.copyWith(decoration: TextDecoration.underline, color: ColorTextConstant.black, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -134,20 +173,26 @@ class LoginPage extends StatelessWidget {
 }
 
 class _SocialLoginRow extends StatelessWidget {
-  const _SocialLoginRow();
+  final void Function() googleOnTap;
+  const _SocialLoginRow({
+    Key? key,
+    required this.googleOnTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        /*
         SocialLoginButton(
-          onTap: () {},
+          onTap: facebookOnTap,
           imageUrl: AppImageConstant.facebook.toPng,
         ),
         SizedBox(width: 30.w),
+        */
         SocialLoginButton(
-          onTap: () {},
+          onTap: googleOnTap,
           imageUrl: AppImageConstant.google.toPng,
         ),
       ],
@@ -169,7 +214,7 @@ class _CustomDivider extends StatelessWidget {
           ),
           Padding(
             padding: context.padding.medium,
-            child: Text("Or"),
+            child: Text("VEYA"),
           ),
           Expanded(
             child: Divider(),

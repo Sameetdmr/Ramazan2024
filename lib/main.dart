@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/ui/login/LoginPage.dart';
+import 'package:ramadan/ui/login/register/RegisterPage.dart';
+import 'package:ramadan/ui/slider/SliderPage.dart';
 import 'package:ramadan/ui/splash/SplashPage.dart';
 import 'package:ramadan/utils/initialize/ProjectInitialize.dart';
 
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'E-Ramadan App',
           debugShowCheckedModeBanner: false,
-          home: LoginPage(),
+          home: SplashPage(),
           navigatorKey: mainNavigatorKey,
         );
       },

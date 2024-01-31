@@ -2,6 +2,7 @@
 
 import 'package:get/get.dart';
 import 'package:ramadan/services/common/ExceptionHandlingService.dart';
+import 'package:ramadan/services/common/core/AuthService.dart';
 
 class ServiceLocator {
   factory ServiceLocator() {
@@ -17,5 +18,6 @@ class ServiceLocator {
 
   void init() {
     Get.lazyPut<IExceptionHandlingService>(() => ExceptionHandlingService(), fenix: true);
+    Get.lazyPut<IAuthService>(() => AuthService(), fenix: true);
   }
 }

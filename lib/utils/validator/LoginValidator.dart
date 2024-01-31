@@ -19,12 +19,23 @@ class LoginValidator {
     return null;
   }
 
-  static String? validateLogin(value, LoginTypeEnum loginTypeEnum) {
+  static String? validatePasswordConfirmation(String password, String? confirmPassword) {
+    if (confirmPassword == null || confirmPassword.isEmpty) {
+      return 'Şifre tekrar boş olamaz';
+    } else if (confirmPassword != password) {
+      return 'Şifreler uyuşmuyor';
+    }
+    return null;
+  }
+
+  static String? validateLogin(String value, LoginTypeEnum loginTypeEnum, [String? confirmPassword]) {
     switch (loginTypeEnum) {
       case LoginTypeEnum.EMAIL:
         return LoginValidator.validateEmail(value);
       case LoginTypeEnum.PASSWORD:
         return LoginValidator.validatePassword(value);
+      case LoginTypeEnum.CONFIRM:
+        return LoginValidator.validatePasswordConfirmation(value, confirmPassword);
     }
   }
 }

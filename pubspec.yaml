@@ -22,6 +22,8 @@ dependencies:
   firebase_analytics: ^10.8.0
   firebase_core_platform_interface: ^5.0.0
   firebase_auth: ^4.10.0
+  google_sign_in: ^6.1.6
+  flutter_facebook_auth: ^6.0.4
 
   #Maps
   permission_handler: ^11.0.1
@@ -41,6 +43,7 @@ dependencies:
   animated_text_kit: ^4.2.2
   intro_slider: ^4.2.1
   hexcolor: ^3.0.1
+  another_flushbar: ^1.12.30
 
   #Other
   cupertino_icons: ^1.0.6

@@ -1,17 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
+import 'package:ramadan/ui/home/HomePage.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
+import 'package:ramadan/utils/navigation/CustomNavigator.dart';
+import 'package:ramadan/utils/popups/CustomSnackBar.dart';
+import 'package:ramadan/utils/popups/CustomSnackBarType.dart';
+import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
 
 class LoginPageViewModel extends ViewModelBase {
+  // TextEditingController
   final TextEditingController emailTextController = new TextEditingController();
   final TextEditingController passwordTextController = new TextEditingController();
+  final TextEditingController forgotPasswordTextController = new TextEditingController();
 
+  // Form
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
+
+  // Password Icon Config
   RxBool obscureText = false.obs;
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  IAuthService authService = ServiceLocator().get<IAuthService>();
 
   LoginPageViewModel() {
     initPage();
@@ -33,21 +46,43 @@ class LoginPageViewModel extends ViewModelBase {
       final result = LoginValidator.validateLogin(value, loginTypeEnum);
       if (result == null) {
         controller.text = value;
-        print(controller.text);
       }
     }
   }
 
-  Future<User?> signInWithEmailAndPassword(String email, String password) async {
+  Future<void> signInWithEmailAndPassword(BuildContext context, String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return userCredential.user;
+      User? user = await authService.signInWithEmailAndPassword(email, password);
+      if (user != null) {
+        CustomNavigator().pushAndRemoveUntil(HomePage());
+      } else {
+        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, 'E-posta & Şifrenizi kontrol ediniz.');
+      }
     } catch (e) {
-      print("Hata: $e");
-      return null;
+      exceptionHandlingService.handleException(e);
+    }
+  }
+
+  Future<void> signInGoogle(BuildContext context) async {
+    try {
+      User? user = await authService.signInWithGoogle();
+      if (user != null) {
+        CustomNavigator().pushAndRemoveUntil(HomePage());
+      } else {
+        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, 'Tekrar deneyiniz.');
+      }
+    } catch (e) {
+      exceptionHandlingService.handleException(e);
+    }
+  }
+
+  Future<void> resetPassword(BuildContext context, String email) async {
+    try {
+      await authService.resetPassword(email);
+      CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, 'E-postanızı kontrol ediniz.');
+    } catch (e) {
+      exceptionHandlingService.handleException(e);
+      CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, 'Tekrar deneyiniz.');
     }
   }
 }
