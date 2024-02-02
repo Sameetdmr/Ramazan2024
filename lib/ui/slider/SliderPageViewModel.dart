@@ -63,6 +63,7 @@ class SliderPageViewModel extends ViewModelBase {
     slides.add(
       ContentConfig(
           title: StringSplashSliderConstant.splashSlider3TitleText,
+          maxLineTitle: 3,
           styleTitle: GoogleFonts.nunito(
             textStyle: context.general.textTheme.bodyMedium?.copyWith(
               color: ColorTextConstant.forestMaid,

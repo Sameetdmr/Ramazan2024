@@ -13,6 +13,7 @@ import 'package:ramadan/ui/login/passwordReset/PasswordResetPage.dart';
 import 'package:ramadan/ui/login/register/RegisterPage.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/image_constant.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
@@ -32,7 +33,7 @@ class LoginPage extends StatelessWidget {
         backgroundColor: ColorBackgroundConstant.white,
         elevation: 0,
         title: Text(
-          'Giriş Yap',
+          StringLoginConstant.loginAppBarTitle,
           style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -47,7 +48,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 CustomTextField(
                   textEditingController: _loginPageViewModel.emailTextController,
-                  hintText: 'E-posta Adresi',
+                  hintText: StringLoginConstant.loginEmailHintText,
                   prefixIcon: Icons.mail_outlined,
                   validator: (value) {
                     if (value != null) {
@@ -70,7 +71,7 @@ class LoginPage extends StatelessWidget {
                 Obx(
                   () => CustomTextField(
                     textEditingController: _loginPageViewModel.passwordTextController,
-                    hintText: 'Şifre',
+                    hintText: StringLoginConstant.loginPasswordHintText,
                     prefixIcon: Icons.lock_outlined,
                     suffixIcon: InkWell(
                         onTap: () {
@@ -119,7 +120,7 @@ class LoginPage extends StatelessWidget {
                         }
                       },
                       customLoginButtonType: CustomLoginButtonType.TEXT,
-                      text: 'Şifremi unuttum',
+                      text: StringLoginConstant.loginForgotPasswordButtonText,
                       textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black),
                     ),
                   ],
@@ -137,7 +138,7 @@ class LoginPage extends StatelessWidget {
                           }
                         },
                         customLoginButtonType: CustomLoginButtonType.PRIMARY,
-                        text: 'Giriş Yap',
+                        text: StringLoginConstant.loginAppBarTitle,
                         textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.white),
                       ),
                     ),
@@ -152,13 +153,13 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Hesabınız yok mu? '),
+                    Text(StringLoginConstant.loginNewUserText1),
                     CustomButton.getButton(
                       onPressed: () {
                         CustomNavigator().pushToMain(RegisterPage());
                       },
                       customLoginButtonType: CustomLoginButtonType.TEXT,
-                      text: 'Ücretsiz Kayıt Olun',
+                      text: StringLoginConstant.loginNewUserText2,
                       textStyle: context.textTheme.bodyMedium?.copyWith(decoration: TextDecoration.underline, color: ColorTextConstant.black, fontWeight: FontWeight.bold),
                     )
                   ],
@@ -214,7 +215,7 @@ class _CustomDivider extends StatelessWidget {
           ),
           Padding(
             padding: context.padding.medium,
-            child: Text("VEYA"),
+            child: Text(StringLoginConstant.loginDividerText),
           ),
           Expanded(
             child: Divider(),

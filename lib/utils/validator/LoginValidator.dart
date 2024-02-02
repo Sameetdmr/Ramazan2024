@@ -1,29 +1,30 @@
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 
 class LoginValidator {
   static String? validateEmail(String value) {
     if (value.isEmpty) {
-      return 'E-posta boş olamaz.';
+      return StringCommonConstant.emptyEmailError;
     } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$').hasMatch(value)) {
-      return 'Geçerli bir e-posta giriniz.';
+      return StringCommonConstant.invalidEmailError;
     }
     return null;
   }
 
   static String? validatePassword(String value) {
     if (value.isEmpty) {
-      return 'Şifre boş olamaz.';
+      return StringCommonConstant.emptyPasswordError;
     } else if (value.length < 6) {
-      return 'Şifre en az 6 karakter olmalıdır.';
+      return StringCommonConstant.emptyPasswordError;
     }
     return null;
   }
 
   static String? validatePasswordConfirmation(String password, String? confirmPassword) {
     if (confirmPassword == null || confirmPassword.isEmpty) {
-      return 'Şifre tekrar boş olamaz';
+      return StringCommonConstant.emptyPasswordConfirmationError;
     } else if (confirmPassword != password) {
-      return 'Şifreler uyuşmuyor';
+      return StringCommonConstant.mismatchedPasswordError;
     }
     return null;
   }

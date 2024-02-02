@@ -8,6 +8,7 @@ import 'package:ramadan/ui/common/button/CustomLoginButton.dart';
 import 'package:ramadan/ui/login/components/CustomLoginButtonType.dart';
 import 'package:ramadan/ui/login/components/CustomTextField.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
@@ -47,11 +48,11 @@ class PasswordResetScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10.h),
-              Text('Şifrenizi sıfırlamak için e-posta adresinizi giriniz:', style: context.textTheme.bodyMedium),
+              Text(StringLoginConstant.passwordResetEmailText, style: context.textTheme.bodyMedium),
               SizedBox(height: 20.h),
               CustomTextField(
                 textEditingController: textEditingController,
-                hintText: 'E-posta Adresi',
+                hintText: StringLoginConstant.passwordResetEmailHintText,
                 prefixIcon: Icons.mail_outlined,
                 suffixIcon: null,
                 validator: (value) {
@@ -77,7 +78,7 @@ class PasswordResetScreen extends StatelessWidget {
                 },
                 customLoginButtonType: CustomLoginButtonType.PRIMARY,
                 textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.white),
-                text: 'Şifre Sıfırla',
+                text: StringLoginConstant.passwordResetApplyButton,
               ),
               SizedBox(height: 20.h),
             ],

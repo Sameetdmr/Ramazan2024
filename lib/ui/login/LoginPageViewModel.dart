@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
 import 'package:ramadan/ui/home/HomePage.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
+import 'package:ramadan/utils/popups/CustomDialog.dart';
 import 'package:ramadan/utils/popups/CustomSnackBar.dart';
 import 'package:ramadan/utils/popups/CustomSnackBarType.dart';
 import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
@@ -52,11 +54,14 @@ class LoginPageViewModel extends ViewModelBase {
 
   Future<void> signInWithEmailAndPassword(BuildContext context, String email, String password) async {
     try {
+      CustomDialog.showLoadingDialog();
       User? user = await authService.signInWithEmailAndPassword(email, password);
       if (user != null) {
+        CustomDialog.dismiss();
         CustomNavigator().pushAndRemoveUntil(HomePage());
       } else {
-        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, 'E-posta & Şifrenizi kontrol ediniz.');
+        CustomDialog.dismiss();
+        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorEmailPasswordControlText);
       }
     } catch (e) {
       exceptionHandlingService.handleException(e);
@@ -69,7 +74,7 @@ class LoginPageViewModel extends ViewModelBase {
       if (user != null) {
         CustomNavigator().pushAndRemoveUntil(HomePage());
       } else {
-        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, 'Tekrar deneyiniz.');
+        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorRetryText);
       }
     } catch (e) {
       exceptionHandlingService.handleException(e);
@@ -79,10 +84,10 @@ class LoginPageViewModel extends ViewModelBase {
   Future<void> resetPassword(BuildContext context, String email) async {
     try {
       await authService.resetPassword(email);
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, 'E-postanızı kontrol ediniz.');
+      CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringLoginConstant.snackbarErrorEmailControlText);
     } catch (e) {
       exceptionHandlingService.handleException(e);
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, 'Tekrar deneyiniz.');
+      CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorRetryText);
     }
   }
 }

@@ -49,6 +49,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   google_fonts: ^6.1.0
 
+  #Database
+  shared_preferences: ^2.2.2
+
 dev_dependencies:
   
 

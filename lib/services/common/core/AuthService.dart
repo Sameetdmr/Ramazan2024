@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
+import 'package:ramadan/utils/exceptions/CustomException.dart';
 
 abstract class IAuthService {
   Future<bool> isUserLoggedIn();
   Future<User?> signInWithEmailAndPassword(String email, String password);
   Future<User?> signInWithGoogle();
-  Future<User?> signInWithFacebook();
   Future<void> signOut();
   Future<void> resetPassword(String email);
   Future<UserCredential?> register(String email, String password);
@@ -35,13 +35,13 @@ class AuthService implements IAuthService {
       }
     } catch (e) {
       if (e is FirebaseAuthException) {
-        if (e.code == 'invalid-credential') {
+        if (e.code == StringCommonConstant.firebaseLoginErrorCode) {
           return null;
         } else {
-          throw 'Giriş yapılırken bir hata oluştu: ${e.message}';
+          throw (StringCommonConstant.firebaseLoginError);
         }
       }
-      throw e;
+      throw CustomException(StringCommonConstant.firebaseLoginError);
     }
   }
 
@@ -63,25 +63,7 @@ class AuthService implements IAuthService {
         return null;
       }
     } catch (e) {
-      throw e;
-    }
-  }
-
-  @override
-  Future<User?> signInWithFacebook() async {
-    try {
-      final LoginResult result = await FacebookAuth.instance.login();
-
-      final AuthCredential credential = FacebookAuthProvider.credential(result.accessToken!.token);
-
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
-      if (userCredential.user != null) {
-        return userCredential.user;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      throw e;
+      throw CustomException(StringCommonConstant.googleLoginError);
     }
   }
 
@@ -95,7 +77,7 @@ class AuthService implements IAuthService {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      throw e;
+      throw CustomException(StringCommonConstant.resetPasswordError);
     }
   }
 
@@ -110,7 +92,7 @@ class AuthService implements IAuthService {
         return null;
       }
     } catch (e) {
-      throw e;
+      throw CustomException(StringCommonConstant.registerError);
     }
   }
 }

@@ -6,6 +6,7 @@ import 'package:kartal/kartal.dart';
 import 'package:ramadan/ui/login/LoginPage.dart';
 import 'package:ramadan/ui/slider/SliderPageViewModel.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 
 class SliderPage extends StatelessWidget {
@@ -32,16 +33,16 @@ class SliderPage extends StatelessWidget {
         await _sliderPageViewModel.handleNextPress();
       },
       isShowSkipBtn: false,
-      renderNextBtn: Text('Sonraki',
+      renderNextBtn: Text(StringSplashSliderConstant.splashSliderNextButtonText,
           style: GoogleFonts.nunito(
             textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
           )),
-      renderPrevBtn: Text('Önceki',
+      renderPrevBtn: Text(StringSplashSliderConstant.splashSliderPrevButtonText,
           style: GoogleFonts.nunito(
             textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
           )),
       renderDoneBtn: Text(
-        'Başla!',
+        StringSplashSliderConstant.splashSliderDoneButtonText,
         style: GoogleFonts.nunito(
           textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
         ),

@@ -7,6 +7,7 @@ import 'package:ramadan/ui/login/components/CustomLoginButtonType.dart';
 import 'package:ramadan/ui/login/components/CustomTextField.dart';
 import 'package:ramadan/ui/login/register/RegisterPageViewModel.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
@@ -33,7 +34,7 @@ class RegisterPage extends StatelessWidget {
         backgroundColor: ColorBackgroundConstant.white,
         elevation: 0,
         title: Text(
-          'Kayıt Ol',
+          StringLoginConstant.registerAppBarTitle,
           style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -46,7 +47,7 @@ class RegisterPage extends StatelessWidget {
             children: [
               CustomTextField(
                 textEditingController: _registerPageViewModel.emailTextController,
-                hintText: 'E-posta Adresi',
+                hintText: StringLoginConstant.registerEmailHintText,
                 prefixIcon: Icons.mail_outlined,
                 validator: (value) {
                   if (value != null) {
@@ -67,7 +68,7 @@ class RegisterPage extends StatelessWidget {
               Obx(
                 () => CustomTextField(
                   textEditingController: _registerPageViewModel.passwordTextController,
-                  hintText: 'Şifre oluşturun',
+                  hintText: StringLoginConstant.registerCreatePasswordHintText,
                   prefixIcon: Icons.lock_outlined,
                   suffixIcon: InkWell(
                       onTap: () {
@@ -95,7 +96,7 @@ class RegisterPage extends StatelessWidget {
               Obx(
                 () => CustomTextField(
                   textEditingController: _registerPageViewModel.confirmPasswordController,
-                  hintText: 'Şifrenizi onaylayın',
+                  hintText: StringLoginConstant.registerConfirmPasswordHintText,
                   prefixIcon: Icons.lock_outlined,
                   suffixIcon: InkWell(
                       onTap: () {
@@ -128,7 +129,7 @@ class RegisterPage extends StatelessWidget {
                         }
                       },
                       customLoginButtonType: CustomLoginButtonType.PRIMARY,
-                      text: 'Kayıt ol',
+                      text: StringLoginConstant.registerAppBarTitle,
                       textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.white),
                     ),
                   ),

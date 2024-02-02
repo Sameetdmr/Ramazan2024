@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ramadan/main.dart';
 
 class CustomNavigator {
   factory CustomNavigator() {
@@ -11,14 +12,17 @@ class CustomNavigator {
   static final CustomNavigator _singleton = CustomNavigator._internal();
 
   void pushToMain(Widget widget) {
+    Get.addKey(mainNavigatorKey);
     Get.to<void>(widget);
   }
 
   void popFromMain([dynamic result]) {
+    Get.addKey(mainNavigatorKey);
     Get.back<void>(result: result);
   }
 
   void pushAndRemoveUntil(Widget widget) {
-    Get.offAll<void>(widget);
+    Get.addKey(mainNavigatorKey);
+    Get.off<void>(widget);
   }
 }

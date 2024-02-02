@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
 import 'package:ramadan/ui/login/LoginPage.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/popups/CustomSnackBar.dart';
 import 'package:ramadan/utils/popups/CustomSnackBarType.dart';
@@ -28,9 +29,9 @@ class HomePageViewModel extends ViewModelBase {
     try {
       await authService.signOut();
       CustomNavigator().pushAndRemoveUntil(LoginPage());
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, 'Çıkış yapıldı.');
+      CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringHomeConstant.successSignOutText);
     } catch (e) {
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, 'Çıkış yapılırken hata oluştu.');
+      CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringHomeConstant.errorSignOutText);
       throw e;
     }
   }

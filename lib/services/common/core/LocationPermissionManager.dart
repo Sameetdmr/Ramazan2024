@@ -1,5 +1,5 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/exceptions/CustomException.dart';
 
 class LocationPermissionManager {
@@ -24,7 +24,7 @@ class LocationPermissionManager {
 
       return false;
     } catch (e) {
-      throw CustomException('Check Location Permission Error');
+      throw CustomException(StringCommonConstant.checkLocationPermissionError);
     }
   }
 
@@ -40,7 +40,7 @@ class LocationPermissionManager {
         return null;
       }
     } catch (e) {
-      throw CustomException('Check Get Current Location Error');
+      throw CustomException(StringCommonConstant.getCurrentLocationError);
     }
   }
 }

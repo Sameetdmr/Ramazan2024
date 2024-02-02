@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:ramadan/ui/login/LoginPage.dart';
-import 'package:ramadan/ui/login/register/RegisterPage.dart';
-import 'package:ramadan/ui/slider/SliderPage.dart';
 import 'package:ramadan/ui/splash/SplashPage.dart';
 import 'package:ramadan/utils/initialize/ProjectInitialize.dart';
+import 'package:ramadan/utils/localization/CustomTranslations.dart';
 
 GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey();
 
@@ -28,6 +26,9 @@ class MyApp extends StatelessWidget {
           title: 'E-Ramadan App',
           debugShowCheckedModeBanner: false,
           home: SplashPage(),
+          translations: CustomTranslations(),
+          locale: Get.deviceLocale,
+          fallbackLocale: Locale('en', 'US'),
           navigatorKey: mainNavigatorKey,
         );
       },

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/popups/CustomSnackBar.dart';
 import 'package:ramadan/utils/popups/CustomSnackBarType.dart';
@@ -38,16 +39,16 @@ class RegisterPageViewModel extends ViewModelBase {
 
       if (userCredential != null) {
         CustomNavigator().popFromMain();
-        CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, 'Kaydınız başarı ile oluşturuldu.');
+        CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringLoginConstant.snackbarSuccessRegisterText);
       } else {
-        CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, 'Kaydınız sırasında hata ile karşılaşıldı.');
+        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorEmailControlText);
 
         emailTextController.clear();
         passwordTextController.clear();
         confirmPasswordController.clear();
       }
     } catch (e) {
-      print('Kayıt sırasında bir hata oluştu: $e');
+      exceptionHandlingService.handleException(e);
     }
   }
 }
