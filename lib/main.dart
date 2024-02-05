@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/ui/splash/SplashPage.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/initialize/ProjectInitialize.dart';
 import 'package:ramadan/utils/localization/CustomTranslations.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (__, _) {
         return GetMaterialApp(
-          title: 'E-Ramadan App',
+          title: StringCommonConstant.appName,
           debugShowCheckedModeBanner: false,
           home: SplashPage(),
           translations: CustomTranslations(),

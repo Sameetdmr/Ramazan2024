@@ -69,6 +69,9 @@ class StringCommonConstant {
   static String get getCurrentLocationError => CustomTranslations.getText(CustomTranslationKeys.getCurrentLocationError);
   static String get isFirstOpenKey => CustomTranslations.getText(CustomTranslationKeys.isFirstOpenKey);
 
+  // Remote Config
+  static String get appVersion => CustomTranslations.getText(CustomTranslationKeys.appVersion);
+
   // Validation
   static String get emptyEmailError => CustomTranslations.getText(CustomTranslationKeys.emptyEmailError);
   static String get invalidEmailError => CustomTranslations.getText(CustomTranslationKeys.invalidEmailError);
@@ -76,6 +79,15 @@ class StringCommonConstant {
   static String get shortPasswordError => CustomTranslations.getText(CustomTranslationKeys.shortPasswordError);
   static String get emptyPasswordConfirmationError => CustomTranslations.getText(CustomTranslationKeys.emptyPasswordConfirmationError);
   static String get mismatchedPasswordError => CustomTranslations.getText(CustomTranslationKeys.mismatchedPasswordError);
+
+  // Rest Service Error
+  static String get anErrorOccured => CustomTranslations.getText(CustomTranslationKeys.anErrorOccured);
+
+  // Custom Dialog
+  static String get submit => CustomTranslations.getText(CustomTranslationKeys.submit);
+
+  // App
+  static String get appName => CustomTranslations.getText(CustomTranslationKeys.appName);
 }
 
 @immutable
@@ -85,4 +97,182 @@ class StringHomeConstant {
   //
   static String get successSignOutText => CustomTranslations.getText(CustomTranslationKeys.successSignOutText);
   static String get errorSignOutText => CustomTranslations.getText(CustomTranslationKeys.errorSignOutText);
+
+  //
+  static String get coordinateError => CustomTranslations.getText(CustomTranslationKeys.coordinateError);
+  static String get prayerTimesError => CustomTranslations.getText(CustomTranslationKeys.prayerTimesError);
+  static String get loginError => CustomTranslations.getText(CustomTranslationKeys.loginError);
+}
+
+class StringCityConstant {
+  const StringCityConstant._();
+
+  //
+  static List<String> turkeyCities = [
+    "ADANA",
+    "ADIYAMAN",
+    "AFYONKARAHİSAR",
+    "AĞRI",
+    "AKSARAY",
+    "AMASYA",
+    "ANKARA",
+    "ANTALYA",
+    "ARDAHAN",
+    "ARTVİN",
+    "AYDIN",
+    "BALIKESİR",
+    "BARTIN",
+    "BATMAN",
+    "BAYBURT",
+    "BİLECİK",
+    "BİNGÖL",
+    "BİTLİS",
+    "BOLU",
+    "BURDUR",
+    "BURSA",
+    "ÇANAKKALE",
+    "ÇANKIRI",
+    "ÇORUM",
+    "DENİZLİ",
+    "DİYARBAKIR",
+    "DÜZCE",
+    "EDİRNE",
+    "ELAZIĞ",
+    "ERZİNCAN",
+    "ERZURUM",
+    "ESKİŞEHİR",
+    "GAZİANTEP",
+    "GİRESUN",
+    "GÜMÜŞHANE",
+    "HAKKARİ",
+    "HATAY",
+    "IĞDIR",
+    "ISPARTA",
+    "İSTANBUL",
+    "İZMİR",
+    "KAHRAMANMARAŞ",
+    "KARABÜK",
+    "KARAMAN",
+    "KARS",
+    "KASTAMONU",
+    "KAYSERİ",
+    "KIRIKKALE",
+    "KIRKLARELİ",
+    "KIRŞEHİR",
+    "KİLİS",
+    "KOCAELİ",
+    "KONYA",
+    "KÜTAHYA",
+    "MALATYA",
+    "MANİSA",
+    "MARDİN",
+    "MERSİN",
+    "MUĞLA",
+    "MUŞ",
+    "NEVŞEHİR",
+    "NİĞDE",
+    "ORDU",
+    "OSMANİYE",
+    "RİZE",
+    "SAKARYA",
+    "SAMSUN",
+    "SİİRT",
+    "SİNOP",
+    "SİVAS",
+    "ŞANLIURFA",
+    "ŞIRNAK",
+    "TEKİRDAĞ",
+    "TOKAT",
+    "TRABZON",
+    "TUNCELİ",
+    "UŞAK",
+    "VAN",
+    "YALOVA",
+    "YOZGAT",
+    "ZONGULDAK"
+  ];
+
+  static List<String> turkeyCitiesLowercase = const [
+    "adana",
+    "adiyaman",
+    "afyonkarahisar",
+    "agri",
+    "aksaray",
+    "amasya",
+    "ankara",
+    "antalya",
+    "ardahan",
+    "artvin",
+    "aydin",
+    "balikesir",
+    "bartin",
+    "batman",
+    "bayburt",
+    "bilecik",
+    "bingol",
+    "bitlis",
+    "bolu",
+    "burdur",
+    "bursa",
+    "canakkale",
+    "cankiri",
+    "corum",
+    "denizli",
+    "diyarbakir",
+    "duzce",
+    "edirne",
+    "elazig",
+    "erzincan",
+    "erzurum",
+    "eskisehir",
+    "gaziantep",
+    "giresun",
+    "gumushane",
+    "hakkari",
+    "hatay",
+    "igdir",
+    "isparta",
+    "istanbul",
+    "izmir",
+    "kahramanmaras",
+    "karabuk",
+    "karaman",
+    "kars",
+    "kastamonu",
+    "kayseri",
+    "kirikkale",
+    "kirklareli",
+    "kirsehir",
+    "kilis",
+    "kocaeli",
+    "konya",
+    "kutahya",
+    "malatya",
+    "manisa",
+    "mardin",
+    "mersin",
+    "mugla",
+    "mus",
+    "nevsehir",
+    "nigde",
+    "ordu",
+    "osmaniye",
+    "rize",
+    "sakarya",
+    "samsun",
+    "siirt",
+    "sinop",
+    "sivas",
+    "sanliurfa",
+    "sirnak",
+    "tekirdag",
+    "tokat",
+    "trabzon",
+    "tunceli",
+    "usak",
+    "van",
+    "yalova",
+    "yozgat",
+    "zonguldak"
+  ];
 }

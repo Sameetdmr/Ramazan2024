@@ -23,7 +23,7 @@ class SliderPage extends StatelessWidget {
         if (_sliderPageViewModel.isLocationOk.value) {
           CustomNavigator().pushToMain(LoginPage());
         } else {
-          print('Başarısız');
+          //Todo? İzin vermesi gerektiğini gösteren dialog.
         }
       },
       onTabChangeCompleted: (index) {

@@ -11,9 +11,9 @@ class CustomNavigator {
   CustomNavigator._internal();
   static final CustomNavigator _singleton = CustomNavigator._internal();
 
-  void pushToMain(Widget widget) {
+  Future<T?> pushToMain<T>(Widget widget) async {
     Get.addKey(mainNavigatorKey);
-    Get.to<void>(widget);
+    return await Get.to<T>(widget);
   }
 
   void popFromMain([dynamic result]) {

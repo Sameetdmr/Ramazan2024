@@ -52,6 +52,18 @@ class CustomTranslationKeys {
   static const String getCurrentLocationError = "getCurrentLocationError";
   static const String isFirstOpenKey = "isFirstOpenKey";
 
+  // Remote Config
+  static const String appVersion = "appVersion";
+
+  // Rest Service Error
+  static const String anErrorOccured = "anErrorOccured";
+
+  // Custom Dialog
+  static const String submit = "submit";
+
+  // App
+  static const String appName = "appName";
+
   // Validation
   static const String emptyEmailError = 'emptyEmailError';
   static const String invalidEmailError = 'invalidEmailError';
@@ -60,7 +72,10 @@ class CustomTranslationKeys {
   static const String emptyPasswordConfirmationError = 'emptyPasswordConfirmationError';
   static const String mismatchedPasswordError = 'mismatchedPasswordError';
 
-  //
+  // Home
   static const String successSignOutText = "successSignOutText";
   static const String errorSignOutText = "errorSignOutText";
+  static const String coordinateError = "coordinateError";
+  static const String prayerTimesError = "prayerTimesError";
+  static const String loginError = "loginError";
 }

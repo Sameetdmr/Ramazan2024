@@ -13,6 +13,16 @@ enum AppSplashSliderLottiesConstant {
   LottieBuilder get toLottie => Lottie.asset(getLottie);
 }
 
+enum AppSplashLottiesConstant {
+  splash('splash_build_app');
+
+  final String value;
+  const AppSplashLottiesConstant(this.value);
+
+  String get getLottie => "assets/lottie/splash/$value.json";
+  LottieBuilder get toLottie => Lottie.asset(getLottie);
+}
+
 enum AppImageConstant {
   facebook('login_facebook'),
   google('login_google');

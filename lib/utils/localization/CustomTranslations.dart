@@ -61,9 +61,24 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.getCurrentLocationError: "Check Get Current Location Error",
           CustomTranslationKeys.isFirstOpenKey: "is_first_open",
 
-          //
+          // Remote Config
+          CustomTranslationKeys.appVersion: "app_version",
+
+          // Rest Service Error
+          CustomTranslationKeys.anErrorOccured: "An error occured",
+
+          // Custom Dialog
+          CustomTranslationKeys.submit: "Submit",
+
+          // App
+          CustomTranslationKeys.appName: "E-Ramazan",
+
+          // Home
           CustomTranslationKeys.successSignOutText: "Sign out successful",
           CustomTranslationKeys.errorSignOutText: "An error occurred while signing out",
+          CustomTranslationKeys.coordinateError: "An error occurred while fetching coordinate information.",
+          CustomTranslationKeys.prayerTimesError: "An error occurred while fetching prayer times.",
+          CustomTranslationKeys.loginError: "An error occurred while fetching login information.",
 
           // Validation
           CustomTranslationKeys.emptyEmailError: 'Email cannot be empty.',
@@ -130,9 +145,24 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.getCurrentLocationError: "Mevcut Konumu Alma Hatası",
           CustomTranslationKeys.isFirstOpenKey: "is_first_open",
 
-          //
+          // Remote Config
+          CustomTranslationKeys.appVersion: "app_version",
+
+          // Rest Service Error
+          CustomTranslationKeys.anErrorOccured: "Bir hata oluştu.",
+
+          // Custom Dialog
+          CustomTranslationKeys.submit: "Tamam",
+
+          // App
+          CustomTranslationKeys.appName: "E-Ramazan",
+
+          // Home
           CustomTranslationKeys.successSignOutText: "Çıkış Başarılı",
           CustomTranslationKeys.errorSignOutText: "Çıkış yapılırken hata oluştu.",
+          CustomTranslationKeys.coordinateError: "Koordinat bilgisi çekilirken hata oluştu.",
+          CustomTranslationKeys.prayerTimesError: "Vakit bilgileri çekilirken hata oluştu.",
+          CustomTranslationKeys.loginError: "Giriş bilgileri çekilirken hata oluştu.",
 
           // Validation
           CustomTranslationKeys.emptyEmailError: 'E-posta boş olamaz.',

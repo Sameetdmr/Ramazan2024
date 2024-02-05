@@ -26,7 +26,7 @@ class LoginPageViewModel extends ViewModelBase {
   // Password Icon Config
   RxBool obscureText = false.obs;
 
-  IAuthService authService = ServiceLocator().get<IAuthService>();
+  IAuthService _authService = ServiceLocator().get<IAuthService>();
 
   LoginPageViewModel() {
     initPage();
@@ -55,7 +55,7 @@ class LoginPageViewModel extends ViewModelBase {
   Future<void> signInWithEmailAndPassword(BuildContext context, String email, String password) async {
     try {
       CustomDialog.showLoadingDialog();
-      User? user = await authService.signInWithEmailAndPassword(email, password);
+      User? user = await _authService.signInWithEmailAndPassword(email, password);
       if (user != null) {
         CustomDialog.dismiss();
         CustomNavigator().pushAndRemoveUntil(HomePage());
@@ -70,7 +70,7 @@ class LoginPageViewModel extends ViewModelBase {
 
   Future<void> signInGoogle(BuildContext context) async {
     try {
-      User? user = await authService.signInWithGoogle();
+      User? user = await _authService.signInWithGoogle();
       if (user != null) {
         CustomNavigator().pushAndRemoveUntil(HomePage());
       } else {
@@ -83,7 +83,7 @@ class LoginPageViewModel extends ViewModelBase {
 
   Future<void> resetPassword(BuildContext context, String email) async {
     try {
-      await authService.resetPassword(email);
+      await _authService.resetPassword(email);
       CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringLoginConstant.snackbarErrorEmailControlText);
     } catch (e) {
       exceptionHandlingService.handleException(e);

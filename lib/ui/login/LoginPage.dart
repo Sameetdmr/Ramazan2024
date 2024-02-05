@@ -115,8 +115,6 @@ class LoginPage extends StatelessWidget {
                             });
                         if (result[0] != null && result[0]) {
                           await _loginPageViewModel.resetPassword(context, result[1].toString().trim());
-                        } else {
-                          print('false');
                         }
                       },
                       customLoginButtonType: CustomLoginButtonType.TEXT,

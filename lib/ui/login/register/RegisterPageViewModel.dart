@@ -16,7 +16,7 @@ class RegisterPageViewModel extends ViewModelBase {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  IAuthService authService = ServiceLocator().get<IAuthService>();
+  IAuthService _authService = ServiceLocator().get<IAuthService>();
 
   RxBool obscureText = false.obs;
   RegisterPageViewModel() {
@@ -35,7 +35,7 @@ class RegisterPageViewModel extends ViewModelBase {
 
   Future<void> register(BuildContext context, String email, String password) async {
     try {
-      UserCredential? userCredential = await authService.register(email, password);
+      UserCredential? userCredential = await _authService.register(email, password);
 
       if (userCredential != null) {
         CustomNavigator().popFromMain();
