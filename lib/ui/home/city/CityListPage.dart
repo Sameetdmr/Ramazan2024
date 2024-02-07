@@ -1,12 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kartal/kartal.dart';
+
+import 'package:ramadan/model/domain/TurkeyCity.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
-import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 
 class CityListPage extends StatelessWidget {
-  const CityListPage({super.key});
+  List<TurkeyCity> turkeyCities;
+  CityListPage({
+    Key? key,
+    required this.turkeyCities,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +60,7 @@ class CityListPage extends StatelessWidget {
                       color: Colors.black,
                     );
                   },
-                  itemCount: StringCityConstant.turkeyCities.length,
+                  itemCount: turkeyCities.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
@@ -62,7 +68,7 @@ class CityListPage extends StatelessWidget {
                       },
                       child: ListTile(
                         title: Text(
-                          StringCityConstant.turkeyCities[index],
+                          turkeyCities[index].name,
                           style: context.textTheme.labelMedium,
                         ),
                         trailing: Icon(

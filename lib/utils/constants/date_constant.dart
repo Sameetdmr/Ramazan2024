@@ -10,7 +10,7 @@ class DateConstant {
 
     // Eğer current date belirtilen aralığın dışındaysa, 11 Mart 2024'ü döndür
     if (currentDate.isBefore(startDate) || currentDate.isAfter(endDate)) {
-      return "11 ${_getMonthName(3)} ${_getDayOfWeek(currentDate)}";
+      return "11 ${_getMonthName(startDate.month)} ${_getDayOfWeek(startDate)}";
     }
 
     // Eğer current date belirtilen aralıkta ise, current date'i döndür

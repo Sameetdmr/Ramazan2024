@@ -32,11 +32,13 @@ class HomePage extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () async {
-                              dynamic result = await CustomNavigator().pushToMain<dynamic>(CityListPage());
+                              dynamic result = await CustomNavigator().pushToMain<dynamic>(CityListPage(
+                                turkeyCities: _homePageViewModel.citiesList,
+                              ));
                               if (result != null) {
                                 if (result != 0) {
-                                  _homePageViewModel.cityName.value = StringCityConstant.turkeyCities[result];
-                                  _homePageViewModel.refreshPage(StringCityConstant.turkeyCitiesLowercase[result]);
+                                  _homePageViewModel.cityName.value = _homePageViewModel.citiesList[result].name;
+                                  _homePageViewModel.refreshPage(_homePageViewModel.citiesList[result].lowercaseName);
                                 } else {
                                   _homePageViewModel.refreshPage(null);
                                 }

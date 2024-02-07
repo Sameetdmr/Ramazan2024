@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/model/domain/PrayerTimeDetails.dart';
 import 'package:ramadan/model/domain/PrayerTimesModel.dart';
+import 'package:ramadan/model/domain/TurkeyCity.dart';
 import 'package:ramadan/rest/ramadan/RamadanDataProvider.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/services/common/ramadan/LocationService.dart';
@@ -22,6 +23,7 @@ class HomePageViewModel extends ViewModelBase {
   RxBool isLoggedIn = false.obs;
 
   RxList<PrayerTimeDetails> timeList = <PrayerTimeDetails>[].obs;
+  RxList<TurkeyCity> citiesList = <TurkeyCity>[].obs;
   RxString cityName = ''.obs;
 
   RxBool isPageLoading = false.obs;
@@ -32,6 +34,7 @@ class HomePageViewModel extends ViewModelBase {
 
   initPage() async {
     try {
+      fillCityList();
       await checkUserLoggedIn();
 
       cityName.value = await _locationService.getCityNameFromCoordinates();
@@ -39,6 +42,10 @@ class HomePageViewModel extends ViewModelBase {
     } catch (e) {
       exceptionHandlingService.handleException(e);
     }
+  }
+
+  void fillCityList() {
+    citiesList.value = TurkeyCityModel.turkeyCities;
   }
 
   Future<void> checkUserLoggedIn() async {
