@@ -50,6 +50,7 @@ dependencies:
   #Other
   cupertino_icons: ^1.0.6
   google_fonts: ^6.1.0
+  flutter_local_notifications: ^16.3.2
 
   #Database
   shared_preferences: ^2.2.2
@@ -65,4 +66,5 @@ flutter:
     - assets/lottie/splash_slider_lottie/
     - assets/lottie/splash/
     - assets/image/login/
+    - assets/image/home/
 

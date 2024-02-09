@@ -20,3 +20,13 @@ class ColorTextConstant {
 
   static Color black = HexColor("#000000");
 }
+
+@immutable
+class PrayerTimeColor {
+  static const Color imsak = Color(0xFF4B0082);
+  static const Color gunes = Color(0xFFFFD700);
+  static const Color ogle = Color(0xFF228B22);
+  static const Color ikindi = Color(0xFFFF4500);
+  static const Color iftar = Color(0xFF8B4513);
+  static const Color yatsi = Color(0xFF00008B);
+}

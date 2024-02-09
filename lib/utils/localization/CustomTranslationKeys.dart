@@ -78,4 +78,27 @@ class CustomTranslationKeys {
   static const String coordinateError = "coordinateError";
   static const String prayerTimesError = "prayerTimesError";
   static const String loginError = "loginError";
+
+  // Months
+  static String jan = "jan";
+  static String feb = "feb";
+  static String mar = "mar";
+  static String apr = "apr";
+  static String may = "may";
+  static String jun = "jun";
+  static String jul = "jul";
+  static String aug = "aug";
+  static String sep = "sep";
+  static String oct = "oct";
+  static String nov = "nov";
+  static String dec = "dec";
+
+  // Days
+  static String sun = "sun";
+  static String mon = "mon";
+  static String tue = "tue";
+  static String wed = "wed";
+  static String thu = "thu";
+  static String fri = "fri";
+  static String sat = "sat";
 }

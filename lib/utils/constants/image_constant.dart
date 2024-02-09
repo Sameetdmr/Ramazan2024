@@ -33,3 +33,18 @@ enum AppImageConstant {
   String get toPng => "assets/image/login/$value.png";
   AssetImage get toImg => AssetImage(toPng);
 }
+
+enum PrayerTimeIconConstant {
+  imsak('moon'),
+  gunes('sun'),
+  ogle('cloudy'),
+  ikindi('morning'),
+  iftar('ramadan'),
+  yatsi('half_moon');
+
+  final String value;
+  const PrayerTimeIconConstant(this.value);
+
+  String get toPng => "assets/image/home/$value.png";
+  AssetImage get toImg => AssetImage(toPng);
+}

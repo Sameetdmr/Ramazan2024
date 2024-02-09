@@ -87,6 +87,29 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.shortPasswordError: 'Password must be at least 6 characters.',
           CustomTranslationKeys.emptyPasswordConfirmationError: 'Password confirmation cannot be empty.',
           CustomTranslationKeys.mismatchedPasswordError: 'Passwords do not match.',
+
+          /// Months
+          CustomTranslationKeys.jan: "Jan",
+          CustomTranslationKeys.feb: "Feb",
+          CustomTranslationKeys.mar: "Mar",
+          CustomTranslationKeys.apr: "Apr",
+          CustomTranslationKeys.may: "May",
+          CustomTranslationKeys.jun: "Jun",
+          CustomTranslationKeys.jul: "Jul",
+          CustomTranslationKeys.aug: "Aug",
+          CustomTranslationKeys.sep: "Sep",
+          CustomTranslationKeys.oct: "Oct",
+          CustomTranslationKeys.nov: "Nov",
+          CustomTranslationKeys.dec: "Dec",
+
+          // Days
+          CustomTranslationKeys.sun: "Sun",
+          CustomTranslationKeys.mon: "Mon",
+          CustomTranslationKeys.tue: "Tue",
+          CustomTranslationKeys.wed: "Wed",
+          CustomTranslationKeys.thu: "Thu",
+          CustomTranslationKeys.fri: "Fri",
+          CustomTranslationKeys.sat: "Sat",
         },
         'tr_TR': {
           // Splash Slider
@@ -171,6 +194,29 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.shortPasswordError: 'Şifre en az 6 karakter olmalıdır.',
           CustomTranslationKeys.emptyPasswordConfirmationError: 'Şifre tekrar boş olamaz',
           CustomTranslationKeys.mismatchedPasswordError: 'Şifreler uyuşmuyor',
+
+          /// Months
+          CustomTranslationKeys.jan: "Oca",
+          CustomTranslationKeys.feb: "Şub",
+          CustomTranslationKeys.mar: "Mar",
+          CustomTranslationKeys.apr: "Nis",
+          CustomTranslationKeys.may: "May",
+          CustomTranslationKeys.jun: "Haz",
+          CustomTranslationKeys.jul: "Tem",
+          CustomTranslationKeys.aug: "Ağu",
+          CustomTranslationKeys.sep: "Eyl",
+          CustomTranslationKeys.oct: "Eki",
+          CustomTranslationKeys.nov: "Kas",
+          CustomTranslationKeys.dec: "Ara",
+
+          // Days
+          CustomTranslationKeys.sun: "Paz",
+          CustomTranslationKeys.mon: "Pzt",
+          CustomTranslationKeys.tue: "Sal",
+          CustomTranslationKeys.wed: "Çar",
+          CustomTranslationKeys.thu: "Per",
+          CustomTranslationKeys.fri: "Cum",
+          CustomTranslationKeys.sat: "Cmt",
         },
       };
 

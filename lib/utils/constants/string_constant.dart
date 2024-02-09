@@ -102,4 +102,26 @@ class StringHomeConstant {
   static String get coordinateError => CustomTranslations.getText(CustomTranslationKeys.coordinateError);
   static String get prayerTimesError => CustomTranslations.getText(CustomTranslationKeys.prayerTimesError);
   static String get loginError => CustomTranslations.getText(CustomTranslationKeys.loginError);
+
+  // Date
+  static String get jan => CustomTranslations.getText(CustomTranslationKeys.jan);
+  static String get feb => CustomTranslations.getText(CustomTranslationKeys.feb);
+  static String get mar => CustomTranslations.getText(CustomTranslationKeys.mar);
+  static String get apr => CustomTranslations.getText(CustomTranslationKeys.apr);
+  static String get may => CustomTranslations.getText(CustomTranslationKeys.may);
+  static String get jun => CustomTranslations.getText(CustomTranslationKeys.jun);
+  static String get jul => CustomTranslations.getText(CustomTranslationKeys.jul);
+  static String get aug => CustomTranslations.getText(CustomTranslationKeys.aug);
+  static String get sep => CustomTranslations.getText(CustomTranslationKeys.sep);
+  static String get oct => CustomTranslations.getText(CustomTranslationKeys.oct);
+  static String get nov => CustomTranslations.getText(CustomTranslationKeys.nov);
+  static String get dec => CustomTranslations.getText(CustomTranslationKeys.dec);
+
+  static String get sun => CustomTranslations.getText(CustomTranslationKeys.sun);
+  static String get mon => CustomTranslations.getText(CustomTranslationKeys.mon);
+  static String get tue => CustomTranslations.getText(CustomTranslationKeys.tue);
+  static String get wed => CustomTranslations.getText(CustomTranslationKeys.wed);
+  static String get thu => CustomTranslations.getText(CustomTranslationKeys.thu);
+  static String get fri => CustomTranslations.getText(CustomTranslationKeys.fri);
+  static String get sat => CustomTranslations.getText(CustomTranslationKeys.sat);
 }
