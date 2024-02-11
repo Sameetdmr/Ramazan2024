@@ -43,8 +43,10 @@ class HomePageViewModel extends ViewModelBase {
   RxBool isPageLoading = false.obs;
 
   late Timer _timer;
+  Timer? _ramadanTimer;
   RxList<RxBool> isActiveList = <RxBool>[].obs;
   RxInt remainingTime = 0.obs;
+  RxInt remainingramadanTime = 0.obs;
 
   HomePageViewModel() {
     initPage();
@@ -94,6 +96,14 @@ class HomePageViewModel extends ViewModelBase {
     gridItemList = data.$1;
     isActiveList = data.$2;
     await _startTimer(gridItemList.firstWhere((element) => element.isActive == true).time);
+    int indexOfTrue = isActiveList.indexOf(true.obs);
+
+    int targetIndex = (indexOfTrue == 0) ? 0 : 4;
+
+    if (_ramadanTimer == null || !_ramadanTimer!.isActive) {
+      await _startRamadanTimer(gridItemList.firstWhere((element) => element.id == targetIndex).time);
+    }
+
     isPageLoading.value = true;
   }
 
@@ -101,6 +111,7 @@ class HomePageViewModel extends ViewModelBase {
     try {
       isPageLoading.value = false;
       _timer.cancel();
+      _ramadanTimer!.cancel();
       timeList.clear();
       gridItemList.clear();
       if (city != null) {
@@ -119,21 +130,38 @@ class HomePageViewModel extends ViewModelBase {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) async {
       if (remainingTime > 0) {
         remainingTime.value--;
-        formatRemainingTime(remainingTime.value);
       } else {
-        _localNotificationService.showFirebaseNotification('${cityName.value.toUpperCase()} İÇİN ${formatRemainingTimeName().value.toUpperCase()} VAKTİ.', "'${getRandomRamadanWord()}'");
-        int indexOfTrue = isActiveList.indexOf(true.obs); //TODO
+        int indexOfTrue = isActiveList.indexOf(true.obs);
+
         // Zaman durumu hangi indexte olduğunu çekiyoruz.
         if (indexOfTrue != -1 && indexOfTrue < 5) {
-          // Buradaki durum o gün tamamen bitti ise artık ekranı yenile
-          _timer.cancel();
           gridItemList.clear();
           var data = _gridItemManager.fillGridItem(_prayerTimesModel.times, gridItemList, isActiveList);
           gridItemList = data.$1;
           isActiveList = data.$2;
+          _timer.cancel();
+
+          if (indexOfTrue == 4) {
+            await _localNotificationService.showFirebaseNotification('${cityName.value.toUpperCase()} İÇİN ${formatRemainingTimeName().value.toUpperCase()} VAKTİ.', "'${getRandomRamadanWord()}'");
+          }
           await _startTimer(gridItemList.firstWhere((element) => element.isActive == true).time);
         } else {
-          refreshPage(cityName.value);
+          await refreshPage(cityName.value);
+        }
+      }
+    });
+  }
+
+  Future<void> _startRamadanTimer(String time) async {
+    remainingramadanTime.value = TimeManager.remainingSeconds(time);
+    _ramadanTimer = Timer.periodic(Duration(seconds: 1), (timer) async {
+      if (remainingramadanTime > 0) {
+        remainingramadanTime.value--;
+        formatRemainingTime(remainingramadanTime.value);
+      } else {
+        _ramadanTimer!.cancel();
+        if (!_ramadanTimer!.isActive) {
+          await _startRamadanTimer(gridItemList.firstWhere((element) => element.id == 4).time);
         }
       }
     });
@@ -154,7 +182,14 @@ class HomePageViewModel extends ViewModelBase {
   }
 
   RxString formatRemainingTimeName() {
-    return '${gridItemList.firstWhere((element) => element.isActive == true).title} Vaktine Kalan Süre'.obs; //TODO
+    int indexOfTrue = isActiveList.indexOf(true.obs);
+    if (indexOfTrue == 0) {
+      return 'Sahur\'a Kalan Süre'.obs;
+    } else if (indexOfTrue < 5 && indexOfTrue > 0) {
+      return 'İftar\'a Kalan Süre'.obs;
+    } else {
+      return 'Sahur\'a  Kalan Süre'.obs;
+    }
   }
 
   String getRandomRamadanWord() {

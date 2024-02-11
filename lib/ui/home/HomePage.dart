@@ -110,7 +110,7 @@ class _RemainingTime extends StatelessWidget {
             ),
           ),
           Text(
-            _homePageViewModel.formatRemainingTime(_homePageViewModel.remainingTime.value).value,
+            _homePageViewModel.formatRemainingTime(_homePageViewModel.remainingramadanTime.value).value,
             style: context.textTheme.headlineMedium?.copyWith(color: Colors.black),
           ),
         ],

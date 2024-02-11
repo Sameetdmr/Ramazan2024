@@ -24,6 +24,7 @@ final class ProjectInitialize {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await DeviceUtility.instance.initPackageInfo(); // System data read or kartal package
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 /*
     FlutterError.onError = (FlutterErrorDetails details) async {
       await FirebaseCrashlytics.instance.log('${StackTrace.current} / ${details.exceptionAsString()}');

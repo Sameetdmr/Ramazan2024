@@ -18,8 +18,9 @@ class LocalNotificationService implements ILocalNotificationService {
   Future<NotificationDetails> notificationDetails() async {
     AndroidNotificationChannel androidNotificationChannel = AndroidNotificationChannel(
       'ramadanAppChannelId',
-      'Ramadan App',
-      description: 'Ramadan App Push Notifications',
+      'E-Imsakiye Ramadan',
+      description: 'Ramadan App Push Notifications With Sound',
+      sound: RawResourceAndroidNotificationSound("cannon"),
       importance: Importance.max,
     );
 
@@ -33,7 +34,9 @@ class LocalNotificationService implements ILocalNotificationService {
         enableVibration: true,
         priority: Priority.high,
         enableLights: true,
-        icon: '@mipmap/ic_launcher',
+        sound: androidNotificationChannel.sound,
+        icon: '@drawable/cannon',
+        playSound: true,
         color: const Color.fromRGBO(0, 0, 0, 0),
         channelDescription: androidNotificationChannel.description,
       ),
@@ -45,7 +48,7 @@ class LocalNotificationService implements ILocalNotificationService {
 
   @override
   Future<void> initializePlatformNotifications() async {
-    AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+    AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@drawable/cannon');
 
     InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
 
