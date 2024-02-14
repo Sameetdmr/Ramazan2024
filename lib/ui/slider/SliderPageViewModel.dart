@@ -4,12 +4,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:kartal/kartal.dart';
-import 'package:ramadan/services/common/core/LocationPermissionManager.dart';
+import 'package:ramadan/services/common/core/PermissionManager.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/image_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
+import 'package:ramadan/utils/initialize/AppPreferences.dart';
 import 'package:ramadan/utils/popups/CustomDialog.dart';
+import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 
 class SliderPageViewModel extends ViewModelBase {
   late BuildContext _context;
@@ -18,8 +20,9 @@ class SliderPageViewModel extends ViewModelBase {
   List<ContentConfig> slides = [];
   RxInt currentIndex = 0.obs;
 
-  // Page variables
   RxBool isLocationOk = false.obs;
+
+  IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
 
   SliderPageViewModel(BuildContext context) {
     this._context = context;
@@ -81,28 +84,31 @@ class SliderPageViewModel extends ViewModelBase {
 
   Future<bool> onDonePress() async {
     try {
+      await _appPreferences.init();
       bool hasLocationPermission = false;
 
       while (!hasLocationPermission) {
         CustomDialog.showLoadingDialog();
-        hasLocationPermission = await LocationPermissionManager.checkLocationPermission();
+        hasLocationPermission = await PermissionManager.checkLocationPermission();
 
         if (hasLocationPermission) {
-          Position? currentPosition = await LocationPermissionManager.getCurrentLocation();
+          Position? currentPosition = await PermissionManager.getCurrentLocation();
           if (currentPosition != null) {
             CustomDialog.dismiss();
-            isLocationOk.value = true;
+            _appPreferences.setLocationPermission(true);
           } else {
             CustomDialog.dismiss();
-            isLocationOk.value = false;
+            _appPreferences.setLocationPermission(false);
             await Future.delayed(Duration(seconds: 1));
           }
         } else {
           CustomDialog.dismiss();
-          isLocationOk.value = false;
+          _appPreferences.setLocationPermission(false);
           await Future.delayed(Duration(seconds: 1));
         }
       }
+      isLocationOk.value = await _appPreferences.getLocationPermission();
+
       return isLocationOk.value;
     } catch (e) {
       exceptionHandlingService.handleException(e);

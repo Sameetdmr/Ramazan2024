@@ -1,11 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kartal/kartal.dart';
 import 'package:ramadan/model/home/GridItem.dart';
+import 'package:ramadan/services/home/TimeFormatterService.dart';
 import 'package:ramadan/ui/home/HomePageViewModel.dart';
 import 'package:ramadan/ui/home/city/CityListPage.dart';
+import 'package:ramadan/ui/home/components/CountdownWidget.dart';
+import 'package:ramadan/ui/home/components/GridCard.dart';
+import 'package:ramadan/utils/configuration/ProjectInfo.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/formatter/DateTimeFormatter.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
@@ -27,7 +31,7 @@ class HomePage extends StatelessWidget {
                 ));
                 if (result != null) {
                   if (result != 0) {
-                    _homePageViewModel.cityName.value = _homePageViewModel.citiesList[result].name;
+                    ProjectInfo.instance.cityName.value = _homePageViewModel.citiesList[result].name;
                     _homePageViewModel.refreshPage(_homePageViewModel.citiesList[result].lowercaseName);
                   } else {
                     _homePageViewModel.refreshPage(null);
@@ -42,7 +46,7 @@ class HomePage extends StatelessWidget {
               automaticallyImplyLeading: false,
               title: _Header(
                 dateTitle: DateTimeFormatter().formatTodayDate().value,
-                cityName: _homePageViewModel.isPageLoading.value ? _homePageViewModel.cityName.value : '-',
+                cityName: _homePageViewModel.isPageLoading.value ? ProjectInfo.instance.cityName.value : '-',
                 onPressed: () async {
                   await _homePageViewModel.signOut(context);
                 },
@@ -63,9 +67,9 @@ class HomePage extends StatelessWidget {
                               mainAxisSpacing: 8.0,
                               crossAxisSpacing: 8.0,
                             ),
-                            itemCount: _homePageViewModel.gridItemList.length,
+                            itemCount: ProjectInfo.instance.gridItemList.length,
                             itemBuilder: (context, index) {
-                              return _GridCard(_homePageViewModel.gridItemList[index]);
+                              return GridCard(ProjectInfo.instance.gridItemList[index]);
                             },
                           ),
                           SizedBox(
@@ -74,7 +78,11 @@ class HomePage extends StatelessWidget {
                               thickness: 2,
                             ),
                           ),
-                          _RemainingTime(homePageViewModel: _homePageViewModel),
+                          CountdownTimerWidget(
+                            title: TimeFormatterService.formatRemainingTimeName().value,
+                            timeRemaining: TimeFormatterService.formatRemainingTime(_homePageViewModel.remainingramadanTime.value).value,
+                            color: TimeFormatterService.formatRemainingTimeColor().value,
+                          ),
                           Divider(
                             thickness: 2,
                           ),
@@ -85,35 +93,6 @@ class HomePage extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     ),
             )),
-      ),
-    );
-  }
-}
-
-class _RemainingTime extends StatelessWidget {
-  const _RemainingTime({
-    required HomePageViewModel homePageViewModel,
-  }) : _homePageViewModel = homePageViewModel;
-
-  final HomePageViewModel _homePageViewModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            _homePageViewModel.formatRemainingTimeName().value,
-            style: context.textTheme.titleMedium?.copyWith(
-              color: ColorTextConstant.forestMaid,
-            ),
-          ),
-          Text(
-            _homePageViewModel.formatRemainingTime(_homePageViewModel.remainingramadanTime.value).value,
-            style: context.textTheme.headlineMedium?.copyWith(color: Colors.black),
-          ),
-        ],
       ),
     );
   }
@@ -153,66 +132,16 @@ class _Header extends StatelessWidget {
         ),
         Spacer(),
         Visibility(
-            visible: isVisible,
-            child: Row(
-              children: [
-                IconButton(
-                    onPressed: onPressed,
-                    icon: Icon(
-                      Icons.logout_outlined,
-                      color: Colors.black,
-                    )),
-                SizedBox(
-                  width: 5,
-                ),
-              ],
-            )),
-      ],
-    );
-  }
-}
-
-class _GridCard extends StatelessWidget {
-  const _GridCard(this.item);
-  final GridItem item;
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-          side: item.isActive.value ? BorderSide(color: item.color, width: 2.0) : BorderSide.none,
-        ),
-        color: item.isActive.value ? item.color.withOpacity(0.5) : item.color.withOpacity(0.1),
-        elevation: 0,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Spacer(flex: 2),
-                Align(alignment: Alignment.topLeft, child: Text(item.title, style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
-                const Spacer(),
-                Flexible(
-                  flex: 20,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Image.asset(
-                      item.iconPath,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-                Align(alignment: Alignment.bottomLeft, child: Text(item.time, style: context.textTheme.titleMedium?.copyWith())),
-                const Spacer(flex: 2),
-              ],
+          visible: isVisible,
+          child: IconButton(
+            onPressed: onPressed,
+            icon: Icon(
+              Icons.logout_outlined,
+              color: Colors.black,
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

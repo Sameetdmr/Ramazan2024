@@ -133,6 +133,7 @@ class LoginPage extends StatelessWidget {
                         onPressed: () async {
                           if (_loginPageViewModel.formKey.currentState!.validate()) {
                             await _loginPageViewModel.signInWithEmailAndPassword(context, _loginPageViewModel.emailTextController.text, _loginPageViewModel.passwordTextController.text);
+                            _loginPageViewModel.clearTextController();
                           }
                         },
                         customLoginButtonType: CustomLoginButtonType.PRIMARY,
@@ -154,6 +155,7 @@ class LoginPage extends StatelessWidget {
                     Text(StringLoginConstant.loginNewUserText1),
                     CustomButton.getButton(
                       onPressed: () {
+                        _loginPageViewModel.clearTextController();
                         CustomNavigator().pushToMain(RegisterPage());
                       },
                       customLoginButtonType: CustomLoginButtonType.TEXT,

@@ -124,4 +124,16 @@ class StringHomeConstant {
   static String get thu => CustomTranslations.getText(CustomTranslationKeys.thu);
   static String get fri => CustomTranslations.getText(CustomTranslationKeys.fri);
   static String get sat => CustomTranslations.getText(CustomTranslationKeys.sat);
+
+  // Prayer Times
+  static String get fajr => CustomTranslations.getText(CustomTranslationKeys.fajr);
+  static String get sunrise => CustomTranslations.getText(CustomTranslationKeys.sunrise);
+  static String get dhuhr => CustomTranslations.getText(CustomTranslationKeys.dhuhr);
+  static String get asr => CustomTranslations.getText(CustomTranslationKeys.asr);
+  static String get sunset => CustomTranslations.getText(CustomTranslationKeys.sunset);
+  static String get isha => CustomTranslations.getText(CustomTranslationKeys.isha);
+
+  // Countdown Title
+  static String get timeUntilFajr => CustomTranslations.getText(CustomTranslationKeys.timeUntilFajr);
+  static String get timeUntilSunset => CustomTranslations.getText(CustomTranslationKeys.timeUntilSunset);
 }

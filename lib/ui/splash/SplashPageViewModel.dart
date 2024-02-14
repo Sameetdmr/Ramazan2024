@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
+import 'package:ramadan/services/common/core/PermissionManager.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
 import 'package:ramadan/ui/home/HomePage.dart';
 import 'package:ramadan/ui/login/LoginPage.dart';
@@ -12,9 +13,9 @@ import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 
 class SplashPageViewModel extends ViewModelBase {
-  IAuthService authService = ServiceLocator().get<IAuthService>();
-  IAppPreferences appPreferences = ServiceLocator().get<IAppPreferences>();
-  IAppVersionChecker appVersionChecker = ServiceLocator().get<IAppVersionChecker>();
+  IAuthService _authService = ServiceLocator().get<IAuthService>();
+  IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
+  IAppVersionChecker _appVersionChecker = ServiceLocator().get<IAppVersionChecker>();
 
   RxBool isCurrentVersionOk = true.obs;
   RxString appVersion = ''.obs;
@@ -25,8 +26,8 @@ class SplashPageViewModel extends ViewModelBase {
   onInit() async {
     super.onInit();
     try {
-      bool result = await appVersionChecker.checkAppVersion();
-      appVersion.value = await appVersionChecker.getAppVersion();
+      bool result = await _appVersionChecker.checkAppVersion();
+      appVersion.value = await _appVersionChecker.getAppVersion();
       if (result) {
         isCurrentVersionOk.value = true;
         await _checkStartConditions();
@@ -40,17 +41,27 @@ class SplashPageViewModel extends ViewModelBase {
 
   Future<void> _checkStartConditions() async {
     try {
-      bool isFirstOpen = await appPreferences.isFirstOpen();
+      await _appPreferences.init();
+      bool isFirstOpen = await _appPreferences.isFirstOpen();
+      bool isLocationOk = await _appPreferences.getLocationPermission();
+      bool hasNotificationPermission = await PermissionManager.checkAndRequestNotificationPermission();
+      _appPreferences.setNotificationPermission(hasNotificationPermission);
 
       if (isFirstOpen) {
-        await appPreferences.setFirstOpen(false);
+        // Uygulama ilk defa mı açıldı.
+        await _appPreferences.setFirstOpen(false);
         CustomNavigator().pushAndRemoveUntil(SliderPage());
       } else {
-        bool isLoggedIn = await authService.isUserLoggedIn();
-        if (isLoggedIn) {
-          CustomNavigator().pushAndRemoveUntil(HomePage());
+        if (!isLocationOk) {
+          // Konum izni alabilmek için tekrardan slider sayfasına yönlendiriyorum.
+          CustomNavigator().pushAndRemoveUntil(SliderPage());
         } else {
-          CustomNavigator().pushAndRemoveUntil(LoginPage());
+          bool isLoggedIn = await _authService.isUserLoggedIn();
+          if (isLoggedIn) {
+            CustomNavigator().pushAndRemoveUntil(HomePage());
+          } else {
+            CustomNavigator().pushAndRemoveUntil(LoginPage());
+          }
         }
       }
     } catch (e) {

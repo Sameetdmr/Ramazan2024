@@ -101,4 +101,16 @@ class CustomTranslationKeys {
   static String thu = "thu";
   static String fri = "fri";
   static String sat = "sat";
+
+  // Prayer Times
+  static String fajr = "fajr";
+  static String sunrise = "sunrise";
+  static String dhuhr = "dhuhr";
+  static String asr = "asr";
+  static String sunset = "sunset";
+  static String isha = "isha";
+
+  // Countdown Title
+  static String timeUntilFajr = "timeUntilFajr";
+  static String timeUntilSunset = "timeUntilSunset";
 }

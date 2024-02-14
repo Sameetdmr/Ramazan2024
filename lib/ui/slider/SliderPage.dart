@@ -21,7 +21,7 @@ class SliderPage extends StatelessWidget {
       listContentConfig: _sliderPageViewModel.slides,
       onDonePress: () {
         if (_sliderPageViewModel.isLocationOk.value) {
-          CustomNavigator().pushToMain(LoginPage());
+          CustomNavigator().pushAndRemoveUntil(LoginPage());
         } else {
           //Todo? İzin vermesi gerektiğini gösteren dialog.
         }

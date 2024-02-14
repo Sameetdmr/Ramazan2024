@@ -47,7 +47,7 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.snackbarErrorRegisterText: "Check your email.",
 
           // Success Login SnackBar Text
-          CustomTranslationKeys.snackbarSuccessRegisterText: "Check your email.",
+          CustomTranslationKeys.snackbarSuccessRegisterText: "Registration Successful.",
 
           //
           CustomTranslationKeys.firebaseLoginError: "An error occurred while logging in.",
@@ -110,6 +110,18 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.thu: "Thu",
           CustomTranslationKeys.fri: "Fri",
           CustomTranslationKeys.sat: "Sat",
+
+          // Prayer Times
+          CustomTranslationKeys.fajr: "Fajr",
+          CustomTranslationKeys.sunrise: "Sunrise",
+          CustomTranslationKeys.dhuhr: "Dhuhr",
+          CustomTranslationKeys.asr: "Asr",
+          CustomTranslationKeys.sunset: "Sunset",
+          CustomTranslationKeys.isha: "Isha",
+
+          // Countdown Title
+          CustomTranslationKeys.timeUntilFajr: "Time Until Fajr",
+          CustomTranslationKeys.timeUntilSunset: "Time Until Sunset",
         },
         'tr_TR': {
           // Splash Slider
@@ -154,7 +166,7 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.snackbarErrorRegisterText: "E-postanızı kontrol ediniz.",
 
           // Success Login SnackBar Text
-          CustomTranslationKeys.snackbarSuccessRegisterText: "E-postanızı kontrol ediniz.",
+          CustomTranslationKeys.snackbarSuccessRegisterText: "Kayıt Başarılı",
 
           //
           CustomTranslationKeys.firebaseLoginError: "Giriş yapılırken bir hata oluştu.",
@@ -217,6 +229,18 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.thu: "Per",
           CustomTranslationKeys.fri: "Cum",
           CustomTranslationKeys.sat: "Cmt",
+
+          // Prayer Times
+          CustomTranslationKeys.fajr: "İmsak",
+          CustomTranslationKeys.sunrise: "Güneş",
+          CustomTranslationKeys.dhuhr: "Öğle",
+          CustomTranslationKeys.asr: "İkindi",
+          CustomTranslationKeys.sunset: "İftar",
+          CustomTranslationKeys.isha: "Yatsı",
+
+          // Countdown Title
+          CustomTranslationKeys.timeUntilFajr: "Sahur\'a Kalan Süre",
+          CustomTranslationKeys.timeUntilSunset: "İftar\'a Kalan Süre",
         },
       };
 

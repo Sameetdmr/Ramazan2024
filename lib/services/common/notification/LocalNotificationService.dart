@@ -3,8 +3,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
 
-FlutterLocalNotificationsPlugin flutterFirebaseNotificationsPlugin = FlutterLocalNotificationsPlugin();
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 Random random = Random();
 
 abstract class ILocalNotificationService {
@@ -24,7 +25,7 @@ class LocalNotificationService implements ILocalNotificationService {
       importance: Importance.max,
     );
 
-    await flutterFirebaseNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(androidNotificationChannel);
+    await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(androidNotificationChannel);
 
     final platformChannelSpecificsWithoutCabinSound = NotificationDetails(
       android: AndroidNotificationDetails(
@@ -52,7 +53,7 @@ class LocalNotificationService implements ILocalNotificationService {
 
     InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
 
-    await flutterFirebaseNotificationsPlugin.initialize(
+    await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (details) {
         print('samet 2');
@@ -67,7 +68,7 @@ class LocalNotificationService implements ILocalNotificationService {
   Future<void> showFirebaseNotification(String title, String body) async {
     final _notificationDetails = await notificationDetails();
 
-    await flutterFirebaseNotificationsPlugin.show(
+    await flutterLocalNotificationsPlugin.show(
       random.nextInt(1 << 31),
       title,
       body,

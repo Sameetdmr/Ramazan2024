@@ -41,6 +41,11 @@ class LoginPageViewModel extends ViewModelBase {
     super.dispose();
   }
 
+  void clearTextController() {
+    emailTextController.clear();
+    passwordTextController.clear();
+  }
+
   void loginTextFormFieldOnChanged(String? value, TextEditingController controller, LoginTypeEnum loginTypeEnum) {
     if (value!.isEmpty) {
       return;
@@ -71,6 +76,7 @@ class LoginPageViewModel extends ViewModelBase {
   Future<void> signInGoogle(BuildContext context) async {
     try {
       User? user = await _authService.signInWithGoogle();
+      clearTextController();
       if (user != null) {
         CustomNavigator().pushAndRemoveUntil(HomePage());
       } else {

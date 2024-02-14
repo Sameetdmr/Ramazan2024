@@ -23,6 +23,6 @@ class CustomNavigator {
 
   void pushAndRemoveUntil(Widget widget) {
     Get.addKey(mainNavigatorKey);
-    Get.off<void>(widget);
+    Get.offAll<void>(widget);
   }
 }
