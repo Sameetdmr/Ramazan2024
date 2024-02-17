@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/main.dart';
 import 'package:ramadan/ui/home/CustomNavigationPageViewModel.dart';
+import 'package:ramadan/ui/home/hadith/HadithPage.dart';
 import 'package:ramadan/ui/home/home/HomePage.dart';
 
 class CustomNavigator {
@@ -25,7 +26,7 @@ class CustomNavigator {
       key: navigatorKeys[1],
       onGenerateRoute: (route) => MaterialPageRoute(
         settings: route,
-        builder: (context) => SizedBox(),
+        builder: (context) => HadithPage(),
       ),
     ),
   ];
@@ -49,6 +50,5 @@ class CustomNavigator {
     CustomNavigationPageViewModel _customNavigationPageViewModel = Get.find();
     Get.addKey(navigatorKeys[_customNavigationPageViewModel.currentStateIndex.value]);
     Get.until((route) => route.isFirst);
-    //navigatorKeys[_navigationPageViewModel.currentTabIndex.value].currentState.popUntil((route) => route.isFirst);
   }
 }

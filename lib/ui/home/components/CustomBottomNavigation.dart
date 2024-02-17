@@ -4,7 +4,7 @@ enum TabItem { home, calendar }
 
 const Map<TabItem, IconData> tabIcons = {
   TabItem.home: Icons.home_outlined,
-  TabItem.calendar: Icons.calendar_month_outlined,
+  TabItem.calendar: Icons.mosque_outlined,
 };
 
 class CustomBottomNavigation extends StatelessWidget {

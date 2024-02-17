@@ -109,7 +109,7 @@ class _Header extends StatelessWidget {
             ),
             Text(
               cityName,
-              style: context.textTheme.bodySmall?.copyWith(color: Colors.orangeAccent),
+              style: context.textTheme.bodySmall?.copyWith(color: ColorTextConstant.orangeAccent),
             )
           ],
         ),
@@ -120,7 +120,7 @@ class _Header extends StatelessWidget {
             onPressed: onPressed,
             icon: Icon(
               Icons.logout_outlined,
-              color: Colors.black,
+              color: ColorCommonConstant.black,
             ),
           ),
         ),

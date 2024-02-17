@@ -83,6 +83,9 @@ class StringCommonConstant {
   // Rest Service Error
   static String get anErrorOccured => CustomTranslations.getText(CustomTranslationKeys.anErrorOccured);
 
+  // Hadith Service Error
+  static String get anErrorHadithService => CustomTranslations.getText(CustomTranslationKeys.anErrorHadithService);
+
   // Custom Dialog
   static String get submit => CustomTranslations.getText(CustomTranslationKeys.submit);
 
@@ -139,4 +142,17 @@ class StringHomeConstant {
   static String get seconds => CustomTranslations.getText(CustomTranslationKeys.seconds);
   static String get timeUntilFajr => CustomTranslations.getText(CustomTranslationKeys.timeUntilFajr);
   static String get timeUntilSunset => CustomTranslations.getText(CustomTranslationKeys.timeUntilSunset);
+}
+
+class StringHadithConstant {
+  const StringHadithConstant._();
+
+  static String get allCategory => CustomTranslations.getText(CustomTranslationKeys.allCategory);
+  static String get hadithAppBarTitle => CustomTranslations.getText(CustomTranslationKeys.hadithAppBarTitle);
+}
+
+class ProjectConstant {
+  const ProjectConstant._();
+
+  static String get hadithJsonPath => 'assets/json/hadiths.json';
 }

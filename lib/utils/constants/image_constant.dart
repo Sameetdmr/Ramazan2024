@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 
 enum AppSplashSliderLottiesConstant {
@@ -47,4 +48,14 @@ enum PrayerTimeIconConstant {
 
   String get toPng => "assets/image/home/$value.png";
   AssetImage get toImg => AssetImage(toPng);
+}
+
+enum HadithLogoConstant {
+  logo_hadith('logo_hadith');
+
+  final String value;
+  const HadithLogoConstant(this.value);
+
+  String get toSvg => "assets/image/hadith/$value.svg";
+  SvgPicture get toImg => SvgPicture.asset(toSvg);
 }

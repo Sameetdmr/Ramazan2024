@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
 import 'package:ramadan/ui/home/components/CustomBottomNavigation.dart';
 import 'package:ramadan/ui/home/home/HomePageViewModel.dart';
-import 'package:ramadan/ui/home/home/city/CityListPage.dart';
+import 'package:ramadan/ui/home/city/CityListPage.dart';
 import 'package:ramadan/utils/configuration/ProjectInfo.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 

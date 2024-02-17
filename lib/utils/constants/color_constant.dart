@@ -19,6 +19,8 @@ class ColorTextConstant {
   static Color white = HexColor("#FFFFFF");
 
   static Color black = HexColor("#000000");
+
+  static Color orangeAccent = Colors.orangeAccent;
 }
 
 @immutable
@@ -29,4 +31,17 @@ class PrayerTimeColor {
   static const Color ikindi = Color(0xFFFF4500);
   static const Color iftar = Color(0xFF8B4513);
   static const Color yatsi = Color(0xFF00008B);
+}
+
+@immutable
+class ColorCommonConstant {
+  const ColorCommonConstant._();
+
+  static Color transparent = Colors.transparent;
+
+  static Color white = HexColor("#FFFFFF");
+
+  static Color black = HexColor("#000000");
+
+  static Color saddleBrown = Color(0xFF8B4513);
 }

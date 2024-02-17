@@ -7,6 +7,7 @@ import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/services/common/core/ConfigurationService.dart';
 import 'package:ramadan/services/common/notification/LocalNotificationService.dart';
 import 'package:ramadan/services/common/ramadan/LocationService.dart';
+import 'package:ramadan/services/home/HadithService.dart';
 import 'package:ramadan/utils/initialize/AppPreferences.dart';
 import 'package:ramadan/utils/initialize/AppVersionChecker.dart';
 
@@ -32,5 +33,6 @@ class ServiceLocator {
     Get.lazyPut<IConfigurationService>(() => ConfigurationService(), fenix: true);
     Get.lazyPut<IRamadanDataProvider>(() => RamadanDataProvider(), fenix: true);
     Get.lazyPut<ILocationService>(() => LocationService(), fenix: true);
+    Get.lazyPut<IHadithService>(() => HadithService(), fenix: true);
   }
 }

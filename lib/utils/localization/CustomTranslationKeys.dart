@@ -58,6 +58,9 @@ class CustomTranslationKeys {
   // Rest Service Error
   static const String anErrorOccured = "anErrorOccured";
 
+  // Hadith Service Error
+  static const String anErrorHadithService = "anErrorHadithService";
+
   // Custom Dialog
   static const String submit = "submit";
 
@@ -116,4 +119,8 @@ class CustomTranslationKeys {
   static String hours = "hours";
   static String minutes = "minutes";
   static String seconds = "seconds";
+
+  // Hadith
+  static String allCategory = "allCategory";
+  static String hadithAppBarTitle = "hadithAppBarTitle";
 }

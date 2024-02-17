@@ -67,6 +67,9 @@ class CustomTranslations extends Translations {
           // Rest Service Error
           CustomTranslationKeys.anErrorOccured: "An error occured",
 
+          // Hadith Service Error
+          CustomTranslationKeys.anErrorHadithService: "An error occurred while loading the hadith service",
+
           // Custom Dialog
           CustomTranslationKeys.submit: "Submit",
 
@@ -125,6 +128,10 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.hours: "Hours",
           CustomTranslationKeys.seconds: "Seconds",
           CustomTranslationKeys.minutes: "Minutes",
+
+          // Hadith
+          CustomTranslationKeys.allCategory: "Select All",
+          CustomTranslationKeys.hadithAppBarTitle: "Hadis-i Şerif",
         },
         'tr_TR': {
           // Splash Slider
@@ -189,6 +196,9 @@ class CustomTranslations extends Translations {
           // Rest Service Error
           CustomTranslationKeys.anErrorOccured: "Bir hata oluştu.",
 
+          // Hadith Service Error
+          CustomTranslationKeys.anErrorHadithService: "Hadis servisi yüklenirken hata oluştu",
+
           // Custom Dialog
           CustomTranslationKeys.submit: "Tamam",
 
@@ -245,8 +255,12 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.timeUntilFajr: "Sahur\'a Kalan Süre",
           CustomTranslationKeys.timeUntilSunset: "İftar\'a Kalan Süre",
           CustomTranslationKeys.hours: "Saat",
-          CustomTranslationKeys.seconds: "Dakika",
-          CustomTranslationKeys.minutes: "Saniye",
+          CustomTranslationKeys.seconds: "Saniye",
+          CustomTranslationKeys.minutes: "Dakika",
+
+          // Hadith
+          CustomTranslationKeys.allCategory: "Tümünü Seç",
+          CustomTranslationKeys.hadithAppBarTitle: "Hadis-i Şerif",
         },
       };
 
