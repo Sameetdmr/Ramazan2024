@@ -13,7 +13,9 @@ class HadithPageViewModel extends ViewModelBase {
   RxList<String> uniqueCategoryList = <String>[].obs;
   IHadithService _iHadithService = ServiceLocator().get<IHadithService>();
 
-  HadithPageViewModel() {}
+  HadithPageViewModel() {
+    setCurrentScreen('Hadith Page');
+  }
 
   @override
   void onInit() async {

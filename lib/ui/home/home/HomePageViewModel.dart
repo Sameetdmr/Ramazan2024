@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/model/domain/GridItemResult.dart';
@@ -53,7 +51,9 @@ class HomePageViewModel extends ViewModelBase {
   RxInt remainingTime = 0.obs;
   RxInt remainingramadanTime = 0.obs;
 
-  HomePageViewModel() {}
+  HomePageViewModel() {
+    setCurrentScreen('Home Page');
+  }
 
   @override
   void onInit() async {

@@ -25,6 +25,7 @@ class SliderPageViewModel extends ViewModelBase {
   IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
 
   SliderPageViewModel(BuildContext context) {
+    setCurrentScreen('Slider Page');
     this._context = context;
   }
 

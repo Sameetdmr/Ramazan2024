@@ -74,7 +74,7 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.submit: "Submit",
 
           // App
-          CustomTranslationKeys.appName: "E-Ramazan",
+          CustomTranslationKeys.appName: "Ramazan 2024",
 
           // Home
           CustomTranslationKeys.successSignOutText: "Sign out successful",
@@ -203,7 +203,7 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.submit: "Tamam",
 
           // App
-          CustomTranslationKeys.appName: "E-Ramazan",
+          CustomTranslationKeys.appName: "Ramazan 2024",
 
           // Home
           CustomTranslationKeys.successSignOutText: "Çıkış Başarılı",

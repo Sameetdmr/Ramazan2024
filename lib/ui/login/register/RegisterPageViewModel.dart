@@ -20,6 +20,7 @@ class RegisterPageViewModel extends ViewModelBase {
 
   RxBool obscureText = false.obs;
   RegisterPageViewModel() {
+    setCurrentScreen('Register Page');
     initPage();
   }
 

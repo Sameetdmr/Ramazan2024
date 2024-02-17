@@ -20,7 +20,9 @@ class SplashPageViewModel extends ViewModelBase {
   RxBool isCurrentVersionOk = true.obs;
   RxString appVersion = ''.obs;
 
-  SplashPageViewModel() {}
+  SplashPageViewModel() {
+    setCurrentScreen('Splash Page');
+  }
 
   @override
   onInit() async {

@@ -29,6 +29,7 @@ class LoginPageViewModel extends ViewModelBase {
   IAuthService _authService = ServiceLocator().get<IAuthService>();
 
   LoginPageViewModel() {
+    setCurrentScreen('Login Page');
     initPage();
   }
 
