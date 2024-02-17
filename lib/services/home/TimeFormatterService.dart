@@ -4,7 +4,7 @@ import 'package:ramadan/utils/configuration/ProjectInfo.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 
 class TimeFormatterService {
-  static formatRemainingTime(int remainingSeconds) {
+  static (RxString, RxString, RxString) formatRemainingTime(int remainingSeconds) {
     Duration remainingDuration = Duration(seconds: remainingSeconds);
 
     int hours = remainingDuration.inHours;
@@ -15,7 +15,7 @@ class TimeFormatterService {
     String formattedMinutes = minutes.toString().padLeft(2, '0');
     String formattedSeconds = seconds.toString().padLeft(2, '0');
 
-    return '$formattedHours : $formattedMinutes : $formattedSeconds'.obs;
+    return (formattedHours.obs, formattedMinutes.obs, formattedSeconds.obs);
   }
 
   static RxString formatRemainingTimeName() {

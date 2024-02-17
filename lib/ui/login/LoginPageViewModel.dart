@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
-import 'package:ramadan/ui/home/HomePage.dart';
+import 'package:ramadan/ui/home/CustomNavigationPage.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
@@ -63,7 +63,7 @@ class LoginPageViewModel extends ViewModelBase {
       User? user = await _authService.signInWithEmailAndPassword(email, password);
       if (user != null) {
         CustomDialog.dismiss();
-        CustomNavigator().pushAndRemoveUntil(HomePage());
+        CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       } else {
         CustomDialog.dismiss();
         CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorEmailPasswordControlText);
@@ -78,7 +78,7 @@ class LoginPageViewModel extends ViewModelBase {
       User? user = await _authService.signInWithGoogle();
       clearTextController();
       if (user != null) {
-        CustomNavigator().pushAndRemoveUntil(HomePage());
+        CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       } else {
         CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorRetryText);
       }

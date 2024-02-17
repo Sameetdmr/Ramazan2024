@@ -9,6 +9,10 @@ import 'package:ramadan/utils/initialize/ProjectInitialize.dart';
 import 'package:ramadan/utils/localization/CustomTranslations.dart';
 
 GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey();
+GlobalKey<NavigatorState> _navigatorKeyHome = GlobalKey();
+GlobalKey<NavigatorState> _navigatorKeyProfile = GlobalKey();
+
+List<GlobalKey<NavigatorState>> navigatorKeys = [_navigatorKeyHome, _navigatorKeyProfile];
 
 Future<void> main() async {
   await ProjectInitialize().make();

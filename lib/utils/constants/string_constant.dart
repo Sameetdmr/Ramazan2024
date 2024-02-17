@@ -134,6 +134,9 @@ class StringHomeConstant {
   static String get isha => CustomTranslations.getText(CustomTranslationKeys.isha);
 
   // Countdown Title
+  static String get hours => CustomTranslations.getText(CustomTranslationKeys.hours);
+  static String get minutes => CustomTranslations.getText(CustomTranslationKeys.minutes);
+  static String get seconds => CustomTranslations.getText(CustomTranslationKeys.seconds);
   static String get timeUntilFajr => CustomTranslations.getText(CustomTranslationKeys.timeUntilFajr);
   static String get timeUntilSunset => CustomTranslations.getText(CustomTranslationKeys.timeUntilSunset);
 }

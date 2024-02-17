@@ -53,11 +53,10 @@ class HomePageViewModel extends ViewModelBase {
   RxInt remainingTime = 0.obs;
   RxInt remainingramadanTime = 0.obs;
 
-  HomePageViewModel() {
-    initPage();
-  }
+  HomePageViewModel() {}
 
-  initPage() async {
+  @override
+  void onInit() async {
     try {
       fillCityList();
       fillRamadanWordList();
@@ -68,6 +67,7 @@ class HomePageViewModel extends ViewModelBase {
     } catch (e) {
       exceptionHandlingService.handleException(e);
     }
+    super.onInit();
   }
 
   @override

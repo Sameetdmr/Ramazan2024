@@ -113,4 +113,7 @@ class CustomTranslationKeys {
   // Countdown Title
   static String timeUntilFajr = "timeUntilFajr";
   static String timeUntilSunset = "timeUntilSunset";
+  static String hours = "hours";
+  static String minutes = "minutes";
+  static String seconds = "seconds";
 }

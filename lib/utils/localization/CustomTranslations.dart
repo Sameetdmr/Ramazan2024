@@ -122,6 +122,9 @@ class CustomTranslations extends Translations {
           // Countdown Title
           CustomTranslationKeys.timeUntilFajr: "Time Until Fajr",
           CustomTranslationKeys.timeUntilSunset: "Time Until Sunset",
+          CustomTranslationKeys.hours: "Hours",
+          CustomTranslationKeys.seconds: "Seconds",
+          CustomTranslationKeys.minutes: "Minutes",
         },
         'tr_TR': {
           // Splash Slider
@@ -241,6 +244,9 @@ class CustomTranslations extends Translations {
           // Countdown Title
           CustomTranslationKeys.timeUntilFajr: "Sahur\'a Kalan Süre",
           CustomTranslationKeys.timeUntilSunset: "İftar\'a Kalan Süre",
+          CustomTranslationKeys.hours: "Saat",
+          CustomTranslationKeys.seconds: "Dakika",
+          CustomTranslationKeys.minutes: "Saniye",
         },
       };
 

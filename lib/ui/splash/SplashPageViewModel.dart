@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/services/common/core/PermissionManager.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
-import 'package:ramadan/ui/home/HomePage.dart';
+import 'package:ramadan/ui/home/CustomNavigationPage.dart';
 import 'package:ramadan/ui/login/LoginPage.dart';
 import 'package:ramadan/ui/slider/SliderPage.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
@@ -58,7 +58,7 @@ class SplashPageViewModel extends ViewModelBase {
         } else {
           bool isLoggedIn = await _authService.isUserLoggedIn();
           if (isLoggedIn) {
-            CustomNavigator().pushAndRemoveUntil(HomePage());
+            CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
           } else {
             CustomNavigator().pushAndRemoveUntil(LoginPage());
           }

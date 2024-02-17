@@ -3,16 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kartal/kartal.dart';
-import 'package:ramadan/model/home/GridItem.dart';
 import 'package:ramadan/services/home/TimeFormatterService.dart';
-import 'package:ramadan/ui/home/HomePageViewModel.dart';
-import 'package:ramadan/ui/home/city/CityListPage.dart';
-import 'package:ramadan/ui/home/components/CountdownWidget.dart';
-import 'package:ramadan/ui/home/components/GridCard.dart';
+import 'package:ramadan/ui/home/home/components/CountdownWidget.dart';
+import 'package:ramadan/ui/home/home/components/GridCard.dart';
+import 'package:ramadan/ui/home/home/HomePageViewModel.dart';
 import 'package:ramadan/utils/configuration/ProjectInfo.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/formatter/DateTimeFormatter.dart';
-import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 
 class HomePage extends StatelessWidget {
   late HomePageViewModel _homePageViewModel;
@@ -20,26 +17,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _homePageViewModel = Get.put(HomePageViewModel());
+    _homePageViewModel = Get.find<HomePageViewModel>();
     return Obx(
       () => SafeArea(
         child: Scaffold(
-            floatingActionButton: FloatingActionButton(
-              onPressed: () async {
-                dynamic result = await CustomNavigator().pushToMain<dynamic>(CityListPage(
-                  turkeyCities: _homePageViewModel.citiesList,
-                ));
-                if (result != null) {
-                  if (result != 0) {
-                    ProjectInfo.instance.cityName.value = _homePageViewModel.citiesList[result].name;
-                    _homePageViewModel.refreshPage(_homePageViewModel.citiesList[result].lowercaseName);
-                  } else {
-                    _homePageViewModel.refreshPage(null);
-                  }
-                }
-              },
-              child: Icon(Icons.location_on_outlined),
-            ),
             appBar: AppBar(
               elevation: 0,
               backgroundColor: Colors.transparent,
@@ -80,7 +61,9 @@ class HomePage extends StatelessWidget {
                           ),
                           CountdownTimerWidget(
                             title: TimeFormatterService.formatRemainingTimeName().value,
-                            timeRemaining: TimeFormatterService.formatRemainingTime(_homePageViewModel.remainingramadanTime.value).value,
+                            hours: TimeFormatterService.formatRemainingTime(_homePageViewModel.remainingramadanTime.value).$1.value,
+                            minutes: TimeFormatterService.formatRemainingTime(_homePageViewModel.remainingramadanTime.value).$2.value,
+                            seconds: TimeFormatterService.formatRemainingTime(_homePageViewModel.remainingramadanTime.value).$3.value,
                             color: TimeFormatterService.formatRemainingTimeColor().value,
                           ),
                           Divider(

@@ -26,22 +26,22 @@ class SliderPageViewModel extends ViewModelBase {
 
   SliderPageViewModel(BuildContext context) {
     this._context = context;
-    initPage(_context);
   }
 
-  initPage(BuildContext context) {
+  @override
+  void onInit() {
     slides.add(
       ContentConfig(
           title: StringSplashSliderConstant.splashSlider1TitleText,
           styleTitle: GoogleFonts.nunito(
-            textStyle: context.general.textTheme.bodyMedium?.copyWith(
+            textStyle: _context.general.textTheme.bodyMedium?.copyWith(
               color: ColorTextConstant.forestMaid,
               fontWeight: FontWeight.bold,
             ),
           ),
           description: StringSplashSliderConstant.splashSlider1SubTitleText,
           styleDescription: GoogleFonts.nunito(
-            textStyle: context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
+            textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
           ),
           centerWidget: AppSplashSliderLottiesConstant.appLottie1.toLottie,
           backgroundColor: ColorBackgroundConstant.white),
@@ -50,14 +50,14 @@ class SliderPageViewModel extends ViewModelBase {
       ContentConfig(
         title: StringSplashSliderConstant.splashSlider2TitleText,
         styleTitle: GoogleFonts.nunito(
-          textStyle: context.general.textTheme.bodyMedium?.copyWith(
+          textStyle: _context.general.textTheme.bodyMedium?.copyWith(
             color: ColorTextConstant.forestMaid,
             fontWeight: FontWeight.bold,
           ),
         ),
         description: StringSplashSliderConstant.splashSlider2SubTitleText,
         styleDescription: GoogleFonts.nunito(
-          textStyle: context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
+          textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
         ),
         centerWidget: AppSplashSliderLottiesConstant.appLottie2.toLottie,
         backgroundColor: ColorBackgroundConstant.white,
@@ -68,18 +68,19 @@ class SliderPageViewModel extends ViewModelBase {
           title: StringSplashSliderConstant.splashSlider3TitleText,
           maxLineTitle: 3,
           styleTitle: GoogleFonts.nunito(
-            textStyle: context.general.textTheme.bodyMedium?.copyWith(
+            textStyle: _context.general.textTheme.bodyMedium?.copyWith(
               color: ColorTextConstant.forestMaid,
               fontWeight: FontWeight.bold,
             ),
           ),
           description: StringSplashSliderConstant.splashSlider3SubTitleText,
           styleDescription: GoogleFonts.nunito(
-            textStyle: context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
+            textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
           ),
           centerWidget: AppSplashSliderLottiesConstant.appLottie3.toLottie,
           backgroundColor: ColorBackgroundConstant.white),
     );
+    super.onInit();
   }
 
   Future<bool> onDonePress() async {
