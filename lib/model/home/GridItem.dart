@@ -8,6 +8,7 @@ class GridItem {
     required this.iconPath,
     required this.title,
     required this.time,
+    required this.date,
     required this.isActive,
   });
 
@@ -16,5 +17,6 @@ class GridItem {
   final String iconPath;
   final String title;
   final String time;
+  final String date;
   final RxBool isActive;
 }

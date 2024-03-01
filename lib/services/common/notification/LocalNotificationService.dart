@@ -3,6 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 Random random = Random();
@@ -11,13 +13,14 @@ abstract class ILocalNotificationService {
   Future<NotificationDetails> notificationDetails();
   Future<void> initializePlatformNotifications();
   Future<void> showFirebaseNotification(String title, String body);
+  Future<void> schedulePrayerTimeNotification(int offsetSeconds, DateTime notificationDate);
 }
 
 class LocalNotificationService implements ILocalNotificationService {
   @override
   Future<NotificationDetails> notificationDetails() async {
     AndroidNotificationChannel androidNotificationChannel = AndroidNotificationChannel(
-      'ramadanAppChannelId',
+      'ramadanAppChannelId-1',
       'E-Imsakiye Ramadan',
       description: 'Ramadan App Push Notifications With Sound',
       sound: RawResourceAndroidNotificationSound("cannon"),
@@ -37,6 +40,7 @@ class LocalNotificationService implements ILocalNotificationService {
         sound: androidNotificationChannel.sound,
         icon: '@drawable/cannon',
         playSound: true,
+        showWhen: false,
         color: const Color.fromRGBO(0, 0, 0, 0),
         channelDescription: androidNotificationChannel.description,
       ),
@@ -73,5 +77,35 @@ class LocalNotificationService implements ILocalNotificationService {
       body,
       _notificationDetails,
     );
+  }
+
+  @override
+  Future<void> schedulePrayerTimeNotification(int offsetSeconds, DateTime notificationDate) async {
+    try {
+      await flutterLocalNotificationsPlugin.cancelAll();
+      int id = DateTime.now().millisecondsSinceEpoch.remainder(100000);
+      final timeZone = await _setup();
+      print('Yeni bildirimin zamanı: $notificationDate');
+      tz.TZDateTime originalTZDateTime = tz.TZDateTime.from(notificationDate, timeZone);
+
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        id,
+        offsetSeconds == 0 ? 'İftar Vakti!' : 'İftar Vaktine $offsetSeconds Saniye Kaldı!',
+        '$notificationDate',
+        originalTZDateTime.add(Duration(seconds: offsetSeconds)),
+        await notificationDetails(),
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dateAndTime,
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<tz.Location> _setup() async {
+    tz.initializeTimeZones();
+    tz.getLocation('Europe/Istanbul');
+    return tz.local;
   }
 }

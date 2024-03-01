@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 
 class DateTimeFormatter {
@@ -40,5 +41,15 @@ class DateTimeFormatter {
     ];
 
     return monthNames[month - 1];
+  }
+
+  DateTime getPrayerTime(String prayerDate) {
+    DateTime parsedData = DateFormat('dd MMMM, EEEE', 'tr_TR').parse(prayerDate);
+    return DateTime(2024, parsedData.month, parsedData.day);
+  }
+
+  DateTime targetDateTime(String prayerTime) {
+    DateTime time = DateFormat('HH:mm', 'tr_TR').parse(prayerTime);
+    return time;
   }
 }
