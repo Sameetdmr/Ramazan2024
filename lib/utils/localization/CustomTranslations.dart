@@ -76,6 +76,9 @@ class CustomTranslations extends Translations {
           // App
           CustomTranslationKeys.appName: "Ramazan 2024",
 
+          // Notification
+          CustomTranslationKeys.notificationBody: "Iftar time has come, may your prayers be accepted!",
+
           // Home
           CustomTranslationKeys.successSignOutText: "Sign out successful",
           CustomTranslationKeys.errorSignOutText: "An error occurred while signing out",
@@ -204,6 +207,9 @@ class CustomTranslations extends Translations {
 
           // App
           CustomTranslationKeys.appName: "Ramazan 2024",
+
+          // Notification
+          CustomTranslationKeys.notificationBody: "İftar vakti geldi, dualarınız kabul olsun!",
 
           // Home
           CustomTranslationKeys.successSignOutText: "Çıkış Başarılı",

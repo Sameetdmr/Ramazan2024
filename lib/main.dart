@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:ramadan/ui/splash/SplashPage.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/initialize/ProjectInitialize.dart';
@@ -17,8 +16,6 @@ List<GlobalKey<NavigatorState>> navigatorKeys = [_navigatorKeyHome, _navigatorKe
 
 Future<void> main() async {
   await ProjectInitialize().make();
-  await initializeDateFormatting('tr_TR', null);
-
   runApp(const MyApp());
 }
 

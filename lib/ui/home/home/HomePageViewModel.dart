@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:ramadan/model/domain/GridItemResult.dart';
 import 'package:ramadan/model/domain/PrayerTimeDetails.dart';
 import 'package:ramadan/model/domain/PrayerTimesModel.dart';
@@ -72,13 +71,12 @@ class HomePageViewModel extends ViewModelBase {
     super.onInit();
   }
 
-  Future<void> setupNotification(DateTime day, String iftarTime) async {
+  Future<void> setupNotification(DateTime day, String iftarTime, String city) async {
     DateTime time = DateTimeFormatter().targetDateTime(iftarTime);
 
     DateTime targetDateTime = DateTime(day.year, day.month, day.day, time.hour, time.minute);
 
-    int offsetSeconds = 30;
-    await _localNotificationService.schedulePrayerTimeNotification(offsetSeconds, targetDateTime);
+    await _localNotificationService.schedulePrayerTimeNotification(city, targetDateTime);
   }
 
   @override
@@ -130,7 +128,7 @@ class HomePageViewModel extends ViewModelBase {
     if (_ramadanTimer == null || !_ramadanTimer!.isActive) {
       await _startRamadanTimer(ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == targetIndex).time);
     }
-    await setupNotification(DateTimeFormatter().getPrayerTime(ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).date), ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).time);
+    await setupNotification(DateTimeFormatter().getPrayerTime(ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).date), ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).time, cityName);
     isPageLoading.value = true;
   }
 
@@ -150,7 +148,7 @@ class HomePageViewModel extends ViewModelBase {
         ProjectInfo.instance.cityName.value = await _locationService.getCityNameFromCoordinates();
         await fillPrayerTimesModel(ProjectInfo.instance.cityName.value);
       }
-      await setupNotification(DateTimeFormatter().getPrayerTime(ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).date), ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).time);
+      await setupNotification(DateTimeFormatter().getPrayerTime(ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).date), ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).time, city!);
     } catch (e) {
       exceptionHandlingService.handleException(e);
     }

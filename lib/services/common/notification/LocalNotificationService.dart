@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -13,7 +14,7 @@ abstract class ILocalNotificationService {
   Future<NotificationDetails> notificationDetails();
   Future<void> initializePlatformNotifications();
   Future<void> showFirebaseNotification(String title, String body);
-  Future<void> schedulePrayerTimeNotification(int offsetSeconds, DateTime notificationDate);
+  Future<void> schedulePrayerTimeNotification(String city, DateTime notificationDate);
 }
 
 class LocalNotificationService implements ILocalNotificationService {
@@ -80,19 +81,18 @@ class LocalNotificationService implements ILocalNotificationService {
   }
 
   @override
-  Future<void> schedulePrayerTimeNotification(int offsetSeconds, DateTime notificationDate) async {
+  Future<void> schedulePrayerTimeNotification(String city, DateTime notificationDate) async {
     try {
       await flutterLocalNotificationsPlugin.cancelAll();
       int id = DateTime.now().millisecondsSinceEpoch.remainder(100000);
       final timeZone = await _setup();
-      print('Yeni bildirimin zamanı: $notificationDate');
       tz.TZDateTime originalTZDateTime = tz.TZDateTime.from(notificationDate, timeZone);
 
       await flutterLocalNotificationsPlugin.zonedSchedule(
         id,
-        offsetSeconds == 0 ? 'İftar Vakti!' : 'İftar Vaktine $offsetSeconds Saniye Kaldı!',
-        '$notificationDate',
-        originalTZDateTime.add(Duration(seconds: offsetSeconds)),
+        '$city için İftar Vakti!',
+        StringCommonConstant.notificationBody,
+        originalTZDateTime,
         await notificationDetails(),
         androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,

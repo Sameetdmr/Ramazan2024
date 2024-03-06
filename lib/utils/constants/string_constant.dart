@@ -91,6 +91,9 @@ class StringCommonConstant {
 
   // App
   static String get appName => CustomTranslations.getText(CustomTranslationKeys.appName);
+
+  // Notification
+  static String get notificationBody => CustomTranslations.getText(CustomTranslationKeys.notificationBody);
 }
 
 @immutable

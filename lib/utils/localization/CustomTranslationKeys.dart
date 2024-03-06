@@ -67,6 +67,9 @@ class CustomTranslationKeys {
   // App
   static const String appName = "appName";
 
+  // Notification
+  static const String notificationBody = "notificationBody";
+
   // Validation
   static const String emptyEmailError = 'emptyEmailError';
   static const String invalidEmailError = 'invalidEmailError';
