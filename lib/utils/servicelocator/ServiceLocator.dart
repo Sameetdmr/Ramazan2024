@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:ramadan/rest/ramadan/RamadanDataProvider.dart';
 import 'package:ramadan/services/common/ExceptionHandlingService.dart';
+import 'package:ramadan/services/common/ads/GoogleAdsenseManager.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/services/common/core/ConfigurationService.dart';
 import 'package:ramadan/services/common/notification/LocalNotificationService.dart';
@@ -34,5 +35,6 @@ class ServiceLocator {
     Get.lazyPut<IRamadanDataProvider>(() => RamadanDataProvider(), fenix: true);
     Get.lazyPut<ILocationService>(() => LocationService(), fenix: true);
     Get.lazyPut<IHadithService>(() => HadithService(), fenix: true);
+    Get.lazyPut<IGoogleAdsenseManager>(() => GoogleAdsenseManager(), fenix: true);
   }
 }

@@ -158,4 +158,6 @@ class ProjectConstant {
   const ProjectConstant._();
 
   static String get hadithJsonPath => 'assets/json/hadiths.json';
+
+  static String get bannerAd1 => 'ca-app-pub-9561486685051319/4348662671';
 }

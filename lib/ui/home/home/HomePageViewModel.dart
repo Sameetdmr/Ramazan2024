@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:ramadan/model/domain/GridItemResult.dart';
 import 'package:ramadan/model/domain/PrayerTimeDetails.dart';
 import 'package:ramadan/model/domain/PrayerTimesModel.dart';
 import 'package:ramadan/model/domain/TurkeyCity.dart';
 import 'package:ramadan/model/home/PrayerTimeWord.dart';
 import 'package:ramadan/rest/ramadan/RamadanDataProvider.dart';
+import 'package:ramadan/services/common/ads/GoogleAdsenseManager.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/services/common/notification/LocalNotificationService.dart';
 import 'package:ramadan/services/common/ramadan/LocationService.dart';
@@ -45,6 +47,9 @@ class HomePageViewModel extends ViewModelBase {
   ILocationService _locationService = ServiceLocator().get<ILocationService>();
   ILocalNotificationService _localNotificationService = ServiceLocator().get<ILocalNotificationService>();
   IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
+  IGoogleAdsenseManager _iGoogleAdsenseManager = ServiceLocator().get<IGoogleAdsenseManager>();
+
+  BannerAd? bannerAd;
 
   // Countdown
   late Timer _timer;
@@ -59,6 +64,9 @@ class HomePageViewModel extends ViewModelBase {
   @override
   void onInit() async {
     try {
+      bannerAd = await _iGoogleAdsenseManager.loadBannerAd(
+        adLoaded: () {},
+      );
       fillCityList();
       fillRamadanWordList();
       await checkUserLoggedIn();

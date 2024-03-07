@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kartal/kartal.dart';
 import 'package:ramadan/services/home/TimeFormatterService.dart';
 import 'package:ramadan/ui/home/home/components/CountdownWidget.dart';
@@ -69,6 +70,15 @@ class HomePage extends StatelessWidget {
                           Divider(
                             thickness: 2,
                           ),
+                          if (_homePageViewModel.bannerAd != null)
+                            Expanded(
+                              child: Container(
+                                color: Colors.white,
+                                width: _homePageViewModel.bannerAd!.size.width.toDouble(),
+                                height: _homePageViewModel.bannerAd!.size.height.toDouble(),
+                                child: AdWidget(ad: _homePageViewModel.bannerAd!),
+                              ),
+                            ),
                         ],
                       ),
                     )

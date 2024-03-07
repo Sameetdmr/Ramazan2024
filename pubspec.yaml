@@ -47,6 +47,7 @@ dependencies:
   hexcolor: ^3.0.1
   another_flushbar: ^1.12.30
   flutter_svg: ^2.0.7
+  google_mobile_ads: ^4.0.0
 
   #Other
   cupertino_icons: ^1.0.6
