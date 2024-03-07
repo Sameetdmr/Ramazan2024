@@ -32,13 +32,12 @@ final class ProjectInitialize {
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     await initializeDateFormatting('tr_TR', null);
-/*
+
     FlutterError.onError = (FlutterErrorDetails details) async {
       await FirebaseCrashlytics.instance.log('${StackTrace.current} / ${details.exceptionAsString()}');
       await FirebaseCrashlytics.instance.recordError(details.exceptionAsString(), StackTrace.current, printDetails: true, fatal: true);
       Logger().e(details.exceptionAsString());
       exit(1);
     };
-    */
   }
 }
