@@ -1,4 +1,4 @@
-# Ramadan 2024 🌙
+# Ramazan 2024 🌙
 
 This application aims to provide users with easy and fast access to daily fasting hours, prayer times, and spiritual content during the month of Ramadan.
 
