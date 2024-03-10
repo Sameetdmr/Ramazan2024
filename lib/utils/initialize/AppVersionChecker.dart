@@ -15,8 +15,8 @@ class AppVersionChecker implements IAppVersionChecker {
   Future<bool> checkAppVersion() async {
     try {
       await _firebaseRemoteConfig.setConfigSettings(RemoteConfigSettings(
-        fetchTimeout: const Duration(minutes: 1),
-        minimumFetchInterval: const Duration(hours: 12),
+        fetchTimeout: const Duration(seconds: 30),
+        minimumFetchInterval: const Duration(seconds: 30),
       ));
       await _firebaseRemoteConfig.fetchAndActivate();
 
