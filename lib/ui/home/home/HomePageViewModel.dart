@@ -49,7 +49,7 @@ class HomePageViewModel extends ViewModelBase {
   IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
   IGoogleAdsenseManager _iGoogleAdsenseManager = ServiceLocator().get<IGoogleAdsenseManager>();
 
-  BannerAd? bannerAd;
+  final Rx<BannerAd?> bannerAd = Rx<BannerAd?>(null);
 
   // Countdown
   late Timer _timer;
@@ -64,9 +64,15 @@ class HomePageViewModel extends ViewModelBase {
   @override
   void onInit() async {
     try {
-      bannerAd = await _iGoogleAdsenseManager.loadBannerAd(
-        adLoaded: () {},
+      bannerAd.value = await _iGoogleAdsenseManager.loadBannerAd(
+        adLoaded: () {
+          update();
+        },
       );
+      if (bannerAd.value != null) {
+        bannerAd.value!.load();
+      }
+
       fillCityList();
       fillRamadanWordList();
       await checkUserLoggedIn();
@@ -156,7 +162,8 @@ class HomePageViewModel extends ViewModelBase {
         ProjectInfo.instance.cityName.value = await _locationService.getCityNameFromCoordinates();
         await fillPrayerTimesModel(ProjectInfo.instance.cityName.value);
       }
-      await setupNotification(DateTimeFormatter().getPrayerTime(ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).date), ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).time, city!);
+      await setupNotification(
+          DateTimeFormatter().getPrayerTime(ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).date), ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).time, ProjectInfo.instance.cityName.value);
     } catch (e) {
       exceptionHandlingService.handleException(e);
     }

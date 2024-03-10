@@ -43,7 +43,7 @@ class CityListPage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () async {
-                  CustomNavigator().popFromMain(0);
+                  CustomNavigator().popFromMain(null);
                 },
                 child: ListTile(
                   title: Text('Tam konumu kullan', style: context.textTheme.bodyMedium?.copyWith(color: Colors.orange)),

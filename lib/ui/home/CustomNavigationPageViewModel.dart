@@ -40,12 +40,10 @@ class CustomNavigationPageViewModel extends ViewModelBase with GetSingleTickerPr
       turkeyCities: _homePageViewModel.citiesList,
     ));
     if (result != null) {
-      if (result != 0) {
-        ProjectInfo.instance.cityName.value = _homePageViewModel.citiesList[result].name;
-        _homePageViewModel.refreshPage(_homePageViewModel.citiesList[result].lowercaseName);
-      } else {
-        _homePageViewModel.refreshPage(null);
-      }
+      ProjectInfo.instance.cityName.value = _homePageViewModel.citiesList[result].name;
+      _homePageViewModel.refreshPage(_homePageViewModel.citiesList[result].lowercaseName);
+    } else {
+      _homePageViewModel.refreshPage(null);
     }
   }
 }
