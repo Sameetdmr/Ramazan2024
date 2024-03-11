@@ -70,20 +70,6 @@ class HomePage extends StatelessWidget {
                           Divider(
                             thickness: 2,
                           ),
-                          Obx(
-                            () => _homePageViewModel.bannerAd.value != null
-                                ? Expanded(
-                                    child: Container(
-                                      color: Colors.white,
-                                      width: _homePageViewModel.bannerAd.value!.size.width.toDouble(),
-                                      height: _homePageViewModel.bannerAd.value!.size.height.toDouble(),
-                                      child: AdWidget(ad: _homePageViewModel.bannerAd.value!),
-                                    ),
-                                  )
-                                : Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                          ),
                         ],
                       ),
                     )

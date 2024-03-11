@@ -34,6 +34,7 @@ android {
     namespace "com.sameetdmr.eramadanapp.ramadan"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
+    android.buildTypes.release.ndk.debugSymbolLevel = 'FULL'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
