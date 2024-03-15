@@ -50,7 +50,7 @@ dependencies:
 
   #Other
   cupertino_icons: ^1.0.6
-  google_fonts: ^6.1.0
+  google_fonts: 6.1.0
   flutter_local_notifications: ^16.3.2
 
   #Database
