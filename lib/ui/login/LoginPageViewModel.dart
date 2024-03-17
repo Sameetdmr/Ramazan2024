@@ -88,6 +88,14 @@ class LoginPageViewModel extends ViewModelBase {
     }
   }
 
+  void withoutSignIn(BuildContext context) {
+    try {
+      CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
+    } catch (e) {
+      exceptionHandlingService.handleException(e);
+    }
+  }
+
   Future<void> resetPassword(BuildContext context, String email) async {
     try {
       await _authService.resetPassword(email);

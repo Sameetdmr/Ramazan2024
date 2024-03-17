@@ -30,6 +30,7 @@ class StringLoginConstant {
   static String get loginNewUserText1 => CustomTranslations.getText(CustomTranslationKeys.loginNewUserText1);
   static String get loginNewUserText2 => CustomTranslations.getText(CustomTranslationKeys.loginNewUserText2);
   static String get loginDividerText => CustomTranslations.getText(CustomTranslationKeys.loginDividerText);
+  static String get withoutLoginText => CustomTranslations.getText(CustomTranslationKeys.withoutLoginText);
 
   // Register
   static String get registerAppBarTitle => CustomTranslations.getText(CustomTranslationKeys.registerAppBarTitle);

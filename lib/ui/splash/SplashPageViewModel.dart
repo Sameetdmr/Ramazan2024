@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
-import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/services/common/core/PermissionManager.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
 import 'package:ramadan/ui/home/CustomNavigationPage.dart';
-import 'package:ramadan/ui/login/LoginPage.dart';
 import 'package:ramadan/ui/slider/SliderPage.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/exceptions/CustomException.dart';
@@ -13,7 +11,6 @@ import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 
 class SplashPageViewModel extends ViewModelBase {
-  IAuthService _authService = ServiceLocator().get<IAuthService>();
   IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
   IAppVersionChecker _appVersionChecker = ServiceLocator().get<IAppVersionChecker>();
 
@@ -58,12 +55,7 @@ class SplashPageViewModel extends ViewModelBase {
           // Konum izni alabilmek için tekrardan slider sayfasına yönlendiriyorum.
           CustomNavigator().pushAndRemoveUntil(SliderPage());
         } else {
-          bool isLoggedIn = await _authService.isUserLoggedIn();
-          if (isLoggedIn) {
-            CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
-          } else {
-            CustomNavigator().pushAndRemoveUntil(LoginPage());
-          }
+          CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
         }
       }
     } catch (e) {

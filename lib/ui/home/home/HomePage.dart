@@ -28,8 +28,11 @@ class HomePage extends StatelessWidget {
               title: _Header(
                 dateTitle: DateTimeFormatter().formatTodayDate().value,
                 cityName: _homePageViewModel.isPageLoading.value ? ProjectInfo.instance.cityName.value : '-',
-                onPressed: () async {
+                signOutOnPressed: () async {
                   await _homePageViewModel.signOut(context);
+                },
+                loginOnPressed: () {
+                  _homePageViewModel.signIn(context);
                 },
                 isVisible: _homePageViewModel.isLoggedIn.value,
               ),
@@ -85,13 +88,16 @@ class _Header extends StatelessWidget {
   final String cityName;
   final bool isVisible;
   final String dateTitle;
-  final void Function() onPressed;
+  final void Function() signOutOnPressed;
+  final void Function() loginOnPressed;
+
   _Header({
     Key? key,
     required this.cityName,
     required this.isVisible,
     required this.dateTitle,
-    required this.onPressed,
+    required this.signOutOnPressed,
+    required this.loginOnPressed,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -117,9 +123,16 @@ class _Header extends StatelessWidget {
         Visibility(
           visible: isVisible,
           child: IconButton(
-            onPressed: onPressed,
+            onPressed: signOutOnPressed,
             icon: Icon(
               Icons.logout_outlined,
+              color: ColorCommonConstant.black,
+            ),
+          ),
+          replacement: IconButton(
+            onPressed: loginOnPressed,
+            icon: Icon(
+              Icons.login_outlined,
               color: ColorCommonConstant.black,
             ),
           ),
