@@ -113,6 +113,16 @@ class HomePageViewModel extends ViewModelBase {
     }
   }
 
+  void signIn(BuildContext context) {
+    try {
+      CustomNavigator().pushAndRemoveUntil(LoginPage());
+      CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringHomeConstant.successSignOutText);
+    } catch (e) {
+      CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringHomeConstant.errorSignOutText);
+      throw e;
+    }
+  }
+
   Future<void> fillPrayerTimesModel(String cityName) async {
     ProjectInfo.instance.gridItemList.clear();
     _prayerTimesModel = await _ramadanDataProvider.loadRamadanData(cityName, DateConstant.getValidDate());

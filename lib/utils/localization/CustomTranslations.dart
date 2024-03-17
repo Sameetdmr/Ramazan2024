@@ -27,6 +27,7 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.loginNewUserText1: "Don't have an account? ",
           CustomTranslationKeys.loginNewUserText2: "Register for Free",
           CustomTranslationKeys.loginDividerText: "OR",
+          CustomTranslationKeys.withoutLoginText: "Continue without login",
 
           // Register
           CustomTranslationKeys.registerAppBarTitle: "Register",
@@ -159,6 +160,7 @@ class CustomTranslations extends Translations {
           CustomTranslationKeys.loginNewUserText1: "Hesabınız yok mu? ",
           CustomTranslationKeys.loginNewUserText2: "Ücretsiz Kayıt Olun",
           CustomTranslationKeys.loginDividerText: "VEYA",
+          CustomTranslationKeys.withoutLoginText: "Üyeliksiz Devam Et",
 
           // Register
           CustomTranslationKeys.registerAppBarTitle: "Kayıt Ol",

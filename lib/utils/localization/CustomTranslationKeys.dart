@@ -18,6 +18,7 @@ class CustomTranslationKeys {
   static const String loginNewUserText1 = "loginNewUserText1";
   static const String loginNewUserText2 = "loginNewUserText2";
   static const String loginDividerText = "loginDividerText";
+  static const String withoutLoginText = "withoutLoginText";
 
   // Register
   static const String registerAppBarTitle = "registerAppBarTitle";

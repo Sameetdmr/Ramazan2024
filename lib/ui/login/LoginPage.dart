@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kartal/kartal.dart';
 import 'package:ramadan/ui/common/button/CustomLoginButton.dart';
-
 import 'package:ramadan/ui/login/LoginPageViewModel.dart';
 import 'package:ramadan/ui/login/components/CustomLoginButtonType.dart';
 import 'package:ramadan/ui/login/components/CustomTextField.dart';
@@ -163,7 +162,22 @@ class LoginPage extends StatelessWidget {
                       textStyle: context.textTheme.bodyMedium?.copyWith(decoration: TextDecoration.underline, color: ColorTextConstant.black, fontWeight: FontWeight.bold),
                     )
                   ],
-                )
+                ),
+                Divider(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomButton.getButton(
+                        onPressed: () {
+                          _loginPageViewModel.withoutSignIn(context);
+                        },
+                        customLoginButtonType: CustomLoginButtonType.TEXT,
+                        text: StringLoginConstant.withoutLoginText,
+                        textStyle: context.textTheme.titleMedium?.copyWith(color: ColorTextConstant.forestMaid, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
