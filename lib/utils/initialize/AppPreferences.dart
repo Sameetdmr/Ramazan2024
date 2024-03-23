@@ -7,8 +7,6 @@ abstract class IAppPreferences {
   Future<void> setFirstOpen(bool value);
   Future<bool> getNotificationPermission();
   Future<void> setNotificationPermission(bool value);
-  Future<bool> getLocationPermission();
-  Future<void> setLocationPermission(bool value);
 }
 
 class AppPreferences implements IAppPreferences {
@@ -36,15 +34,5 @@ class AppPreferences implements IAppPreferences {
   @override
   Future<void> setNotificationPermission(bool value) async {
     await _prefs.setBool('Notification', value);
-  }
-
-  @override
-  Future<bool> getLocationPermission() async {
-    return _prefs.getBool('Location') ?? false;
-  }
-
-  @override
-  Future<void> setLocationPermission(bool value) async {
-    await _prefs.setBool('Location', value);
   }
 }

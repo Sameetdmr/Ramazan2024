@@ -20,17 +20,10 @@ class SliderPage extends StatelessWidget {
       key: UniqueKey(),
       listContentConfig: _sliderPageViewModel.slides,
       onDonePress: () {
-        if (_sliderPageViewModel.isLocationOk.value) {
-          CustomNavigator().pushAndRemoveUntil(LoginPage());
-        } else {
-          //Todo? İzin vermesi gerektiğini gösteren dialog.
-        }
+        CustomNavigator().pushAndRemoveUntil(LoginPage());
       },
       onTabChangeCompleted: (index) {
         _sliderPageViewModel.updateCurrentIndex(index);
-      },
-      onNextPress: () async {
-        await _sliderPageViewModel.handleNextPress();
       },
       isShowSkipBtn: false,
       renderNextBtn: Text(StringSplashSliderConstant.splashSliderNextButtonText,
