@@ -42,7 +42,6 @@ class SplashPageViewModel extends ViewModelBase {
     try {
       await _appPreferences.init();
       bool isFirstOpen = await _appPreferences.isFirstOpen();
-      bool isLocationOk = await _appPreferences.getLocationPermission();
       bool hasNotificationPermission = await PermissionManager.checkAndRequestNotificationPermission();
       _appPreferences.setNotificationPermission(hasNotificationPermission);
 
@@ -51,12 +50,7 @@ class SplashPageViewModel extends ViewModelBase {
         await _appPreferences.setFirstOpen(false);
         CustomNavigator().pushAndRemoveUntil(SliderPage());
       } else {
-        if (!isLocationOk) {
-          // Konum izni alabilmek için tekrardan slider sayfasına yönlendiriyorum.
-          CustomNavigator().pushAndRemoveUntil(SliderPage());
-        } else {
-          CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
-        }
+        CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       }
     } catch (e) {
       throw CustomException(StringHomeConstant.loginError);

@@ -22,6 +22,7 @@ class CustomNavigationPage extends StatelessWidget {
             length: CustomNavigator.navigators.length,
             child: Scaffold(
               body: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
                 controller: _customNavigationPageViewModel.tabController!.value,
                 children: CustomNavigator.navigators,
               ),

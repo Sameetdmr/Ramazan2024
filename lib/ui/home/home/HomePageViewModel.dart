@@ -8,6 +8,7 @@ import 'package:ramadan/model/domain/TurkeyCity.dart';
 import 'package:ramadan/model/home/PrayerTimeWord.dart';
 import 'package:ramadan/rest/ramadan/RamadanDataProvider.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
+import 'package:ramadan/services/common/core/PermissionManager.dart';
 import 'package:ramadan/services/common/notification/LocalNotificationService.dart';
 import 'package:ramadan/services/common/ramadan/LocationService.dart';
 import 'package:ramadan/services/home/TimeFormatterService.dart';
@@ -31,6 +32,7 @@ class HomePageViewModel extends ViewModelBase {
   RxBool isLoggedIn = false.obs;
   RxBool isNotificationPermissionGranted = false.obs;
   RxBool isPageLoading = false.obs;
+  RxString initLocation = 'İSTANBUL'.obs;
 
   // Model
   late PrayerTimesModel _prayerTimesModel;
@@ -63,7 +65,7 @@ class HomePageViewModel extends ViewModelBase {
       fillRamadanWordList();
       await checkUserLoggedIn();
       await checkNotificationPermission();
-      ProjectInfo.instance.cityName.value = await _locationService.getCityNameFromCoordinates();
+      ProjectInfo.instance.cityName.value = initLocation.value;
       await fillPrayerTimesModel(ProjectInfo.instance.cityName.value);
     } catch (e) {
       exceptionHandlingService.handleException(e);
@@ -155,11 +157,14 @@ class HomePageViewModel extends ViewModelBase {
       if (city != null) {
         await fillPrayerTimesModel(city);
       } else {
-        ProjectInfo.instance.cityName.value = await _locationService.getCityNameFromCoordinates();
+        bool hasLocationOk = await PermissionManager.checkLocationPermission();
+        if (hasLocationOk) {
+          ProjectInfo.instance.cityName.value = await _locationService.getCityNameFromCoordinates();
+        } else {
+          ProjectInfo.instance.cityName.value = initLocation.value;
+        }
         await fillPrayerTimesModel(ProjectInfo.instance.cityName.value);
       }
-      await setupNotification(
-          DateTimeFormatter().getPrayerTime(ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).date), ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == 4).time, ProjectInfo.instance.cityName.value);
     } catch (e) {
       exceptionHandlingService.handleException(e);
     }

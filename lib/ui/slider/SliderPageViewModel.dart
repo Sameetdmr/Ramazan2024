@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:kartal/kartal.dart';
-import 'package:ramadan/services/common/core/PermissionManager.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/image_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
-import 'package:ramadan/utils/initialize/AppPreferences.dart';
-import 'package:ramadan/utils/popups/CustomDialog.dart';
-import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 
 class SliderPageViewModel extends ViewModelBase {
   late BuildContext _context;
@@ -21,8 +16,6 @@ class SliderPageViewModel extends ViewModelBase {
   RxInt currentIndex = 0.obs;
 
   RxBool isLocationOk = false.obs;
-
-  IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
 
   SliderPageViewModel(BuildContext context) {
     setCurrentScreen('Slider Page');
@@ -84,47 +77,7 @@ class SliderPageViewModel extends ViewModelBase {
     super.onInit();
   }
 
-  Future<bool> onDonePress() async {
-    try {
-      await _appPreferences.init();
-      bool hasLocationPermission = false;
-
-      while (!hasLocationPermission) {
-        CustomDialog.showLoadingDialog();
-        hasLocationPermission = await PermissionManager.checkLocationPermission();
-
-        if (hasLocationPermission) {
-          Position? currentPosition = await PermissionManager.getCurrentLocation();
-          if (currentPosition != null) {
-            CustomDialog.dismiss();
-            _appPreferences.setLocationPermission(true);
-          } else {
-            CustomDialog.dismiss();
-            _appPreferences.setLocationPermission(false);
-            await Future.delayed(Duration(seconds: 1));
-          }
-        } else {
-          CustomDialog.dismiss();
-          _appPreferences.setLocationPermission(false);
-          await Future.delayed(Duration(seconds: 1));
-        }
-      }
-      isLocationOk.value = await _appPreferences.getLocationPermission();
-
-      return isLocationOk.value;
-    } catch (e) {
-      exceptionHandlingService.handleException(e);
-      return false;
-    }
-  }
-
   void updateCurrentIndex(int index) {
     currentIndex.value = index;
-  }
-
-  Future<void> handleNextPress() async {
-    if (currentIndex.value == 1) {
-      await onDonePress();
-    }
   }
 }

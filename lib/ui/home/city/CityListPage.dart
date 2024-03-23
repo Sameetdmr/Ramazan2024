@@ -21,6 +21,7 @@ class CityListPage extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           centerTitle: false,
+          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined))],
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_outlined,
