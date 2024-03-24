@@ -14,14 +14,16 @@ class AppVersionChecker implements IAppVersionChecker {
   @override
   Future<bool> checkAppVersion() async {
     try {
-      await _firebaseRemoteConfig.setConfigSettings(RemoteConfigSettings(
-        fetchTimeout: const Duration(seconds: 30),
-        minimumFetchInterval: const Duration(seconds: 30),
-      ));
+      await _firebaseRemoteConfig.setConfigSettings(
+        RemoteConfigSettings(
+          fetchTimeout: const Duration(seconds: 30),
+          minimumFetchInterval: const Duration(seconds: 30),
+        ),
+      );
       await _firebaseRemoteConfig.fetchAndActivate();
 
-      String currentAppVersion = ''.ext.version;
-      String activeAppVersion = _firebaseRemoteConfig.getString(StringCommonConstant.appVersion);
+      final currentAppVersion = ''.ext.version;
+      final activeAppVersion = _firebaseRemoteConfig.getString(StringCommonConstant.appVersion);
 
       return isVersionLessThan(currentAppVersion, activeAppVersion);
     } catch (e) {
@@ -36,10 +38,12 @@ class AppVersionChecker implements IAppVersionChecker {
 
   @override
   Future<String> getAppVersion() async {
-    await _firebaseRemoteConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: const Duration(minutes: 1),
-      minimumFetchInterval: const Duration(hours: 12),
-    ));
+    await _firebaseRemoteConfig.setConfigSettings(
+      RemoteConfigSettings(
+        fetchTimeout: const Duration(minutes: 1),
+        minimumFetchInterval: const Duration(hours: 12),
+      ),
+    );
     await _firebaseRemoteConfig.fetchAndActivate();
 
     return _firebaseRemoteConfig.getString(StringCommonConstant.appVersion);

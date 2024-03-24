@@ -13,8 +13,8 @@ import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
 
 class RegisterPage extends StatelessWidget {
-  late RegisterPageViewModel _registerPageViewModel;
   RegisterPage({super.key});
+  late RegisterPageViewModel _registerPageViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +24,14 @@ class RegisterPage extends StatelessWidget {
       backgroundColor: ColorBackgroundConstant.white,
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {
-              CustomNavigator().popFromMain();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_outlined,
-              color: ColorBackgroundConstant.black,
-            )),
+          onPressed: () {
+            CustomNavigator().popFromMain();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_outlined,
+            color: ColorBackgroundConstant.black,
+          ),
+        ),
         backgroundColor: ColorBackgroundConstant.white,
         elevation: 0,
         title: Text(
@@ -71,10 +72,11 @@ class RegisterPage extends StatelessWidget {
                   hintText: StringLoginConstant.registerCreatePasswordHintText,
                   prefixIcon: Icons.lock_outlined,
                   suffixIcon: InkWell(
-                      onTap: () {
-                        _registerPageViewModel.obscureText.value = !_registerPageViewModel.obscureText.value;
-                      },
-                      child: Icon(_registerPageViewModel.obscureText.value ? Icons.visibility_outlined : Icons.visibility_off_outlined)),
+                    onTap: () {
+                      _registerPageViewModel.obscureText.value = !_registerPageViewModel.obscureText.value;
+                    },
+                    child: Icon(_registerPageViewModel.obscureText.value ? Icons.visibility_outlined : Icons.visibility_off_outlined),
+                  ),
                   obscureText: !_registerPageViewModel.obscureText.value,
                   validator: (value) {
                     if (value != null) {
@@ -99,10 +101,11 @@ class RegisterPage extends StatelessWidget {
                   hintText: StringLoginConstant.registerConfirmPasswordHintText,
                   prefixIcon: Icons.lock_outlined,
                   suffixIcon: InkWell(
-                      onTap: () {
-                        _registerPageViewModel.obscureText.value = !_registerPageViewModel.obscureText.value;
-                      },
-                      child: Icon(_registerPageViewModel.obscureText.value ? Icons.visibility_outlined : Icons.visibility_off_outlined)),
+                    onTap: () {
+                      _registerPageViewModel.obscureText.value = !_registerPageViewModel.obscureText.value;
+                    },
+                    child: Icon(_registerPageViewModel.obscureText.value ? Icons.visibility_outlined : Icons.visibility_off_outlined),
+                  ),
                   obscureText: !_registerPageViewModel.obscureText.value,
                   validator: (value) {
                     if (value != null) {

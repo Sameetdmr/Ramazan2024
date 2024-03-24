@@ -3,7 +3,7 @@ import 'package:ramadan/utils/localization/CustomTranslationKeys.dart';
 import 'package:ramadan/utils/localization/CustomTranslations.dart';
 
 @immutable
-class StringSplashSliderConstant {
+final class StringSplashSliderConstant {
   const StringSplashSliderConstant._();
 
   //
@@ -19,7 +19,7 @@ class StringSplashSliderConstant {
 }
 
 @immutable
-class StringLoginConstant {
+final class StringLoginConstant {
   const StringLoginConstant._();
 
   // Login
@@ -55,7 +55,7 @@ class StringLoginConstant {
 }
 
 @immutable
-class StringCommonConstant {
+final class StringCommonConstant {
   const StringCommonConstant._();
 
   //
@@ -72,6 +72,7 @@ class StringCommonConstant {
 
   // Remote Config
   static String get appVersion => CustomTranslations.getText(CustomTranslationKeys.appVersion);
+  static String get appVersionInformation => CustomTranslations.getText(CustomTranslationKeys.appVersionInformation);
 
   // Validation
   static String get emptyEmailError => CustomTranslations.getText(CustomTranslationKeys.emptyEmailError);
@@ -95,10 +96,14 @@ class StringCommonConstant {
 
   // Notification
   static String get notificationBody => CustomTranslations.getText(CustomTranslationKeys.notificationBody);
+
+  //
+  static String get noDateInformation => CustomTranslations.getText(CustomTranslationKeys.noDateInformation);
+  static String get noTimeInformation => CustomTranslations.getText(CustomTranslationKeys.noTimeInformation);
 }
 
 @immutable
-class StringHomeConstant {
+final class StringHomeConstant {
   const StringHomeConstant._();
 
   //
@@ -146,19 +151,20 @@ class StringHomeConstant {
   static String get seconds => CustomTranslations.getText(CustomTranslationKeys.seconds);
   static String get timeUntilFajr => CustomTranslations.getText(CustomTranslationKeys.timeUntilFajr);
   static String get timeUntilSunset => CustomTranslations.getText(CustomTranslationKeys.timeUntilSunset);
+
+  // Another City
+  static String get usePreciseLocation => CustomTranslations.getText(CustomTranslationKeys.usePreciseLocation);
 }
 
-class StringHadithConstant {
+final class StringHadithConstant {
   const StringHadithConstant._();
 
   static String get allCategory => CustomTranslations.getText(CustomTranslationKeys.allCategory);
   static String get hadithAppBarTitle => CustomTranslations.getText(CustomTranslationKeys.hadithAppBarTitle);
 }
 
-class ProjectConstant {
+final class ProjectConstant {
   const ProjectConstant._();
 
   static String get hadithJsonPath => 'assets/json/hadiths.json';
-
-  static String get bannerAd1 => 'ca-app-pub-9561486685051319/4348662671';
 }

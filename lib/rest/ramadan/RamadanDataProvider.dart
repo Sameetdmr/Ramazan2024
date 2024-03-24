@@ -1,3 +1,5 @@
+// ignore_for_file: one_member_abstracts
+
 import 'dart:async';
 import 'package:ramadan/model/domain/PrayerTimeDetails.dart';
 import 'package:ramadan/model/domain/PrayerTimesModel.dart';
@@ -8,22 +10,21 @@ import 'package:ramadan/utils/exceptions/CustomException.dart';
 import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 
 abstract class IRamadanDataProvider {
-  Future<PrayerTimesModel> loadRamadanData(String cityName, String? date);
+  Future<PrayerTimesModel> loadRamadanData({required String cityName, String? date});
 }
 
-class RamadanDataProvider implements IRamadanDataProvider {
-  late String _apiUrl;
-
+final class RamadanDataProvider implements IRamadanDataProvider {
   RamadanDataProvider() {
-    IConfigurationService configurationService = ServiceLocator().get<IConfigurationService>();
+    final configurationService = ServiceLocator().get<IConfigurationService>();
     _apiUrl = configurationService.getApiServiceURL();
   }
+  late String _apiUrl;
 
   @override
-  Future<PrayerTimesModel> loadRamadanData(String cityName, String? date) async {
+  Future<PrayerTimesModel> loadRamadanData({required String cityName, String? date}) async {
     try {
-      String lowercaseUserCityChoiceString = cityName.toLowerCase();
-      List<String> rawData = await RestServiceManager.call(_apiUrl, lowercaseUserCityChoiceString, null);
+      final lowercaseUserCityChoiceString = cityName.toLowerCase();
+      final rawData = await RestServiceManager.call(_apiUrl, lowercaseUserCityChoiceString, null);
       if (date != null) {
         return _convertDataForDate(rawData, cityName, date);
       } else {
@@ -35,17 +36,17 @@ class RamadanDataProvider implements IRamadanDataProvider {
   }
 
   PrayerTimesModel _convertDataForDate(List<String> rawData, String cityName, String date) {
-    List<PrayerTimeDetails> prayerTimeDetailsList = [];
+    final prayerTimeDetailsList = <PrayerTimeDetails>[];
 
-    for (int i = 0; i < rawData.length / 8; i++) {
-      String currentRawDate = rawData[8 * i + 1];
+    for (var i = 0; i < rawData.length / 8; i++) {
+      final currentRawDate = rawData[8 * i + 1];
 
       if (currentRawDate.contains(date)) {
-        List<String> times = rawData.sublist(8 * i + 2, 8 * i + 8);
+        final times = rawData.sublist(8 * i + 2, 8 * i + 8);
 
         // Date formatını düzenle
-        List<String> dateParts = currentRawDate.split(' ');
-        String formattedDate = '${dateParts[0]} ${dateParts[1]}, ${dateParts[2]}';
+        final dateParts = currentRawDate.split(' ');
+        final formattedDate = '${dateParts[0]} ${dateParts[1]}, ${dateParts[2]}';
 
         // times listesini map'e ekle
         prayerTimeDetailsList.add(PrayerTimeDetails(date: formattedDate, times: times));
@@ -56,15 +57,15 @@ class RamadanDataProvider implements IRamadanDataProvider {
   }
 
   PrayerTimesModel _convertData(List<String> rawData, String cityName) {
-    List<PrayerTimeDetails> prayerTimeDetailsList = [];
+    final prayerTimeDetailsList = <PrayerTimeDetails>[];
 
-    for (int i = 0; i < rawData.length / 8; i++) {
-      String date = rawData[8 * i + 1];
-      List<String> times = rawData.sublist(8 * i + 2, 8 * i + 8);
+    for (var i = 0; i < rawData.length / 8; i++) {
+      final date = rawData[8 * i + 1];
+      final times = rawData.sublist(8 * i + 2, 8 * i + 8);
 
       // Date formatını düzenle
-      List<String> dateParts = date.split(' ');
-      String formattedDate = '${dateParts[0]} ${dateParts[1]}, ${dateParts[2]}';
+      final dateParts = date.split(' ');
+      final formattedDate = '${dateParts[0]} ${dateParts[1]}, ${dateParts[2]}';
 
       // times listesini map'e ekle
       prayerTimeDetailsList.add(PrayerTimeDetails(date: formattedDate, times: times));

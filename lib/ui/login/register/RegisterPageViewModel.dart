@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
@@ -10,21 +9,18 @@ import 'package:ramadan/utils/popups/CustomSnackBarType.dart';
 import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 
 class RegisterPageViewModel extends ViewModelBase {
-  final TextEditingController emailTextController = new TextEditingController();
-  final TextEditingController passwordTextController = new TextEditingController();
-  final TextEditingController confirmPasswordController = new TextEditingController();
+  RegisterPageViewModel() {
+    setCurrentScreen('Register Page');
+  }
+  final TextEditingController emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  IAuthService _authService = ServiceLocator().get<IAuthService>();
+  final IAuthService _authService = ServiceLocator().get<IAuthService>();
 
   RxBool obscureText = false.obs;
-  RegisterPageViewModel() {
-    setCurrentScreen('Register Page');
-    initPage();
-  }
-
-  initPage() {}
 
   @override
   void dispose() {
@@ -36,20 +32,20 @@ class RegisterPageViewModel extends ViewModelBase {
 
   Future<void> register(BuildContext context, String email, String password) async {
     try {
-      UserCredential? userCredential = await _authService.register(email, password);
+      final userCredential = await _authService.register(email, password);
 
       if (userCredential != null) {
         CustomNavigator().popFromMain();
-        CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringLoginConstant.snackbarSuccessRegisterText);
+        if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringLoginConstant.snackbarSuccessRegisterText);
       } else {
-        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorEmailControlText);
+        if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorEmailControlText);
 
         emailTextController.clear();
         passwordTextController.clear();
         confirmPasswordController.clear();
       }
     } catch (e) {
-      exceptionHandlingService.handleException(e);
+      await exceptionHandlingService.handleException(e);
     }
   }
 }

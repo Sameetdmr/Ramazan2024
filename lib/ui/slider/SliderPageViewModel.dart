@@ -1,3 +1,5 @@
+// ignore_for_file: use_setters_to_change_properties
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +11,10 @@ import 'package:ramadan/utils/constants/image_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 
 class SliderPageViewModel extends ViewModelBase {
+  SliderPageViewModel(BuildContext context) {
+    setCurrentScreen('Slider Page');
+    _context = context;
+  }
   late BuildContext _context;
 
   // Intro
@@ -17,30 +23,24 @@ class SliderPageViewModel extends ViewModelBase {
 
   RxBool isLocationOk = false.obs;
 
-  SliderPageViewModel(BuildContext context) {
-    setCurrentScreen('Slider Page');
-    this._context = context;
-  }
-
   @override
   void onInit() {
-    slides.add(
+    slides.addAll([
       ContentConfig(
-          title: StringSplashSliderConstant.splashSlider1TitleText,
-          styleTitle: GoogleFonts.nunito(
-            textStyle: _context.general.textTheme.bodyMedium?.copyWith(
-              color: ColorTextConstant.forestMaid,
-              fontWeight: FontWeight.bold,
-            ),
+        title: StringSplashSliderConstant.splashSlider1TitleText,
+        styleTitle: GoogleFonts.nunito(
+          textStyle: _context.general.textTheme.bodyMedium?.copyWith(
+            color: ColorTextConstant.forestMaid,
+            fontWeight: FontWeight.bold,
           ),
-          description: StringSplashSliderConstant.splashSlider1SubTitleText,
-          styleDescription: GoogleFonts.nunito(
-            textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
-          ),
-          centerWidget: AppSplashSliderLottiesConstant.appLottie1.toLottie,
-          backgroundColor: ColorBackgroundConstant.white),
-    );
-    slides.add(
+        ),
+        description: StringSplashSliderConstant.splashSlider1SubTitleText,
+        styleDescription: GoogleFonts.nunito(
+          textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
+        ),
+        centerWidget: AppSplashSliderLottiesConstant.appLottie1.toLottie,
+        backgroundColor: ColorBackgroundConstant.white,
+      ),
       ContentConfig(
         title: StringSplashSliderConstant.splashSlider2TitleText,
         styleTitle: GoogleFonts.nunito(
@@ -56,24 +56,24 @@ class SliderPageViewModel extends ViewModelBase {
         centerWidget: AppSplashSliderLottiesConstant.appLottie2.toLottie,
         backgroundColor: ColorBackgroundConstant.white,
       ),
-    );
-    slides.add(
       ContentConfig(
-          title: StringSplashSliderConstant.splashSlider3TitleText,
-          maxLineTitle: 3,
-          styleTitle: GoogleFonts.nunito(
-            textStyle: _context.general.textTheme.bodyMedium?.copyWith(
-              color: ColorTextConstant.forestMaid,
-              fontWeight: FontWeight.bold,
-            ),
+        title: StringSplashSliderConstant.splashSlider3TitleText,
+        maxLineTitle: 3,
+        styleTitle: GoogleFonts.nunito(
+          textStyle: _context.general.textTheme.bodyMedium?.copyWith(
+            color: ColorTextConstant.forestMaid,
+            fontWeight: FontWeight.bold,
           ),
-          description: StringSplashSliderConstant.splashSlider3SubTitleText,
-          styleDescription: GoogleFonts.nunito(
-            textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
-          ),
-          centerWidget: AppSplashSliderLottiesConstant.appLottie3.toLottie,
-          backgroundColor: ColorBackgroundConstant.white),
-    );
+        ),
+        description: StringSplashSliderConstant.splashSlider3SubTitleText,
+        styleDescription: GoogleFonts.nunito(
+          textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
+        ),
+        centerWidget: AppSplashSliderLottiesConstant.appLottie3.toLottie,
+        backgroundColor: ColorBackgroundConstant.white,
+      ),
+    ]);
+
     super.onInit();
   }
 

@@ -12,19 +12,19 @@ abstract class IAuthService {
   Future<UserCredential?> register(String email, String password);
 }
 
-class AuthService implements IAuthService {
+final class AuthService implements IAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Future<bool> isUserLoggedIn() async {
-    User? user = _auth.currentUser;
+    final user = _auth.currentUser;
     return user != null;
   }
 
   @override
   Future<User?> signInWithEmailAndPassword(String email, String password) async {
     try {
-      UserCredential? userCredential = await _auth.signInWithEmailAndPassword(
+      final userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -38,7 +38,7 @@ class AuthService implements IAuthService {
         if (e.code == StringCommonConstant.firebaseLoginErrorCode) {
           return null;
         } else {
-          throw (StringCommonConstant.firebaseLoginError);
+          throw StringCommonConstant.firebaseLoginError;
         }
       }
       throw CustomException(StringCommonConstant.firebaseLoginError);
@@ -48,15 +48,15 @@ class AuthService implements IAuthService {
   @override
   Future<User?> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
+      final googleSignInAccount = await GoogleSignIn().signIn();
+      final googleSignInAuthentication = await googleSignInAccount!.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
 
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final userCredential = await _auth.signInWithCredential(credential);
       if (userCredential.user != null) {
         return userCredential.user;
       } else {
@@ -84,7 +84,7 @@ class AuthService implements IAuthService {
   @override
   Future<UserCredential?> register(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      final userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
       if (userCredential.user != null) {
         return userCredential;

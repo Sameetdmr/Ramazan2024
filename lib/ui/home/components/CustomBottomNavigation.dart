@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ramadan/utils/constants/color_constant.dart';
 
 enum TabItem { home, calendar }
 
@@ -8,11 +9,11 @@ const Map<TabItem, IconData> tabIcons = {
 };
 
 class CustomBottomNavigation extends StatelessWidget {
-  CustomBottomNavigation({
-    Key? key,
+  const CustomBottomNavigation({
     required this.onSelectedTab,
     required this.tabController,
-  }) : super(key: key);
+    super.key,
+  });
   final ValueChanged<TabItem> onSelectedTab;
   final TabController tabController;
 
@@ -25,7 +26,7 @@ class CustomBottomNavigation extends StatelessWidget {
       shape: const CircularNotchedRectangle(),
       child: TabBar(
         controller: tabController,
-        indicatorColor: Colors.blue,
+        indicatorColor: ColorCommonConstant.blue,
         labelPadding: EdgeInsets.zero,
         onTap: (value) {
           onSelectedTab(TabItem.values[value]);
@@ -43,7 +44,7 @@ class CustomBottomNavigation extends StatelessWidget {
       iconMargin: EdgeInsets.zero,
       icon: Icon(
         tabIcons[tabItem],
-        color: Colors.black,
+        color: ColorCommonConstant.black,
       ),
     );
   }

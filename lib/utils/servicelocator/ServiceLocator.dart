@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs
+// ignore_for_file: public_member_api_docs, unnecessary_lambdas, cascade_invocations
 
 import 'package:get/get.dart';
 import 'package:ramadan/rest/ramadan/RamadanDataProvider.dart';

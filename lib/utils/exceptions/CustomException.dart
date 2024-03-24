@@ -1,5 +1,4 @@
-class CustomException {
-  String message;
-
+final class CustomException {
   CustomException(this.message);
+  String message;
 }

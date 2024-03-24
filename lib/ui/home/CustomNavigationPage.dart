@@ -7,6 +7,8 @@ import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 
 class CustomNavigationPage extends StatelessWidget {
+  CustomNavigationPage({super.key});
+
   late CustomNavigationPageViewModel _customNavigationPageViewModel;
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class CustomNavigationPage extends StatelessWidget {
             length: CustomNavigator.navigators.length,
             child: Scaffold(
               body: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 controller: _customNavigationPageViewModel.tabController!.value,
                 children: CustomNavigator.navigators,
               ),
@@ -38,12 +40,13 @@ class CustomNavigationPage extends StatelessWidget {
               ),
               floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
               floatingActionButton: FloatingActionButton(
-                  elevation: 5,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.location_on_outlined, size: 32.sp, color: ColorTextConstant.forestMaid),
-                  onPressed: () async {
-                    await _customNavigationPageViewModel.changeCity();
-                  }),
+                elevation: 5,
+                backgroundColor: ColorCommonConstant.white,
+                child: Icon(Icons.location_on_outlined, size: 32.sp, color: ColorTextConstant.forestMaid),
+                onPressed: () async {
+                  await _customNavigationPageViewModel.changeCity();
+                },
+              ),
             ),
           ),
         ),

@@ -1,9 +1,6 @@
-class HadithModel {
-  final String category;
-  final String hadith;
-  final String author;
-  final String id;
+// ignore_for_file: public_member_api_docs
 
+final class HadithModel {
   HadithModel({
     required this.category,
     required this.hadith,
@@ -13,10 +10,14 @@ class HadithModel {
 
   factory HadithModel.fromJson(Map<String, dynamic> json) {
     return HadithModel(
-      category: json['category'],
-      hadith: json['hadith'],
-      author: json['author'],
-      id: json['id'],
+      category: json['category'] as String,
+      hadith: json['hadith'] as String,
+      author: json['author'] as String,
+      id: json['id'] as String,
     );
   }
+  final String category;
+  final String hadith;
+  final String author;
+  final String id;
 }

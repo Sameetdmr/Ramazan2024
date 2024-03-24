@@ -6,8 +6,8 @@ import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 class ViewModelBase extends GetxController {
   IExceptionHandlingService exceptionHandlingService = ServiceLocator().get<IExceptionHandlingService>();
 
-  setCurrentScreen(String screenName) async {
-    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-    analytics.setCurrentScreen(screenName: screenName, screenClassOverride: screenName);
+  Future<void> setCurrentScreen(String screenName) async {
+    final analytics = FirebaseAnalytics.instance;
+    await analytics.setCurrentScreen(screenName: screenName, screenClassOverride: screenName);
   }
 }

@@ -26,14 +26,18 @@ class SliderPage extends StatelessWidget {
         _sliderPageViewModel.updateCurrentIndex(index);
       },
       isShowSkipBtn: false,
-      renderNextBtn: Text(StringSplashSliderConstant.splashSliderNextButtonText,
-          style: GoogleFonts.nunito(
-            textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
-          )),
-      renderPrevBtn: Text(StringSplashSliderConstant.splashSliderPrevButtonText,
-          style: GoogleFonts.nunito(
-            textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
-          )),
+      renderNextBtn: Text(
+        StringSplashSliderConstant.splashSliderNextButtonText,
+        style: GoogleFonts.nunito(
+          textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
+        ),
+      ),
+      renderPrevBtn: Text(
+        StringSplashSliderConstant.splashSliderPrevButtonText,
+        style: GoogleFonts.nunito(
+          textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
+        ),
+      ),
       renderDoneBtn: Text(
         StringSplashSliderConstant.splashSliderDoneButtonText,
         style: GoogleFonts.nunito(

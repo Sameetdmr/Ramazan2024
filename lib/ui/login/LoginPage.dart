@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _loginPageViewModel = Get.put(LoginPageViewModel());
+    _loginPageViewModel = Get.put(LoginPageViewModel(context));
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: ColorBackgroundConstant.white,
@@ -73,10 +73,11 @@ class LoginPage extends StatelessWidget {
                     hintText: StringLoginConstant.loginPasswordHintText,
                     prefixIcon: Icons.lock_outlined,
                     suffixIcon: InkWell(
-                        onTap: () {
-                          _loginPageViewModel.obscureText.value = !_loginPageViewModel.obscureText.value;
-                        },
-                        child: Icon(_loginPageViewModel.obscureText.value ? Icons.visibility_outlined : Icons.visibility_off_outlined)),
+                      onTap: () {
+                        _loginPageViewModel.obscureText.value = !_loginPageViewModel.obscureText.value;
+                      },
+                      child: Icon(_loginPageViewModel.obscureText.value ? Icons.visibility_outlined : Icons.visibility_off_outlined),
+                    ),
                     obscureText: !_loginPageViewModel.obscureText.value,
                     validator: (value) {
                       if (value != null) {
@@ -102,18 +103,19 @@ class LoginPage extends StatelessWidget {
                   children: [
                     CustomButton.getButton(
                       onPressed: () async {
-                        dynamic result = await showModalBottomSheet<dynamic>(
-                            context: context,
-                            isScrollControlled: true,
-                            isDismissible: false,
-                            builder: (context) {
-                              return PasswordResetScreen(
-                                textEditingController: _loginPageViewModel.forgotPasswordTextController,
-                                formKey: _loginPageViewModel.forgotPasswordFormKey,
-                              );
-                            });
-                        if (result[0] != null && result[0]) {
-                          await _loginPageViewModel.resetPassword(context, result[1].toString().trim());
+                        final result = await showModalBottomSheet<List<bool>?>(
+                          context: context,
+                          isScrollControlled: true,
+                          isDismissible: false,
+                          builder: (context) {
+                            return PasswordResetScreen(
+                              textEditingController: _loginPageViewModel.forgotPasswordTextController,
+                              formKey: _loginPageViewModel.forgotPasswordFormKey,
+                            );
+                          },
+                        );
+                        if (result != null && result[0]) {
+                          await _loginPageViewModel.resetPassword(result[1].toString().trim());
                         }
                       },
                       customLoginButtonType: CustomLoginButtonType.TEXT,
@@ -131,7 +133,7 @@ class LoginPage extends StatelessWidget {
                       child: CustomButton.getButton(
                         onPressed: () async {
                           if (_loginPageViewModel.formKey.currentState!.validate()) {
-                            await _loginPageViewModel.signInWithEmailAndPassword(context, _loginPageViewModel.emailTextController.text, _loginPageViewModel.passwordTextController.text);
+                            await _loginPageViewModel.signInWithEmailAndPassword(_loginPageViewModel.emailTextController.text, _loginPageViewModel.passwordTextController.text);
                             _loginPageViewModel.clearTextController();
                           }
                         },
@@ -142,11 +144,14 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                _CustomDivider(),
-                _SocialLoginRow(
-                  googleOnTap: () async {
-                    await _loginPageViewModel.signInGoogle(context);
-                  },
+                const _CustomDivider(),
+                Center(
+                  child: SocialLoginButton(
+                    onTap: () async {
+                      await _loginPageViewModel.signInGoogle();
+                    },
+                    imageUrl: AppImageConstant.google.toPng,
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -155,15 +160,15 @@ class LoginPage extends StatelessWidget {
                     CustomButton.getButton(
                       onPressed: () {
                         _loginPageViewModel.clearTextController();
-                        CustomNavigator().pushToMain(RegisterPage());
+                        CustomNavigator().pushToMain<void>(RegisterPage());
                       },
                       customLoginButtonType: CustomLoginButtonType.TEXT,
                       text: StringLoginConstant.loginNewUserText2,
                       textStyle: context.textTheme.bodyMedium?.copyWith(decoration: TextDecoration.underline, color: ColorTextConstant.black, fontWeight: FontWeight.bold),
-                    )
+                    ),
                   ],
                 ),
-                Divider(),
+                const Divider(),
                 Row(
                   children: [
                     Expanded(
@@ -187,34 +192,6 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class _SocialLoginRow extends StatelessWidget {
-  final void Function() googleOnTap;
-  const _SocialLoginRow({
-    Key? key,
-    required this.googleOnTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        /*
-        SocialLoginButton(
-          onTap: facebookOnTap,
-          imageUrl: AppImageConstant.facebook.toPng,
-        ),
-        SizedBox(width: 30.w),
-        */
-        SocialLoginButton(
-          onTap: googleOnTap,
-          imageUrl: AppImageConstant.google.toPng,
-        ),
-      ],
-    );
-  }
-}
-
 class _CustomDivider extends StatelessWidget {
   const _CustomDivider();
 
@@ -224,14 +201,14 @@ class _CustomDivider extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
+          const Expanded(
             child: Divider(),
           ),
           Padding(
             padding: context.padding.medium,
             child: Text(StringLoginConstant.loginDividerText),
           ),
-          Expanded(
+          const Expanded(
             child: Divider(),
           ),
         ],

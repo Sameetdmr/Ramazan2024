@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
@@ -14,10 +13,16 @@ import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
 
 class LoginPageViewModel extends ViewModelBase {
+  LoginPageViewModel(BuildContext context) {
+    setCurrentScreen('Login Page');
+    _context = context;
+  }
+  late final BuildContext _context;
+
   // TextEditingController
-  final TextEditingController emailTextController = new TextEditingController();
-  final TextEditingController passwordTextController = new TextEditingController();
-  final TextEditingController forgotPasswordTextController = new TextEditingController();
+  final TextEditingController emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
+  final TextEditingController forgotPasswordTextController = TextEditingController();
 
   // Form
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -26,14 +31,7 @@ class LoginPageViewModel extends ViewModelBase {
   // Password Icon Config
   RxBool obscureText = false.obs;
 
-  IAuthService _authService = ServiceLocator().get<IAuthService>();
-
-  LoginPageViewModel() {
-    setCurrentScreen('Login Page');
-    initPage();
-  }
-
-  initPage() {}
+  final IAuthService _authService = ServiceLocator().get<IAuthService>();
 
   @override
   void dispose() {
@@ -58,33 +56,33 @@ class LoginPageViewModel extends ViewModelBase {
     }
   }
 
-  Future<void> signInWithEmailAndPassword(BuildContext context, String email, String password) async {
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
       CustomDialog.showLoadingDialog();
-      User? user = await _authService.signInWithEmailAndPassword(email, password);
+      final user = await _authService.signInWithEmailAndPassword(email, password);
       if (user != null) {
         CustomDialog.dismiss();
         CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       } else {
         CustomDialog.dismiss();
-        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorEmailPasswordControlText);
+        await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorEmailPasswordControlText);
       }
     } catch (e) {
-      exceptionHandlingService.handleException(e);
+      await exceptionHandlingService.handleException(e);
     }
   }
 
-  Future<void> signInGoogle(BuildContext context) async {
+  Future<void> signInGoogle() async {
     try {
-      User? user = await _authService.signInWithGoogle();
+      final user = await _authService.signInWithGoogle();
       clearTextController();
       if (user != null) {
         CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       } else {
-        CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorRetryText);
+        await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorRetryText);
       }
     } catch (e) {
-      exceptionHandlingService.handleException(e);
+      await exceptionHandlingService.handleException(e);
     }
   }
 
@@ -96,13 +94,13 @@ class LoginPageViewModel extends ViewModelBase {
     }
   }
 
-  Future<void> resetPassword(BuildContext context, String email) async {
+  Future<void> resetPassword(String email) async {
     try {
       await _authService.resetPassword(email);
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringLoginConstant.snackbarErrorEmailControlText);
+      await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.SUCCESS, StringLoginConstant.snackbarErrorEmailControlText);
     } catch (e) {
-      exceptionHandlingService.handleException(e);
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorRetryText);
+      await exceptionHandlingService.handleException(e);
+      await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorRetryText);
     }
   }
 }

@@ -17,10 +17,10 @@ class PasswordResetScreen extends StatelessWidget {
   final TextEditingController textEditingController;
   final GlobalKey<FormState> formKey;
   const PasswordResetScreen({
-    Key? key,
     required this.textEditingController,
     required this.formKey,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class PasswordResetScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.close),
+                    icon: const Icon(Icons.close),
                     onPressed: () {
                       CustomNavigator().popFromMain([false]);
                       textEditingController.clear();
@@ -54,7 +54,6 @@ class PasswordResetScreen extends StatelessWidget {
                 textEditingController: textEditingController,
                 hintText: StringLoginConstant.passwordResetEmailHintText,
                 prefixIcon: Icons.mail_outlined,
-                suffixIcon: null,
                 validator: (value) {
                   if (value != null) {
                     final result = LoginValidator.validateLogin(value, LoginTypeEnum.EMAIL);

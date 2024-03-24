@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ramadan/model/home/GridItem.dart';
 
 class GridCard extends StatelessWidget {
-  const GridCard(this.item);
+  const GridCard(this.item, {super.key});
   final GridItem item;
 
   @override
@@ -12,16 +12,15 @@ class GridCard extends StatelessWidget {
       () => Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: item.isActive.value ? BorderSide(color: item.color, width: 2.0) : BorderSide.none,
+          side: item.isActive.value ? BorderSide(color: item.color, width: 2) : BorderSide.none,
         ),
         color: item.isActive.value ? item.color.withOpacity(0.5) : item.color.withOpacity(0.1),
         elevation: 0,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(flex: 2),
                 Align(alignment: Alignment.topLeft, child: Text(item.title, style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),

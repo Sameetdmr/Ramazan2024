@@ -1,9 +1,8 @@
 import 'package:get/get.dart';
 import 'package:ramadan/model/home/GridItem.dart';
 
-class GridItemResult {
-  RxList<GridItem> gridItemList;
-  RxList<RxBool> isActiveList;
-
+final class GridItemResult {
   GridItemResult(this.gridItemList, this.isActiveList);
+  final RxList<GridItem> gridItemList;
+  final RxList<RxBool> isActiveList;
 }

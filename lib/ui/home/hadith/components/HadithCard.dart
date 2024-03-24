@@ -9,6 +9,7 @@ class HadithCard extends StatelessWidget {
   const HadithCard({
     required this.text,
     required this.author,
+    super.key,
   });
 
   final String text;
@@ -18,7 +19,7 @@ class HadithCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: BorderSide(color: ColorCommonConstant.black.withOpacity(0.1))),
       child: Padding(
         padding: context.padding.low,
@@ -26,7 +27,7 @@ class HadithCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Align(alignment: Alignment.centerRight, child: Container(width: 16.w, height: 24.h, child: HadithLogoConstant.logo_hadith.toImg)),
+            Align(alignment: Alignment.centerRight, child: SizedBox(width: 16.w, height: 24.h, child: HadithLogoConstant.logo_hadith.toImg)),
             Text(
               text,
               textAlign: TextAlign.justify,

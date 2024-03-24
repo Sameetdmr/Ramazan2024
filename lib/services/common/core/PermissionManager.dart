@@ -3,7 +3,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/exceptions/CustomException.dart';
 
-class PermissionManager {
+final class PermissionManager {
   static Future<bool> checkLocationPermission() async {
     try {
       LocationPermission permission;
@@ -16,7 +16,7 @@ class PermissionManager {
         if (permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
           return true;
         } else if (permission == LocationPermission.deniedForever) {
-          Geolocator.openAppSettings();
+          await Geolocator.openAppSettings();
           return false;
         }
       } else if (permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
@@ -31,7 +31,7 @@ class PermissionManager {
 
   static Future<Position?> getCurrentLocation() async {
     try {
-      bool hasPermission = await checkLocationPermission();
+      final hasPermission = await checkLocationPermission();
 
       if (hasPermission) {
         return await Geolocator.getCurrentPosition(
@@ -46,14 +46,14 @@ class PermissionManager {
   }
 
   static Future<bool> checkAndRequestNotificationPermission() async {
-    PermissionStatus status = await Permission.notification.request();
+    final status = await Permission.notification.request();
 
     if (status == PermissionStatus.granted) {
       // Kullanıcı zaten izin verdi.
       return true;
     } else {
       // Kullanıcı izin vermedi, izin talep et.
-      PermissionStatus requestedStatus = await Permission.notification.request();
+      final requestedStatus = await Permission.notification.request();
 
       // Kullanıcı izin verdiyse true döner, aksi takdirde false döner.
       return requestedStatus == PermissionStatus.granted;

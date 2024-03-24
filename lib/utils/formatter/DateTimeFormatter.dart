@@ -4,10 +4,10 @@ import 'package:ramadan/utils/constants/string_constant.dart';
 
 class DateTimeFormatter {
   RxString formatTodayDate() {
-    DateTime today = DateTime.now();
+    final today = DateTime.now();
 
     // Türkçe gün isimleri için sabit bir liste oluştur
-    List<String> dayNames = [
+    final dayNames = <String>[
       StringHomeConstant.mon,
       StringHomeConstant.tue,
       StringHomeConstant.wed,
@@ -18,14 +18,14 @@ class DateTimeFormatter {
     ];
 
     // Tarih bilgisini oluşturulan listeye göre formatla
-    String formattedDate = '${dayNames[today.weekday - 1]}, ${today.day} ${_getMonth(today.month)}';
+    final formattedDate = '${dayNames[today.weekday - 1]}, ${today.day} ${_getMonth(today.month)}';
 
     return formattedDate.obs;
   }
 
   String _getMonth(int month) {
     // Türkçe ay isimleri için sabit bir liste oluştur
-    List<String> monthNames = [
+    final monthNames = <String>[
       StringHomeConstant.jan,
       StringHomeConstant.feb,
       StringHomeConstant.mar,
@@ -44,12 +44,12 @@ class DateTimeFormatter {
   }
 
   DateTime getPrayerTime(String prayerDate) {
-    DateTime parsedData = DateFormat('dd MMMM, EEEE', 'tr_TR').parse(prayerDate);
+    final parsedData = DateFormat('dd MMMM, EEEE', 'tr_TR').parse(prayerDate);
     return DateTime(2024, parsedData.month, parsedData.day);
   }
 
   DateTime targetDateTime(String prayerTime) {
-    DateTime time = DateFormat('HH:mm', 'tr_TR').parse(prayerTime);
+    final time = DateFormat('HH:mm', 'tr_TR').parse(prayerTime);
     return time;
   }
 }

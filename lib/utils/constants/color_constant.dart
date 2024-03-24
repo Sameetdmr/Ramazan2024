@@ -2,46 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 @immutable
-class ColorBackgroundConstant {
+final class ColorBackgroundConstant {
   const ColorBackgroundConstant._();
 
-  static Color white = HexColor("#FFFFFF");
-
-  static Color black = HexColor("#000000");
+  static Color white = HexColor('#FFFFFF');
+  static Color black = HexColor('#000000');
 }
 
 @immutable
-class ColorTextConstant {
+final class ColorTextConstant {
   const ColorTextConstant._();
 
-  static Color forestMaid = HexColor("#5CB85C");
-
-  static Color white = HexColor("#FFFFFF");
-
-  static Color black = HexColor("#000000");
-
-  static Color orangeAccent = Colors.orangeAccent;
+  static Color forestMaid = HexColor('#5CB85C');
+  static Color white = HexColor('#FFFFFF');
+  static Color black = HexColor('#000000');
+  static Color orangeAccent = HexColor('#FF9800');
 }
 
 @immutable
-class PrayerTimeColor {
-  static const Color imsak = Color(0xFF4B0082);
-  static const Color gunes = Color(0xFFFFD700);
-  static const Color ogle = Color(0xFF228B22);
-  static const Color ikindi = Color(0xFFFF4500);
-  static const Color iftar = Color(0xFF8B4513);
-  static const Color yatsi = Color(0xFF00008B);
+final class PrayerTimeColor {
+  const PrayerTimeColor._();
+
+  static Color imsak = HexColor('#4B0082');
+  static Color gunes = HexColor('#FFD700');
+  static Color ogle = HexColor('#228B22');
+  static Color ikindi = HexColor('#FF4500');
+  static Color iftar = HexColor('#8B4513');
+  static Color yatsi = HexColor('#00008B');
 }
 
 @immutable
-class ColorCommonConstant {
+final class ColorCommonConstant {
   const ColorCommonConstant._();
 
   static Color transparent = Colors.transparent;
+  static Color white = HexColor('#FFFFFF');
+  static Color black = HexColor('#000000');
+  static Color saddleBrown = HexColor('#8B4513');
 
-  static Color white = HexColor("#FFFFFF");
+  //TextField
+  static Color grey = HexColor('#9E9E9E');
+  static Color greyShade100 = HexColor('#F5F5F5');
+  static Color red = HexColor('#F44336');
 
-  static Color black = HexColor("#000000");
-
-  static Color saddleBrown = Color(0xFF8B4513);
+  //BottomNavigation
+  static Color blue = HexColor('#2196F3');
 }

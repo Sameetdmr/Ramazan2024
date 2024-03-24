@@ -1,3 +1,5 @@
+// ignore_for_file: one_member_abstracts
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
@@ -7,20 +9,20 @@ abstract class ILocationService {
   Future<String> getCityNameFromCoordinates();
 }
 
-class LocationService implements ILocationService {
+final class LocationService implements ILocationService {
   @override
   Future<String> getCityNameFromCoordinates() async {
     try {
-      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-      List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+      final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      final placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
 
       if (placemarks.isNotEmpty) {
-        String cityName = placemarks.first.administrativeArea ?? "";
+        final cityName = placemarks.first.administrativeArea ?? '';
         return cityName.toUpperCase();
       }
     } catch (e) {
       throw CustomException(StringHomeConstant.coordinateError);
     }
-    return "";
+    return '';
   }
 }

@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SocialLoginButton extends StatelessWidget {
   const SocialLoginButton({
-    Key? key,
     required this.onTap,
     required this.imageUrl,
-  }) : super(key: key);
+    super.key,
+  });
   final void Function() onTap;
   final String imageUrl;
   @override
@@ -18,10 +18,11 @@ class SocialLoginButton extends StatelessWidget {
         width: 30.w,
         height: 30.h,
         decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage(imageUrl),
-          fit: BoxFit.cover,
-        )),
+          image: DecorationImage(
+            image: AssetImage(imageUrl),
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }

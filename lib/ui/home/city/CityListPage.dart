@@ -5,30 +5,31 @@ import 'package:kartal/kartal.dart';
 
 import 'package:ramadan/model/domain/TurkeyCity.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
+import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 
 class CityListPage extends StatelessWidget {
   List<TurkeyCity> turkeyCities;
   CityListPage({
-    Key? key,
     required this.turkeyCities,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorCommonConstant.white,
         appBar: AppBar(
           centerTitle: false,
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined))],
+          actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search_outlined))],
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_outlined,
-              color: Colors.black,
+              color: ColorCommonConstant.black,
             ),
             onPressed: () {
-              CustomNavigator().popFromMain(null);
+              CustomNavigator().popFromMain();
             },
           ),
           elevation: 0,
@@ -36,7 +37,7 @@ class CityListPage extends StatelessWidget {
             'Şehir Seçiniz',
             style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Colors.transparent,
+          backgroundColor: ColorCommonConstant.transparent,
         ),
         body: Padding(
           padding: context.padding.low,
@@ -44,13 +45,13 @@ class CityListPage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () async {
-                  CustomNavigator().popFromMain(null);
+                  CustomNavigator().popFromMain();
                 },
                 child: ListTile(
-                  title: Text('Tam konumu kullan', style: context.textTheme.bodyMedium?.copyWith(color: Colors.orange)),
+                  title: Text(StringHomeConstant.usePreciseLocation, style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.orangeAccent)),
                   trailing: Icon(
                     Icons.location_on_outlined,
-                    color: Colors.orange,
+                    color: ColorTextConstant.orangeAccent,
                   ),
                 ),
               ),
@@ -58,7 +59,7 @@ class CityListPage extends StatelessWidget {
                 child: ListView.separated(
                   separatorBuilder: (context, index) {
                     return Divider(
-                      color: Colors.black,
+                      color: ColorCommonConstant.black,
                     );
                   },
                   itemCount: turkeyCities.length,
@@ -74,7 +75,7 @@ class CityListPage extends StatelessWidget {
                         ),
                         trailing: Icon(
                           Icons.arrow_forward_outlined,
-                          color: Colors.black,
+                          color: ColorCommonConstant.black,
                         ),
                       ),
                     );

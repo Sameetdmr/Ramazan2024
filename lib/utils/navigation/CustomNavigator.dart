@@ -1,4 +1,4 @@
-// ignore_for_file: cascade_invocations, public_member_api_docs, sort_unnamed_constructors_first
+// ignore_for_file: cascade_invocations, public_member_api_docs, sort_unnamed_constructors_first, omit_local_variable_types, prefer_final_locals
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +38,7 @@ class CustomNavigator {
 
   void popFromMain([dynamic result]) {
     Get.addKey(mainNavigatorKey);
-    Get.back<void>(result: result);
+    Get.back<dynamic>(result: result);
   }
 
   void pushAndRemoveUntil(Widget widget) {
@@ -47,6 +47,7 @@ class CustomNavigator {
   }
 
   void popUntilCurrentTab() {
+    // ignore: no_leading_underscores_for_local_identifiers
     CustomNavigationPageViewModel _customNavigationPageViewModel = Get.find();
     Get.addKey(navigatorKeys[_customNavigationPageViewModel.currentStateIndex.value]);
     Get.until((route) => route.isFirst);

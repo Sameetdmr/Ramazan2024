@@ -1,7 +1,7 @@
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 
-class LoginValidator {
+final class LoginValidator {
   static String? validateEmail(String value) {
     if (value.isEmpty) {
       return StringCommonConstant.emptyEmailError;

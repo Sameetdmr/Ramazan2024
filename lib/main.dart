@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           home: SplashPage(),
           translations: CustomTranslations(),
           locale: Get.deviceLocale,
-          fallbackLocale: Locale('en', 'US'),
+          fallbackLocale: const Locale('en', 'US'),
           navigatorKey: mainNavigatorKey,
         );
       },

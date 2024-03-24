@@ -1,4 +1,4 @@
-// ignore_for_file: null_argument_to_non_null_type
+// ignore_for_file: null_argument_to_non_null_type, unnecessary_new, cascade_invocations, prefer_collection_literals, prefer_final_locals, omit_local_variable_types, depend_on_referenced_packages, directives_ordering
 
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:http/http.dart' as http;

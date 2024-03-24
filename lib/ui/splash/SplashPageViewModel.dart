@@ -11,21 +11,20 @@ import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 
 class SplashPageViewModel extends ViewModelBase {
-  IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
-  IAppVersionChecker _appVersionChecker = ServiceLocator().get<IAppVersionChecker>();
+  SplashPageViewModel() {
+    setCurrentScreen('Splash Page');
+  }
+  final IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
+  final IAppVersionChecker _appVersionChecker = ServiceLocator().get<IAppVersionChecker>();
 
   RxBool isCurrentVersionOk = true.obs;
   RxString appVersion = ''.obs;
 
-  SplashPageViewModel() {
-    setCurrentScreen('Splash Page');
-  }
-
   @override
-  onInit() async {
+  Future<void> onInit() async {
     super.onInit();
     try {
-      bool result = await _appVersionChecker.checkAppVersion();
+      final result = await _appVersionChecker.checkAppVersion();
       appVersion.value = await _appVersionChecker.getAppVersion();
       if (result) {
         isCurrentVersionOk.value = true;
@@ -34,20 +33,20 @@ class SplashPageViewModel extends ViewModelBase {
         isCurrentVersionOk.value = false;
       }
     } catch (e) {
-      exceptionHandlingService.handleException(e);
+      await exceptionHandlingService.handleException(e);
     }
   }
 
   Future<void> _checkStartConditions() async {
     try {
       await _appPreferences.init();
-      bool isFirstOpen = await _appPreferences.isFirstOpen();
-      bool hasNotificationPermission = await PermissionManager.checkAndRequestNotificationPermission();
-      _appPreferences.setNotificationPermission(hasNotificationPermission);
+      final isFirstOpen = await _appPreferences.isFirstOpen();
+      final hasNotificationPermission = await PermissionManager.checkAndRequestNotificationPermission();
+      await _appPreferences.setNotificationPermission(value: hasNotificationPermission);
 
       if (isFirstOpen) {
         // Uygulama ilk defa mı açıldı.
-        await _appPreferences.setFirstOpen(false);
+        await _appPreferences.setFirstOpen(value: false);
         CustomNavigator().pushAndRemoveUntil(SliderPage());
       } else {
         CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());

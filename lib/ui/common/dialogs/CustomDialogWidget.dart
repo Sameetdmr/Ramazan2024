@@ -5,11 +5,10 @@ import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 
 class CustomDialogWidget extends StatelessWidget {
+  const CustomDialogWidget(this.title, this.message, this.onPressed, {super.key});
   final String title;
   final String message;
-  final Function() onPressed;
-
-  CustomDialogWidget(this.title, this.message, this.onPressed);
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +25,7 @@ class CustomDialogWidget extends StatelessWidget {
           customLoginButtonType: CustomLoginButtonType.PRIMARY,
           text: StringCommonConstant.submit,
           textStyle: null,
-          onPressed: () {
-            onPressed();
-          },
+          onPressed: onPressed,
         ),
       ],
     );

@@ -1,7 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ramadan/model/domain/GridItemResult.dart';
 import 'package:ramadan/model/domain/PrayerTimeDetails.dart';
 import 'package:ramadan/model/domain/PrayerTimesModel.dart';
 import 'package:ramadan/model/domain/TurkeyCity.dart';
@@ -17,17 +17,19 @@ import 'package:ramadan/ui/login/LoginPage.dart';
 import 'package:ramadan/utils/configuration/ProjectInfo.dart';
 import 'package:ramadan/utils/constants/date_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
-import 'package:ramadan/utils/extension/RandomRamadanWordExtension.dart';
 import 'package:ramadan/utils/formatter/DateTimeFormatter.dart';
 import 'package:ramadan/utils/initialize/AppPreferences.dart';
 import 'package:ramadan/utils/manager/GridItemManager.dart';
+import 'package:ramadan/utils/manager/TimeManager.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
 import 'package:ramadan/utils/popups/CustomSnackBar.dart';
 import 'package:ramadan/utils/popups/CustomSnackBarType.dart';
 import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
-import 'package:ramadan/utils/manager/TimeManager.dart';
 
 class HomePageViewModel extends ViewModelBase {
+  HomePageViewModel() {
+    setCurrentScreen('Home Page');
+  }
   // Init
   RxBool isLoggedIn = false.obs;
   RxBool isNotificationPermissionGranted = false.obs;
@@ -38,15 +40,15 @@ class HomePageViewModel extends ViewModelBase {
   late PrayerTimesModel _prayerTimesModel;
   RxList<PrayerTimeDetails> timeList = <PrayerTimeDetails>[].obs;
   RxList<TurkeyCity> citiesList = <TurkeyCity>[].obs;
-  RxList<PrayerTimeWord> _prayerTimeWordModel = <PrayerTimeWord>[].obs;
-  GridItemManager _gridItemManager = GridItemManager();
+  final RxList<PrayerTimeWord> _prayerTimeWordModel = <PrayerTimeWord>[].obs;
+  final GridItemManager _gridItemManager = GridItemManager();
 
   // Service
-  IAuthService _authService = ServiceLocator().get<IAuthService>();
-  IRamadanDataProvider _ramadanDataProvider = ServiceLocator().get<IRamadanDataProvider>();
-  ILocationService _locationService = ServiceLocator().get<ILocationService>();
-  ILocalNotificationService _localNotificationService = ServiceLocator().get<ILocalNotificationService>();
-  IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
+  final IAuthService _authService = ServiceLocator().get<IAuthService>();
+  final IRamadanDataProvider _ramadanDataProvider = ServiceLocator().get<IRamadanDataProvider>();
+  final ILocationService _locationService = ServiceLocator().get<ILocationService>();
+  final ILocalNotificationService _localNotificationService = ServiceLocator().get<ILocalNotificationService>();
+  final IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
 
   // Countdown
   late Timer _timer;
@@ -54,12 +56,8 @@ class HomePageViewModel extends ViewModelBase {
   RxInt remainingTime = 0.obs;
   RxInt remainingramadanTime = 0.obs;
 
-  HomePageViewModel() {
-    setCurrentScreen('Home Page');
-  }
-
   @override
-  void onInit() async {
+  Future<void> onInit() async {
     try {
       fillCityList();
       fillRamadanWordList();
@@ -68,15 +66,15 @@ class HomePageViewModel extends ViewModelBase {
       ProjectInfo.instance.cityName.value = initLocation.value;
       await fillPrayerTimesModel(ProjectInfo.instance.cityName.value);
     } catch (e) {
-      exceptionHandlingService.handleException(e);
+      await exceptionHandlingService.handleException(e);
     }
     super.onInit();
   }
 
   Future<void> setupNotification(DateTime day, String iftarTime, String city) async {
-    DateTime time = DateTimeFormatter().targetDateTime(iftarTime);
+    final time = DateTimeFormatter().targetDateTime(iftarTime);
 
-    DateTime targetDateTime = DateTime(day.year, day.month, day.day, time.hour, time.minute);
+    final targetDateTime = DateTime(day.year, day.month, day.day, time.hour, time.minute);
 
     await _localNotificationService.schedulePrayerTimeNotification(city, targetDateTime);
   }
@@ -88,11 +86,11 @@ class HomePageViewModel extends ViewModelBase {
   }
 
   void fillCityList() {
-    citiesList.value = TurkeyCityModel.turkeyCities;
+    citiesList.value = TurkeyCity.turkeyCities;
   }
 
   void fillRamadanWordList() {
-    _prayerTimeWordModel.value = PrayerTimeWordModel.ramadanWordList;
+    _prayerTimeWordModel.value = PrayerTimeWord.ramadanWordList;
   }
 
   Future<void> checkUserLoggedIn() async {
@@ -108,34 +106,34 @@ class HomePageViewModel extends ViewModelBase {
     try {
       await _authService.signOut();
       CustomNavigator().pushAndRemoveUntil(LoginPage());
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringHomeConstant.successSignOutText);
+      if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringHomeConstant.successSignOutText);
     } catch (e) {
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringHomeConstant.errorSignOutText);
-      throw e;
+      await CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringHomeConstant.errorSignOutText);
+      rethrow;
     }
   }
 
-  void signIn(BuildContext context) {
+  Future<void> signIn(BuildContext context) async {
     try {
       CustomNavigator().pushAndRemoveUntil(LoginPage());
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringHomeConstant.successSignOutText);
+      if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringHomeConstant.successSignOutText);
     } catch (e) {
-      CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringHomeConstant.errorSignOutText);
-      throw e;
+      await CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringHomeConstant.errorSignOutText);
+      rethrow;
     }
   }
 
   Future<void> fillPrayerTimesModel(String cityName) async {
     ProjectInfo.instance.gridItemList.clear();
-    _prayerTimesModel = await _ramadanDataProvider.loadRamadanData(cityName, DateConstant.getValidDate());
+    _prayerTimesModel = await _ramadanDataProvider.loadRamadanData(cityName: cityName, date: DateConstant.getValidDate());
     timeList.value = _prayerTimesModel.times;
-    GridItemResult gridItemResult = _gridItemManager.fillGridItem(_prayerTimesModel.times, ProjectInfo.instance.gridItemList, ProjectInfo.instance.isActiveList);
+    final gridItemResult = _gridItemManager.fillGridItem(_prayerTimesModel.times, ProjectInfo.instance.gridItemList, ProjectInfo.instance.isActiveList);
     ProjectInfo.instance.gridItemList = gridItemResult.gridItemList;
     ProjectInfo.instance.isActiveList = gridItemResult.isActiveList;
-    await _startTimer(ProjectInfo.instance.gridItemList.firstWhere((element) => element.isActive == true).time);
-    int indexOfTrue = ProjectInfo.instance.isActiveList.indexOf(true.obs);
+    await _startTimer(ProjectInfo.instance.gridItemList.firstWhere((element) => element.isActive.value == true).time);
+    final indexOfTrue = ProjectInfo.instance.isActiveList.indexOf(true.obs);
 
-    int targetIndex = (indexOfTrue == 0) ? 0 : 4; // Eğer kullanıcı vakitleri listerken Sahur ya da iftar vaktinde değil ise oraya göre hesaplanmasını sağla
+    final targetIndex = (indexOfTrue == 0) ? 0 : 4; // Eğer kullanıcı vakitleri listerken Sahur ya da iftar vaktinde değil ise oraya göre hesaplanmasını sağla
 
     if (_ramadanTimer == null || !_ramadanTimer!.isActive) {
       await _startRamadanTimer(ProjectInfo.instance.gridItemList.firstWhere((element) => element.id == targetIndex).time);
@@ -157,7 +155,7 @@ class HomePageViewModel extends ViewModelBase {
       if (city != null) {
         await fillPrayerTimesModel(city);
       } else {
-        bool hasLocationOk = await PermissionManager.checkLocationPermission();
+        final hasLocationOk = await PermissionManager.checkLocationPermission();
         if (hasLocationOk) {
           ProjectInfo.instance.cityName.value = await _locationService.getCityNameFromCoordinates();
         } else {
@@ -166,33 +164,27 @@ class HomePageViewModel extends ViewModelBase {
         await fillPrayerTimesModel(ProjectInfo.instance.cityName.value);
       }
     } catch (e) {
-      exceptionHandlingService.handleException(e);
+      await exceptionHandlingService.handleException(e);
     }
   }
 
   Future<void> _startTimer(String time) async {
     remainingTime.value = TimeManager.remainingSeconds(time);
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) async {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       if (remainingTime > 0) {
         remainingTime.value--;
       } else {
-        int indexOfTrue = ProjectInfo.instance.isActiveList.indexOf(true.obs);
+        final indexOfTrue = ProjectInfo.instance.isActiveList.indexOf(true.obs);
 
         // Zaman durumu hangi indexte olduğunu çekiyoruz.
         if (indexOfTrue != -1 && indexOfTrue < 5) {
           ProjectInfo.instance.gridItemList.clear();
-          GridItemResult gridItemResult = _gridItemManager.fillGridItem(_prayerTimesModel.times, ProjectInfo.instance.gridItemList, ProjectInfo.instance.isActiveList);
+          final gridItemResult = _gridItemManager.fillGridItem(_prayerTimesModel.times, ProjectInfo.instance.gridItemList, ProjectInfo.instance.isActiveList);
           ProjectInfo.instance.gridItemList = gridItemResult.gridItemList;
           ProjectInfo.instance.isActiveList = gridItemResult.isActiveList;
           _timer.cancel();
 
-          if (indexOfTrue == 4) {
-            if (isNotificationPermissionGranted.value) {
-              await _localNotificationService.showFirebaseNotification(
-                  '${ProjectInfo.instance.cityName.value.toUpperCase()} İÇİN ${TimeFormatterService.formatRemainingTimeName().value.toUpperCase()} VAKTİ.', "'${RandomRamadanWordExtension.getRandomRamadanWord(_prayerTimeWordModel)}'");
-            }
-          }
-          await _startTimer(ProjectInfo.instance.gridItemList.firstWhere((element) => element.isActive == true).time);
+          await _startTimer(ProjectInfo.instance.gridItemList.firstWhere((element) => element.isActive.value == true).time);
         } else {
           await refreshPage(ProjectInfo.instance.cityName.value);
         }
@@ -202,7 +194,7 @@ class HomePageViewModel extends ViewModelBase {
 
   Future<void> _startRamadanTimer(String time) async {
     remainingramadanTime.value = TimeManager.remainingSeconds(time);
-    _ramadanTimer = Timer.periodic(Duration(seconds: 1), (timer) async {
+    _ramadanTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       if (remainingramadanTime > 0) {
         remainingramadanTime.value--;
         TimeFormatterService.formatRemainingTime(remainingramadanTime.value);

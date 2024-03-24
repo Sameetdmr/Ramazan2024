@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ramadan/utils/constants/color_constant.dart';
 
 class CustomTextField extends StatelessWidget {
+  CustomTextField({required this.textEditingController, required this.onChanged, required this.hintText, required this.prefixIcon, required this.validator, super.key, this.obscureText = false, this.suffixIcon});
   final TextEditingController textEditingController;
   final String hintText;
   final Widget? suffixIcon;
@@ -9,14 +11,13 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   String? Function(String?)? validator;
   void Function(String)? onChanged;
-  CustomTextField({Key? key, required this.textEditingController, required this.onChanged, required this.hintText, required this.prefixIcon, required this.validator, this.obscureText = false, this.suffixIcon = null}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Colors.grey.shade100,
+        color: ColorCommonConstant.greyShade100,
       ),
       child: TextFormField(
         controller: textEditingController,
@@ -26,29 +27,33 @@ class CustomTextField extends StatelessWidget {
         textInputAction: TextInputAction.done,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
-          iconColor: Colors.red,
+          iconColor: ColorCommonConstant.red,
           hintText: hintText,
           hintStyle: context.textTheme.bodySmall?.copyWith(
-            color: Colors.grey,
+            color: ColorCommonConstant.grey,
           ),
           prefixIcon: Icon(
             prefixIcon,
-            color: Colors.grey,
+            color: ColorCommonConstant.grey,
           ),
           suffixIcon: suffixIcon,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
-              color: Colors.grey,
+              color: ColorCommonConstant.grey,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: BorderSide(
+              color: ColorCommonConstant.white,
+            ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: BorderSide(
+              color: ColorCommonConstant.grey,
+            ),
           ),
         ),
       ),

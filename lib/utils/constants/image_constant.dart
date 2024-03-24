@@ -7,20 +7,20 @@ enum AppSplashSliderLottiesConstant {
   appLottie2('splash_slide-2'),
   appLottie3('splash_slide-3');
 
-  final String value;
   const AppSplashSliderLottiesConstant(this.value);
+  final String value;
 
-  String get getLottie => "assets/lottie/splash_slider_lottie/$value.json";
+  String get getLottie => 'assets/lottie/splash_slider_lottie/$value.json';
   LottieBuilder get toLottie => Lottie.asset(getLottie);
 }
 
 enum AppSplashLottiesConstant {
   splash('splash_build_app');
 
-  final String value;
   const AppSplashLottiesConstant(this.value);
+  final String value;
 
-  String get getLottie => "assets/lottie/splash/$value.json";
+  String get getLottie => 'assets/lottie/splash/$value.json';
   LottieBuilder get toLottie => Lottie.asset(getLottie);
 }
 
@@ -28,10 +28,10 @@ enum AppImageConstant {
   facebook('login_facebook'),
   google('login_google');
 
-  final String value;
   const AppImageConstant(this.value);
+  final String value;
 
-  String get toPng => "assets/image/login/$value.png";
+  String get toPng => 'assets/image/login/$value.png';
   AssetImage get toImg => AssetImage(toPng);
 }
 
@@ -43,19 +43,19 @@ enum PrayerTimeIconConstant {
   iftar('ramadan'),
   yatsi('half_moon');
 
-  final String value;
   const PrayerTimeIconConstant(this.value);
+  final String value;
 
-  String get toPng => "assets/image/home/$value.png";
+  String get toPng => 'assets/image/home/$value.png';
   AssetImage get toImg => AssetImage(toPng);
 }
 
 enum HadithLogoConstant {
   logo_hadith('logo_hadith');
 
-  final String value;
   const HadithLogoConstant(this.value);
+  final String value;
 
-  String get toSvg => "assets/image/hadith/$value.svg";
+  String get toSvg => 'assets/image/hadith/$value.svg';
   SvgPicture get toImg => SvgPicture.asset(toSvg);
 }
