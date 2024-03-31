@@ -7,15 +7,18 @@ currently being supported with security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 1.0.6   | :white_check_mark: |
+| < 1.0.6 | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+To report a vulnerability, please create a new issue in the GitHub repository. We will review and respond to all reported vulnerabilities as quickly as possible.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Once a vulnerability is reported:
+- We will acknowledge the receipt of the report within 2 business days.
+- Our team will investigate the reported vulnerability and determine its validity.
+- If the vulnerability is valid, we will prioritize fixing it based on its severity and impact.
+- We will provide updates on the progress of fixing the vulnerability in the GitHub issue.
+- Once the vulnerability is fixed, we will release a new version of the project with the security patch.
+
+Thank you for helping us keep our project secure.
