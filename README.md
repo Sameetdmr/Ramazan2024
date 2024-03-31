@@ -1,3 +1,5 @@
+[![Codemagic build status](https://api.codemagic.io/apps/65f0be96f45e54589b271055/65f0be96f45e54589b271054/status_badge.svg)](https://codemagic.io/apps/65f0be96f45e54589b271055/65f0be96f45e54589b271054/latest_build)
+
 # Ramazan 2024 🌙
 
 This application aims to provide users with easy and fast access to daily fasting hours, prayer times, and spiritual content during the month of Ramadan.
