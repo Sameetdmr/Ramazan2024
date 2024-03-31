@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/model/home/GridItem.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class GridCard extends StatelessWidget {
   const GridCard(this.item, {super.key});
@@ -23,7 +24,7 @@ class GridCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Spacer(flex: 2),
-                Align(alignment: Alignment.topLeft, child: Text(item.title, style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+                Align(alignment: Alignment.topLeft, child: Text(item.title, style: CustomTextTheme(context).bodyMedium.copyWith(fontWeight: FontWeight.bold))),
                 const Spacer(),
                 Flexible(
                   flex: 20,
@@ -35,7 +36,7 @@ class GridCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(alignment: Alignment.bottomLeft, child: Text(item.time, style: context.textTheme.titleMedium?.copyWith())),
+                Align(alignment: Alignment.bottomLeft, child: Text(item.time, style: CustomTextTheme(context).titleMedium.copyWith())),
                 const Spacer(flex: 2),
               ],
             ),

@@ -7,6 +7,7 @@ import 'package:ramadan/ui/splash/SplashPage.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/initialize/ProjectInitialize.dart';
 import 'package:ramadan/utils/localization/CustomTranslations.dart';
+import 'package:ramadan/utils/theme/AppThemeLight.dart';
 
 GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey();
 GlobalKey<NavigatorState> _navigatorKeyHome = GlobalKey();
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           home: SplashPage(),
           translations: CustomTranslations(),
+          theme: AppThemeLight.getInstance(context).theme,
           locale: Get.deviceLocale,
           fallbackLocale: const Locale('en', 'US'),
           navigatorKey: mainNavigatorKey,

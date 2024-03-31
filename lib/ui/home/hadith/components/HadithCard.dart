@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kartal/kartal.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/image_constant.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class HadithCard extends StatelessWidget {
   const HadithCard({
@@ -31,14 +32,14 @@ class HadithCard extends StatelessWidget {
             Text(
               text,
               textAlign: TextAlign.justify,
-              style: context.textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic),
+              style: CustomTextTheme(context).bodyMedium.copyWith(fontStyle: FontStyle.italic),
             ),
             SizedBox(height: 8.h),
             Align(
               alignment: Alignment.bottomRight,
               child: Text(
                 author,
-                style: context.textTheme.bodySmall?.copyWith(color: ColorCommonConstant.saddleBrown),
+                style: CustomTextTheme(context).bodySmall.copyWith(color: ColorCommonConstant.saddleBrown),
               ),
             ),
           ],

@@ -7,6 +7,7 @@ import 'package:ramadan/model/domain/TurkeyCity.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class CityListPage extends StatelessWidget {
   List<TurkeyCity> turkeyCities;
@@ -35,7 +36,7 @@ class CityListPage extends StatelessWidget {
           elevation: 0,
           title: Text(
             'Şehir Seçiniz',
-            style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
+            style: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
           ),
           backgroundColor: ColorCommonConstant.transparent,
         ),
@@ -48,7 +49,7 @@ class CityListPage extends StatelessWidget {
                   CustomNavigator().popFromMain();
                 },
                 child: ListTile(
-                  title: Text(StringHomeConstant.usePreciseLocation, style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.orangeAccent)),
+                  title: Text(StringHomeConstant.usePreciseLocation, style: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.orangeAccent)),
                   trailing: Icon(
                     Icons.location_on_outlined,
                     color: ColorTextConstant.orangeAccent,
@@ -71,7 +72,7 @@ class CityListPage extends StatelessWidget {
                       child: ListTile(
                         title: Text(
                           turkeyCities[index].name,
-                          style: context.textTheme.labelMedium,
+                          style: CustomTextTheme(context).labelMedium,
                         ),
                         trailing: Icon(
                           Icons.arrow_forward_outlined,

@@ -10,6 +10,7 @@ import 'package:ramadan/ui/home/home/components/GridCard.dart';
 import 'package:ramadan/utils/configuration/ProjectInfo.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/formatter/DateTimeFormatter.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class HomePage extends StatelessWidget {
   late HomePageViewModel _homePageViewModel;
@@ -22,8 +23,6 @@ class HomePage extends StatelessWidget {
       () => SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            elevation: 0,
-            backgroundColor: ColorCommonConstant.transparent,
             automaticallyImplyLeading: false,
             title: _Header(
               dateTitle: DateTimeFormatter().formatTodayDate().value,
@@ -108,14 +107,14 @@ class _Header extends StatelessWidget {
           children: [
             Text(
               dateTitle,
-              style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black),
+              style: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.black),
             ),
             SizedBox(
               height: 5.h,
             ),
             Text(
               cityName,
-              style: context.textTheme.bodySmall?.copyWith(color: ColorTextConstant.orangeAccent),
+              style: CustomTextTheme(context).bodySmall.copyWith(color: ColorTextConstant.orangeAccent),
             ),
           ],
         ),

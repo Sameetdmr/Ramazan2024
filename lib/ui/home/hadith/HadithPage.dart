@@ -9,6 +9,7 @@ import 'package:ramadan/ui/home/hadith/components/HadithCard.dart';
 import 'package:ramadan/ui/home/hadith/components/HadithCategoryFilterButton.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class HadithPage extends StatelessWidget {
   HadithPage({super.key});
@@ -78,14 +79,14 @@ class _Header extends StatelessWidget {
           children: [
             Text(
               title,
-              style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black),
+              style: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.black),
             ),
             SizedBox(
               height: 5.h,
             ),
             Text(
               categoryName,
-              style: context.textTheme.bodySmall?.copyWith(color: ColorTextConstant.orangeAccent),
+              style: CustomTextTheme(context).bodySmall.copyWith(color: ColorTextConstant.orangeAccent),
             ),
           ],
         ),

@@ -10,6 +10,7 @@ import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -36,7 +37,7 @@ class RegisterPage extends StatelessWidget {
         elevation: 0,
         title: Text(
           StringLoginConstant.registerAppBarTitle,
-          style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
+          style: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -133,7 +134,7 @@ class RegisterPage extends StatelessWidget {
                       },
                       customLoginButtonType: CustomLoginButtonType.PRIMARY,
                       text: StringLoginConstant.registerAppBarTitle,
-                      textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.white),
+                      textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.white),
                     ),
                   ),
                 ],
