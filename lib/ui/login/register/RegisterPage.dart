@@ -53,14 +53,9 @@ class RegisterPage extends StatelessWidget {
                 prefixIcon: Icons.mail_outlined,
                 validator: (value) {
                   if (value != null) {
-                    final result = LoginValidator.validateLogin(value, LoginTypeEnum.EMAIL);
-                    if (result != null) {
-                      return result;
-                    }
-                    return null;
-                  } else {
-                    return null;
+                    return LoginValidator.validateLogin(value, LoginTypeEnum.email);
                   }
+                  return null;
                 },
                 onChanged: null,
               ),
@@ -81,14 +76,9 @@ class RegisterPage extends StatelessWidget {
                   obscureText: !_registerPageViewModel.obscureText.value,
                   validator: (value) {
                     if (value != null) {
-                      final result = LoginValidator.validateLogin(value, LoginTypeEnum.PASSWORD);
-                      if (result != null) {
-                        return result;
-                      }
-                      return null;
-                    } else {
-                      return null;
+                      return LoginValidator.validateLogin(value, LoginTypeEnum.password);
                     }
+                    return null;
                   },
                   onChanged: null,
                 ),
@@ -110,14 +100,9 @@ class RegisterPage extends StatelessWidget {
                   obscureText: !_registerPageViewModel.obscureText.value,
                   validator: (value) {
                     if (value != null) {
-                      final result = LoginValidator.validateLogin(_registerPageViewModel.passwordTextController.text, LoginTypeEnum.CONFIRM, value);
-                      if (result != null) {
-                        return result;
-                      }
-                      return null;
-                    } else {
-                      return null;
+                      return LoginValidator.validateLogin(_registerPageViewModel.passwordTextController.text, LoginTypeEnum.confirm, value);
                     }
+                    return null;
                   },
                   onChanged: null,
                 ),
@@ -132,7 +117,7 @@ class RegisterPage extends StatelessWidget {
                           await _registerPageViewModel.register(context, _registerPageViewModel.emailTextController.text, _registerPageViewModel.passwordTextController.text);
                         }
                       },
-                      customLoginButtonType: CustomLoginButtonType.PRIMARY,
+                      customLoginButtonType: CustomLoginButtonType.primary,
                       text: StringLoginConstant.registerAppBarTitle,
                       textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.white),
                     ),

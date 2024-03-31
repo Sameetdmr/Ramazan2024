@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:kartal/kartal.dart';
 
 import 'package:ramadan/ui/common/button/CustomLoginButton.dart';
@@ -57,14 +56,9 @@ class PasswordResetScreen extends StatelessWidget {
                 prefixIcon: Icons.mail_outlined,
                 validator: (value) {
                   if (value != null) {
-                    final result = LoginValidator.validateLogin(value, LoginTypeEnum.EMAIL);
-                    if (result != null) {
-                      return result;
-                    }
-                    return null;
-                  } else {
-                    return null;
+                    return LoginValidator.validateLogin(value, LoginTypeEnum.email);
                   }
+                  return null;
                 },
                 onChanged: null,
               ),
@@ -76,7 +70,7 @@ class PasswordResetScreen extends StatelessWidget {
                     textEditingController.clear();
                   }
                 },
-                customLoginButtonType: CustomLoginButtonType.PRIMARY,
+                customLoginButtonType: CustomLoginButtonType.primary,
                 textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.white),
                 text: StringLoginConstant.passwordResetApplyButton,
               ),

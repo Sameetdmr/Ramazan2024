@@ -52,17 +52,12 @@ class LoginPage extends StatelessWidget {
                   prefixIcon: Icons.mail_outlined,
                   validator: (value) {
                     if (value != null) {
-                      final result = LoginValidator.validateLogin(value, LoginTypeEnum.EMAIL);
-                      if (result != null) {
-                        return result;
-                      }
-                      return null;
-                    } else {
-                      return null;
+                      return LoginValidator.validateLogin(value, LoginTypeEnum.email);
                     }
+                    return null;
                   },
                   onChanged: (String? value) {
-                    _loginPageViewModel.loginTextFormFieldOnChanged(value, _loginPageViewModel.emailTextController, LoginTypeEnum.EMAIL);
+                    _loginPageViewModel.loginTextFormFieldOnChanged(value, _loginPageViewModel.emailTextController, LoginTypeEnum.email);
                   },
                 ),
                 SizedBox(
@@ -82,17 +77,12 @@ class LoginPage extends StatelessWidget {
                     obscureText: !_loginPageViewModel.obscureText.value,
                     validator: (value) {
                       if (value != null) {
-                        final result = LoginValidator.validateLogin(value, LoginTypeEnum.PASSWORD);
-                        if (result != null) {
-                          return result;
-                        }
-                        return null;
-                      } else {
-                        return null;
+                        return LoginValidator.validateLogin(value, LoginTypeEnum.password);
                       }
+                      return null;
                     },
                     onChanged: (String? value) {
-                      _loginPageViewModel.loginTextFormFieldOnChanged(value, _loginPageViewModel.passwordTextController, LoginTypeEnum.PASSWORD);
+                      _loginPageViewModel.loginTextFormFieldOnChanged(value, _loginPageViewModel.passwordTextController, LoginTypeEnum.password);
                     },
                   ),
                 ),
@@ -119,7 +109,7 @@ class LoginPage extends StatelessWidget {
                           await _loginPageViewModel.resetPassword(result[1].toString().trim());
                         }
                       },
-                      customLoginButtonType: CustomLoginButtonType.TEXT,
+                      customLoginButtonType: CustomLoginButtonType.text,
                       text: StringLoginConstant.loginForgotPasswordButtonText,
                       textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.black),
                     ),
@@ -128,22 +118,26 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                   height: 20.h,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomButton.getButton(
-                        onPressed: () async {
-                          if (_loginPageViewModel.formKey.currentState!.validate()) {
-                            await _loginPageViewModel.signInWithEmailAndPassword(_loginPageViewModel.emailTextController.text, _loginPageViewModel.passwordTextController.text);
-                            _loginPageViewModel.clearTextController();
-                          }
-                        },
-                        customLoginButtonType: CustomLoginButtonType.PRIMARY,
-                        text: StringLoginConstant.loginAppBarTitle,
-                        textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.white),
+                Obx(
+                  () => Row(
+                    children: [
+                      Expanded(
+                        child: CustomButton.getButton(
+                          onPressed: _loginPageViewModel.signInButtonVisible()
+                              ? () async {
+                                  if (_loginPageViewModel.formKey.currentState!.validate()) {
+                                    await _loginPageViewModel.signInWithEmailAndPassword(_loginPageViewModel.emailTextController.text, _loginPageViewModel.passwordTextController.text);
+                                    _loginPageViewModel.clearTextController();
+                                  }
+                                }
+                              : null,
+                          customLoginButtonType: CustomLoginButtonType.primary,
+                          text: StringLoginConstant.loginAppBarTitle,
+                          textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.white),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const _CustomDivider(),
                 Center(
@@ -163,7 +157,7 @@ class LoginPage extends StatelessWidget {
                         _loginPageViewModel.clearTextController();
                         CustomNavigator().pushToMain<void>(RegisterPage());
                       },
-                      customLoginButtonType: CustomLoginButtonType.TEXT,
+                      customLoginButtonType: CustomLoginButtonType.text,
                       text: StringLoginConstant.loginNewUserText2,
                       textStyle: CustomTextTheme(context).bodyMedium.copyWith(decoration: TextDecoration.underline, color: ColorTextConstant.black, fontWeight: FontWeight.bold),
                     ),
@@ -177,7 +171,7 @@ class LoginPage extends StatelessWidget {
                         onPressed: () {
                           _loginPageViewModel.withoutSignIn(context);
                         },
-                        customLoginButtonType: CustomLoginButtonType.TEXT,
+                        customLoginButtonType: CustomLoginButtonType.text,
                         text: StringLoginConstant.withoutLoginText,
                         textStyle: CustomTextTheme(context).titleMedium.copyWith(color: ColorTextConstant.forestMaid, fontWeight: FontWeight.bold),
                       ),

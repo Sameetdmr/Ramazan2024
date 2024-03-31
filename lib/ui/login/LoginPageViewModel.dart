@@ -19,6 +19,9 @@ class LoginPageViewModel extends ViewModelBase {
   }
   late final BuildContext _context;
 
+  // Secure
+  RxInt failedSignInCount = 0.obs;
+
   // TextEditingController
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
@@ -62,15 +65,19 @@ class LoginPageViewModel extends ViewModelBase {
       final user = await _authService.signInWithEmailAndPassword(email, password);
       if (user != null) {
         CustomDialog.dismiss();
+        failedSignInCount.value = 0;
         CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       } else {
         CustomDialog.dismiss();
-        await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorEmailPasswordControlText);
+        failedSignInCount.value++;
+        if (_context.mounted) await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.error, StringLoginConstant.snackbarErrorEmailPasswordControlText);
       }
     } catch (e) {
       await exceptionHandlingService.handleException(e);
     }
   }
+
+  RxBool get signInButtonVisible => failedSignInCount.value >= 3 ? false.obs : true.obs;
 
   Future<void> signInGoogle() async {
     try {
@@ -79,7 +86,7 @@ class LoginPageViewModel extends ViewModelBase {
       if (user != null) {
         CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       } else {
-        await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorRetryText);
+        if (_context.mounted) await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.error, StringLoginConstant.snackbarErrorRetryText);
       }
     } catch (e) {
       await exceptionHandlingService.handleException(e);
@@ -97,10 +104,10 @@ class LoginPageViewModel extends ViewModelBase {
   Future<void> resetPassword(String email) async {
     try {
       await _authService.resetPassword(email);
-      await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.SUCCESS, StringLoginConstant.snackbarErrorEmailControlText);
+      if (_context.mounted) await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.success, StringLoginConstant.snackbarErrorEmailControlText);
     } catch (e) {
       await exceptionHandlingService.handleException(e);
-      await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorRetryText);
+      if (_context.mounted) await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.error, StringLoginConstant.snackbarErrorRetryText);
     }
   }
 }

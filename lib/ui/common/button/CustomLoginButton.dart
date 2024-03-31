@@ -3,9 +3,9 @@ import 'package:ramadan/ui/login/components/CustomLoginButtonType.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 
 class CustomButton {
-  static Widget getButton({required CustomLoginButtonType customLoginButtonType, required String text, required TextStyle? textStyle, required void Function() onPressed}) {
+  static Widget getButton({required CustomLoginButtonType customLoginButtonType, required String text, required TextStyle? textStyle, void Function()? onPressed}) {
     switch (customLoginButtonType) {
-      case CustomLoginButtonType.PRIMARY:
+      case CustomLoginButtonType.primary:
         return ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
@@ -20,7 +20,7 @@ class CustomButton {
           ),
         );
 
-      case CustomLoginButtonType.TEXT:
+      case CustomLoginButtonType.text:
         return TextButton(
           onPressed: onPressed,
           child: Text(

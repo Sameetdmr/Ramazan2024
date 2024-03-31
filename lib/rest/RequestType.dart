@@ -1,1 +1,1 @@
-enum RequestType { GET, POST }
+enum RequestType { get, post }

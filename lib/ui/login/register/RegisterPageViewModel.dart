@@ -36,9 +36,9 @@ class RegisterPageViewModel extends ViewModelBase {
 
       if (userCredential != null) {
         CustomNavigator().popFromMain();
-        if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringLoginConstant.snackbarSuccessRegisterText);
+        if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.success, StringLoginConstant.snackbarSuccessRegisterText);
       } else {
-        if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringLoginConstant.snackbarErrorEmailControlText);
+        if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.error, StringLoginConstant.snackbarErrorEmailControlText);
 
         emailTextController.clear();
         passwordTextController.clear();

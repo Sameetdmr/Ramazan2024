@@ -31,11 +31,11 @@ final class LoginValidator {
 
   static String? validateLogin(String value, LoginTypeEnum loginTypeEnum, [String? confirmPassword]) {
     switch (loginTypeEnum) {
-      case LoginTypeEnum.EMAIL:
+      case LoginTypeEnum.email:
         return LoginValidator.validateEmail(value);
-      case LoginTypeEnum.PASSWORD:
+      case LoginTypeEnum.password:
         return LoginValidator.validatePassword(value);
-      case LoginTypeEnum.CONFIRM:
+      case LoginTypeEnum.confirm:
         return LoginValidator.validatePasswordConfirmation(value, confirmPassword);
     }
   }

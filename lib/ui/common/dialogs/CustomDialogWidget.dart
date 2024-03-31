@@ -22,7 +22,7 @@ class CustomDialogWidget extends StatelessWidget {
       content: Text(message),
       actions: [
         CustomButton.getButton(
-          customLoginButtonType: CustomLoginButtonType.PRIMARY,
+          customLoginButtonType: CustomLoginButtonType.primary,
           text: StringCommonConstant.submit,
           textStyle: null,
           onPressed: onPressed,
