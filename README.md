@@ -1,4 +1,5 @@
-[![Codemagic build status](https://api.codemagic.io/apps/65f0be96f45e54589b271055/65f0be96f45e54589b271054/status_badge.svg)](https://codemagic.io/apps/65f0be96f45e54589b271055/65f0be96f45e54589b271054/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/65f0be96f45e54589b271055/65f0be96f45e54589b271054/status_badge.svg)](https://codemagic.io/app/65f0be96f45e54589b271055/build/6609ce7c2ba7389d8681049b)
+
 
 # Ramazan 2024 🌙
 
