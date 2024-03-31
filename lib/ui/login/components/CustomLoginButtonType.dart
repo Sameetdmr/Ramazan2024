@@ -1,4 +1,4 @@
 enum CustomLoginButtonType {
-  PRIMARY,
-  TEXT,
+  primary,
+  text,
 }

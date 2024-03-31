@@ -38,7 +38,7 @@ final class AuthService implements IAuthService {
         if (e.code == StringCommonConstant.firebaseLoginErrorCode) {
           return null;
         } else {
-          throw StringCommonConstant.firebaseLoginError;
+          throw CustomException(StringCommonConstant.firebaseLoginError);
         }
       }
       throw CustomException(StringCommonConstant.firebaseLoginError);

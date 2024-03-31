@@ -1,5 +1,1 @@
-enum LoginTypeEnum {
-  EMAIL,
-  CONFIRM,
-  PASSWORD,
-}
+enum LoginTypeEnum { email, confirm, password }

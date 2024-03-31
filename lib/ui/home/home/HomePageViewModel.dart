@@ -106,21 +106,15 @@ class HomePageViewModel extends ViewModelBase {
     try {
       await _authService.signOut();
       CustomNavigator().pushAndRemoveUntil(LoginPage());
-      if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringHomeConstant.successSignOutText);
+      if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.success, StringHomeConstant.successSignOutText);
     } catch (e) {
-      await CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringHomeConstant.errorSignOutText);
+      if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.error, StringHomeConstant.errorSignOutText);
       rethrow;
     }
   }
 
   Future<void> signIn(BuildContext context) async {
-    try {
-      CustomNavigator().pushAndRemoveUntil(LoginPage());
-      if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.SUCCESS, StringHomeConstant.successSignOutText);
-    } catch (e) {
-      await CustomSnackBar.showSnackBar(context, CustomSnackBarType.ERROR, StringHomeConstant.errorSignOutText);
-      rethrow;
-    }
+    CustomNavigator().pushAndRemoveUntil(LoginPage());
   }
 
   Future<void> fillPrayerTimesModel(String cityName) async {

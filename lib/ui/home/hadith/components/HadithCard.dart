@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:kartal/kartal.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/image_constant.dart';
@@ -28,7 +27,7 @@ class HadithCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Align(alignment: Alignment.centerRight, child: SizedBox(width: 16.w, height: 24.h, child: HadithLogoConstant.logo_hadith.toImg)),
+            Align(alignment: Alignment.centerRight, child: SizedBox(width: 16.w, height: 24.h, child: HadithLogoConstant.logoHadith.toImg)),
             Text(
               text,
               textAlign: TextAlign.justify,

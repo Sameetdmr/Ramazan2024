@@ -51,7 +51,7 @@ enum PrayerTimeIconConstant {
 }
 
 enum HadithLogoConstant {
-  logo_hadith('logo_hadith');
+  logoHadith('logo_hadith');
 
   const HadithLogoConstant(this.value);
   final String value;
