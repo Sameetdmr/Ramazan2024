@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:ramadan/ui/home/home/components/TimeCard.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class CountdownTimerWidget extends StatelessWidget {
   final String hours;
@@ -21,7 +22,7 @@ class CountdownTimerWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: context.textTheme.titleMedium?.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
+          style: CustomTextTheme(context).titleMedium.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
         ),
         SizedBox(
           height: 10.h,

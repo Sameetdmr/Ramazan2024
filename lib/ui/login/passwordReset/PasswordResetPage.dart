@@ -11,6 +11,7 @@ import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
 
 class PasswordResetScreen extends StatelessWidget {
@@ -48,7 +49,7 @@ class PasswordResetScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10.h),
-              Text(StringLoginConstant.passwordResetEmailText, style: context.textTheme.bodyMedium),
+              Text(StringLoginConstant.passwordResetEmailText, style: CustomTextTheme(context).bodyMedium),
               SizedBox(height: 20.h),
               CustomTextField(
                 textEditingController: textEditingController,
@@ -76,7 +77,7 @@ class PasswordResetScreen extends StatelessWidget {
                   }
                 },
                 customLoginButtonType: CustomLoginButtonType.PRIMARY,
-                textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.white),
+                textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.white),
                 text: StringLoginConstant.passwordResetApplyButton,
               ),
               SizedBox(height: 20.h),

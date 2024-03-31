@@ -8,6 +8,7 @@ import 'package:ramadan/ui/slider/SliderPageViewModel.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class SliderPage extends StatelessWidget {
   SliderPage({super.key});
@@ -29,19 +30,19 @@ class SliderPage extends StatelessWidget {
       renderNextBtn: Text(
         StringSplashSliderConstant.splashSliderNextButtonText,
         style: GoogleFonts.nunito(
-          textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
+          textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.forestMaid),
         ),
       ),
       renderPrevBtn: Text(
         StringSplashSliderConstant.splashSliderPrevButtonText,
         style: GoogleFonts.nunito(
-          textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
+          textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.forestMaid),
         ),
       ),
       renderDoneBtn: Text(
         StringSplashSliderConstant.splashSliderDoneButtonText,
         style: GoogleFonts.nunito(
-          textStyle: context.general.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.forestMaid),
+          textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.forestMaid),
         ),
       ),
     );

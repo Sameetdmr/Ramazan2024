@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class CustomTextField extends StatelessWidget {
   CustomTextField({required this.textEditingController, required this.onChanged, required this.hintText, required this.prefixIcon, required this.validator, super.key, this.obscureText = false, this.suffixIcon});
@@ -29,9 +30,9 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           iconColor: ColorCommonConstant.red,
           hintText: hintText,
-          hintStyle: context.textTheme.bodySmall?.copyWith(
-            color: ColorCommonConstant.grey,
-          ),
+          hintStyle: CustomTextTheme(context).bodySmall.copyWith(
+                color: ColorCommonConstant.grey,
+              ),
           prefixIcon: Icon(
             prefixIcon,
             color: ColorCommonConstant.grey,

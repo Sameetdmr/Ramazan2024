@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kartal/kartal.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class TimeCard extends StatelessWidget {
   const TimeCard({required this.time, required this.header, required this.color, super.key});
@@ -20,10 +21,10 @@ class TimeCard extends StatelessWidget {
           decoration: BoxDecoration(color: ColorCommonConstant.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: ColorTextConstant.black)),
           child: Text(
             time,
-            style: context.textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+            style: CustomTextTheme(context).headlineMedium.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
           ),
         ),
         SizedBox(
@@ -31,7 +32,7 @@ class TimeCard extends StatelessWidget {
         ),
         Text(
           header,
-          style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black),
+          style: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.black),
         ),
       ],
     );

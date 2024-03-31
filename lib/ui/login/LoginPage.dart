@@ -15,6 +15,7 @@ import 'package:ramadan/utils/constants/image_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/enums/LoginTypeEnum.dart';
 import 'package:ramadan/utils/navigation/CustomNavigator.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 import 'package:ramadan/utils/validator/LoginValidator.dart';
 
 class LoginPage extends StatelessWidget {
@@ -33,7 +34,7 @@ class LoginPage extends StatelessWidget {
         elevation: 0,
         title: Text(
           StringLoginConstant.loginAppBarTitle,
-          style: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
+          style: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -120,7 +121,7 @@ class LoginPage extends StatelessWidget {
                       },
                       customLoginButtonType: CustomLoginButtonType.TEXT,
                       text: StringLoginConstant.loginForgotPasswordButtonText,
-                      textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.black),
+                      textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.black),
                     ),
                   ],
                 ),
@@ -139,7 +140,7 @@ class LoginPage extends StatelessWidget {
                         },
                         customLoginButtonType: CustomLoginButtonType.PRIMARY,
                         text: StringLoginConstant.loginAppBarTitle,
-                        textStyle: context.textTheme.bodyMedium?.copyWith(color: ColorTextConstant.white),
+                        textStyle: CustomTextTheme(context).bodyMedium.copyWith(color: ColorTextConstant.white),
                       ),
                     ),
                   ],
@@ -164,7 +165,7 @@ class LoginPage extends StatelessWidget {
                       },
                       customLoginButtonType: CustomLoginButtonType.TEXT,
                       text: StringLoginConstant.loginNewUserText2,
-                      textStyle: context.textTheme.bodyMedium?.copyWith(decoration: TextDecoration.underline, color: ColorTextConstant.black, fontWeight: FontWeight.bold),
+                      textStyle: CustomTextTheme(context).bodyMedium.copyWith(decoration: TextDecoration.underline, color: ColorTextConstant.black, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -178,7 +179,7 @@ class LoginPage extends StatelessWidget {
                         },
                         customLoginButtonType: CustomLoginButtonType.TEXT,
                         text: StringLoginConstant.withoutLoginText,
-                        textStyle: context.textTheme.titleMedium?.copyWith(color: ColorTextConstant.forestMaid, fontWeight: FontWeight.bold),
+                        textStyle: CustomTextTheme(context).titleMedium.copyWith(color: ColorTextConstant.forestMaid, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

@@ -9,6 +9,7 @@ import 'package:ramadan/ui/ViewModelBase.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
 import 'package:ramadan/utils/constants/image_constant.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
+import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
 class SliderPageViewModel extends ViewModelBase {
   SliderPageViewModel(BuildContext context) {
@@ -29,14 +30,14 @@ class SliderPageViewModel extends ViewModelBase {
       ContentConfig(
         title: StringSplashSliderConstant.splashSlider1TitleText,
         styleTitle: GoogleFonts.nunito(
-          textStyle: _context.general.textTheme.bodyMedium?.copyWith(
-            color: ColorTextConstant.forestMaid,
-            fontWeight: FontWeight.bold,
-          ),
+          textStyle: CustomTextTheme(_context).bodyMedium.copyWith(
+                color: ColorTextConstant.forestMaid,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         description: StringSplashSliderConstant.splashSlider1SubTitleText,
         styleDescription: GoogleFonts.nunito(
-          textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
+          textStyle: CustomTextTheme(_context).labelMedium.copyWith(color: ColorTextConstant.black),
         ),
         centerWidget: AppSplashSliderLottiesConstant.appLottie1.toLottie,
         backgroundColor: ColorBackgroundConstant.white,
@@ -44,14 +45,14 @@ class SliderPageViewModel extends ViewModelBase {
       ContentConfig(
         title: StringSplashSliderConstant.splashSlider2TitleText,
         styleTitle: GoogleFonts.nunito(
-          textStyle: _context.general.textTheme.bodyMedium?.copyWith(
-            color: ColorTextConstant.forestMaid,
-            fontWeight: FontWeight.bold,
-          ),
+          textStyle: CustomTextTheme(_context).bodyMedium.copyWith(
+                color: ColorTextConstant.forestMaid,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         description: StringSplashSliderConstant.splashSlider2SubTitleText,
         styleDescription: GoogleFonts.nunito(
-          textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
+          textStyle: CustomTextTheme(_context).labelMedium.copyWith(color: ColorTextConstant.black),
         ),
         centerWidget: AppSplashSliderLottiesConstant.appLottie2.toLottie,
         backgroundColor: ColorBackgroundConstant.white,
@@ -60,14 +61,14 @@ class SliderPageViewModel extends ViewModelBase {
         title: StringSplashSliderConstant.splashSlider3TitleText,
         maxLineTitle: 3,
         styleTitle: GoogleFonts.nunito(
-          textStyle: _context.general.textTheme.bodyMedium?.copyWith(
-            color: ColorTextConstant.forestMaid,
-            fontWeight: FontWeight.bold,
-          ),
+          textStyle: CustomTextTheme(_context).bodyMedium.copyWith(
+                color: ColorTextConstant.forestMaid,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         description: StringSplashSliderConstant.splashSlider3SubTitleText,
         styleDescription: GoogleFonts.nunito(
-          textStyle: _context.general.textTheme.labelMedium?.copyWith(color: ColorTextConstant.black),
+          textStyle: CustomTextTheme(_context).labelMedium.copyWith(color: ColorTextConstant.black),
         ),
         centerWidget: AppSplashSliderLottiesConstant.appLottie3.toLottie,
         backgroundColor: ColorBackgroundConstant.white,
