@@ -1,4 +1,4 @@
 final class CustomException implements Exception {
   CustomException(this.message);
-  String message;
+  final String message;
 }

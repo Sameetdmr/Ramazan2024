@@ -66,7 +66,7 @@ class LoginPageViewModel extends ViewModelBase {
       if (user != null) {
         CustomDialog.dismiss();
         failedSignInCount.value = 0;
-        CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
+        await CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       } else {
         CustomDialog.dismiss();
         failedSignInCount.value++;
@@ -84,7 +84,7 @@ class LoginPageViewModel extends ViewModelBase {
       final user = await _authService.signInWithGoogle();
       clearTextController();
       if (user != null) {
-        CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
+        await CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       } else {
         if (_context.mounted) await CustomSnackBar.showSnackBar(_context, CustomSnackBarType.error, StringLoginConstant.snackbarErrorRetryText);
       }

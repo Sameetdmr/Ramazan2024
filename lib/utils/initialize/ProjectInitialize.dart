@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -32,8 +33,10 @@ final class ProjectInitialize {
     await initializeDateFormatting('tr_TR');
 
     FlutterError.onError = (FlutterErrorDetails details) async {
-      await FirebaseCrashlytics.instance.log('${StackTrace.current} / ${details.exceptionAsString()}');
-      await FirebaseCrashlytics.instance.recordError(details.exceptionAsString(), StackTrace.current, printDetails: true, fatal: true);
+      if (!kDebugMode) {
+        await FirebaseCrashlytics.instance.log('${StackTrace.current} / ${details.exceptionAsString()}');
+        await FirebaseCrashlytics.instance.recordError(details.exceptionAsString(), StackTrace.current, printDetails: true, fatal: true);
+      }
       Logger().e(details.exceptionAsString());
       exit(1);
     };

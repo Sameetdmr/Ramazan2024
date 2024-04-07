@@ -1,10 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/exceptions/CustomException.dart';
 
-final class PermissionManager {
-  static Future<bool> checkLocationPermission() async {
+abstract class IPermissionManager {
+  Future<bool> checkLocationPermission();
+  Future<Position?> getCurrentLocation();
+  Future<bool> checkAndRequestNotificationPermission();
+}
+
+@immutable
+final class PermissionManager extends IPermissionManager {
+  @override
+  Future<bool> checkLocationPermission() async {
     try {
       LocationPermission permission;
 
@@ -29,7 +38,8 @@ final class PermissionManager {
     }
   }
 
-  static Future<Position?> getCurrentLocation() async {
+  @override
+  Future<Position?> getCurrentLocation() async {
     try {
       final hasPermission = await checkLocationPermission();
 
@@ -45,7 +55,8 @@ final class PermissionManager {
     }
   }
 
-  static Future<bool> checkAndRequestNotificationPermission() async {
+  @override
+  Future<bool> checkAndRequestNotificationPermission() async {
     final status = await Permission.notification.request();
 
     if (status == PermissionStatus.granted) {

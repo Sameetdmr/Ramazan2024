@@ -5,8 +5,10 @@ import 'package:ramadan/rest/ramadan/RamadanDataProvider.dart';
 import 'package:ramadan/services/common/ExceptionHandlingService.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
 import 'package:ramadan/services/common/core/ConfigurationService.dart';
+import 'package:ramadan/services/common/core/LocationService.dart';
+import 'package:ramadan/services/common/core/PermissionManager.dart';
 import 'package:ramadan/services/common/notification/LocalNotificationService.dart';
-import 'package:ramadan/services/common/ramadan/LocationService.dart';
+import 'package:ramadan/services/common/performance/PerformanceMonitoringService.dart';
 import 'package:ramadan/services/home/HadithService.dart';
 import 'package:ramadan/utils/initialize/AppPreferences.dart';
 import 'package:ramadan/utils/initialize/AppVersionChecker.dart';
@@ -26,8 +28,9 @@ class ServiceLocator {
   void init() {
     Get.lazyPut<IExceptionHandlingService>(() => ExceptionHandlingService(), fenix: true);
     Get.lazyPut<ILocalNotificationService>(() => LocalNotificationService(), fenix: true);
-
+    Get.lazyPut<IPerformanceMonitoringService>(() => PerformanceMonitoringService(), fenix: true);
     Get.lazyPut<IAuthService>(() => AuthService(), fenix: true);
+    Get.lazyPut<IPermissionManager>(() => PermissionManager(), fenix: true);
     Get.lazyPut<IAppVersionChecker>(() => AppVersionChecker(), fenix: true);
     Get.lazyPut<IAppPreferences>(() => AppPreferences(), fenix: true);
     Get.lazyPut<IConfigurationService>(() => ConfigurationService(), fenix: true);

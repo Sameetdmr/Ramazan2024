@@ -41,9 +41,9 @@ class CustomNavigator {
     Get.back<dynamic>(result: result);
   }
 
-  void pushAndRemoveUntil(Widget widget) {
+  Future<void> pushAndRemoveUntil(Widget widget) async {
     Get.addKey(mainNavigatorKey);
-    Get.offAll<void>(widget);
+    await Get.offAll<void>(widget);
   }
 
   void popUntilCurrentTab() {

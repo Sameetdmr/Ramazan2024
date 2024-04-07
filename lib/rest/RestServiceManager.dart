@@ -6,10 +6,14 @@ import 'package:html/dom.dart' as dom;
 import 'dart:async';
 
 import 'package:http/http.dart';
+import 'package:ramadan/services/common/performance/PerformanceMonitoringService.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/exceptions/CustomException.dart';
+import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 
 FirebasePerformance performance = FirebasePerformance.instance;
+
+final IPerformanceMonitoringService _iPerformanceMonitoringService = ServiceLocator().get<IPerformanceMonitoringService>();
 
 class RestServiceManager {
   static const defaultheader = {'Content-Type': 'application/json'};
@@ -22,34 +26,23 @@ class RestServiceManager {
       header.addAll(requestHeader);
     }
 
-    final Trace trace = performance.newTrace('rest_service_call_trace');
-    HttpMetric metric = performance.newHttpMetric(url + endpoint, HttpMethod.Get);
-    await trace.start();
+    HttpMetric metric = await _iPerformanceMonitoringService.startHttpMetric(endpoint, HttpMethod.Get);
 
     try {
       Response response;
-      var uri = Uri.parse(url + endpoint);
+      Uri uri = Uri.parse(url + endpoint);
 
       response = await http.get(uri, headers: header);
-
+      await _iPerformanceMonitoringService.stopHttpMetric(endpoint, metric, response);
       switch (response.statusCode) {
         case 200:
           dom.Document ramadanTimesHtmlSource = dom.Document.html(response.body);
           final ramadanTimesTable = ramadanTimesHtmlSource.querySelectorAll('tr[data-dateint] > td');
-          metric.httpResponseCode = response.statusCode;
-          metric.responsePayloadSize = response.contentLength;
-          trace.setMetric(url + endpoint, response.statusCode);
-          await trace.stop();
           return ramadanTimesTable.map((e) => e.innerHtml.trim()).toList();
         default:
-          metric.httpResponseCode = response.statusCode;
-          metric.responsePayloadSize = response.contentLength;
-          trace.setMetric(url + endpoint, response.statusCode);
-          await trace.stop();
           throw CustomException(StringCommonConstant.anErrorOccured);
       }
     } catch (ex) {
-      await trace.stop();
       throw CustomException(StringCommonConstant.anErrorOccured);
     }
   }

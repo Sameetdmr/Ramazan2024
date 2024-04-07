@@ -8,9 +8,9 @@ import 'package:ramadan/model/domain/TurkeyCity.dart';
 import 'package:ramadan/model/home/PrayerTimeWord.dart';
 import 'package:ramadan/rest/ramadan/RamadanDataProvider.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
+import 'package:ramadan/services/common/core/LocationService.dart';
 import 'package:ramadan/services/common/core/PermissionManager.dart';
 import 'package:ramadan/services/common/notification/LocalNotificationService.dart';
-import 'package:ramadan/services/common/ramadan/LocationService.dart';
 import 'package:ramadan/services/home/TimeFormatterService.dart';
 import 'package:ramadan/ui/ViewModelBase.dart';
 import 'package:ramadan/ui/login/LoginPage.dart';
@@ -45,6 +45,7 @@ class HomePageViewModel extends ViewModelBase {
 
   // Service
   final IAuthService _authService = ServiceLocator().get<IAuthService>();
+  final IPermissionManager _iPermissionManager = ServiceLocator().get<IPermissionManager>();
   final IRamadanDataProvider _ramadanDataProvider = ServiceLocator().get<IRamadanDataProvider>();
   final ILocationService _locationService = ServiceLocator().get<ILocationService>();
   final ILocalNotificationService _localNotificationService = ServiceLocator().get<ILocalNotificationService>();
@@ -105,7 +106,7 @@ class HomePageViewModel extends ViewModelBase {
   Future<void> signOut(BuildContext context) async {
     try {
       await _authService.signOut();
-      CustomNavigator().pushAndRemoveUntil(LoginPage());
+      await CustomNavigator().pushAndRemoveUntil(LoginPage());
       if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.success, StringHomeConstant.successSignOutText);
     } catch (e) {
       if (context.mounted) await CustomSnackBar.showSnackBar(context, CustomSnackBarType.error, StringHomeConstant.errorSignOutText);
@@ -114,7 +115,7 @@ class HomePageViewModel extends ViewModelBase {
   }
 
   Future<void> signIn(BuildContext context) async {
-    CustomNavigator().pushAndRemoveUntil(LoginPage());
+    await CustomNavigator().pushAndRemoveUntil(LoginPage());
   }
 
   Future<void> fillPrayerTimesModel(String cityName) async {
@@ -149,7 +150,7 @@ class HomePageViewModel extends ViewModelBase {
       if (city != null) {
         await fillPrayerTimesModel(city);
       } else {
-        final hasLocationOk = await PermissionManager.checkLocationPermission();
+        final hasLocationOk = await _iPermissionManager.checkLocationPermission();
         if (hasLocationOk) {
           ProjectInfo.instance.cityName.value = await _locationService.getCityNameFromCoordinates();
         } else {

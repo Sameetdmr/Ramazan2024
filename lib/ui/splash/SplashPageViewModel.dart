@@ -15,6 +15,7 @@ class SplashPageViewModel extends ViewModelBase {
     setCurrentScreen('Splash Page');
   }
   final IAppPreferences _appPreferences = ServiceLocator().get<IAppPreferences>();
+  final IPermissionManager _iPermissionManager = ServiceLocator().get<IPermissionManager>();
   final IAppVersionChecker _appVersionChecker = ServiceLocator().get<IAppVersionChecker>();
 
   RxBool isCurrentVersionOk = true.obs;
@@ -41,15 +42,15 @@ class SplashPageViewModel extends ViewModelBase {
     try {
       await _appPreferences.init();
       final isFirstOpen = await _appPreferences.isFirstOpen();
-      final hasNotificationPermission = await PermissionManager.checkAndRequestNotificationPermission();
+      final hasNotificationPermission = await _iPermissionManager.checkAndRequestNotificationPermission();
       await _appPreferences.setNotificationPermission(value: hasNotificationPermission);
 
       if (isFirstOpen) {
         // Uygulama ilk defa mı açıldı.
         await _appPreferences.setFirstOpen(value: false);
-        CustomNavigator().pushAndRemoveUntil(SliderPage());
+        await CustomNavigator().pushAndRemoveUntil(SliderPage());
       } else {
-        CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
+        await CustomNavigator().pushAndRemoveUntil(CustomNavigationPage());
       }
     } catch (e) {
       throw CustomException(StringHomeConstant.loginError);
