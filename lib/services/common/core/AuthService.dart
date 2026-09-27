@@ -33,14 +33,12 @@ final class AuthService implements IAuthService {
       } else {
         return null;
       }
-    } catch (e) {
-      if (e is FirebaseAuthException) {
-        if (e.code == StringCommonConstant.firebaseLoginErrorCode) {
-          return null;
-        } else {
-          throw CustomException(StringCommonConstant.firebaseLoginError);
-        }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == StringCommonConstant.firebaseLoginErrorCode) {
+        return null;
       }
+      throw CustomException(StringCommonConstant.firebaseLoginError);
+    } catch (_) {
       throw CustomException(StringCommonConstant.firebaseLoginError);
     }
   }
@@ -48,35 +46,37 @@ final class AuthService implements IAuthService {
   @override
   Future<User?> signInWithGoogle() async {
     try {
-      final googleSignInAccount = await GoogleSignIn().signIn();
-      final googleSignInAuthentication = await googleSignInAccount!.authentication;
+      final googleUser = await GoogleSignIn.instance.authenticate();
+      final googleAuth = googleUser.authentication;
+      final authorization = await googleUser.authorizationClient.authorizeScopes(
+        const ['email', 'profile', 'openid'],
+      );
 
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
+      final credential = GoogleAuthProvider.credential(
+        accessToken: authorization.accessToken,
+        idToken: googleAuth.idToken,
       );
 
       final userCredential = await _auth.signInWithCredential(credential);
-      if (userCredential.user != null) {
-        return userCredential.user;
-      } else {
-        return null;
-      }
-    } catch (e) {
+      return userCredential.user;
+    } catch (_) {
       throw CustomException(StringCommonConstant.googleLoginError);
     }
   }
 
   @override
   Future<void> signOut() async {
-    await _auth.signOut();
+    await Future.wait([
+      _auth.signOut(),
+      GoogleSignIn.instance.signOut(),
+    ]);
   }
 
   @override
   Future<void> resetPassword(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
-    } catch (e) {
+    } catch (_) {
       throw CustomException(StringCommonConstant.resetPasswordError);
     }
   }
@@ -91,7 +91,7 @@ final class AuthService implements IAuthService {
       } else {
         return null;
       }
-    } catch (e) {
+    } catch (_) {
       throw CustomException(StringCommonConstant.registerError);
     }
   }

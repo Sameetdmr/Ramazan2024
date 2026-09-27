@@ -7,7 +7,9 @@ class ViewModelBase extends GetxController {
   IExceptionHandlingService exceptionHandlingService = ServiceLocator().get<IExceptionHandlingService>();
 
   Future<void> setCurrentScreen(String screenName) async {
-    final analytics = FirebaseAnalytics.instance;
-    await analytics.setCurrentScreen(screenName: screenName, screenClassOverride: screenName);
+    await FirebaseAnalytics.instance.logScreenView(
+      screenName: screenName,
+      screenClass: screenName,
+    );
   }
 }

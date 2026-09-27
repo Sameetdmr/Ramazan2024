@@ -14,10 +14,12 @@ class CustomNavigationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     _customNavigationPageViewModel = Get.put(CustomNavigationPageViewModel());
     return Obx(
-      () => WillPopScope(
-        onWillPop: () async {
-          CustomNavigator().popFromMain();
-          return false;
+      () => PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!didPop) {
+            CustomNavigator().popFromMain();
+          }
         },
         child: GestureDetector(
           child: DefaultTabController(

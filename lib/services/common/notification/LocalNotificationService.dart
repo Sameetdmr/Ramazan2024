@@ -85,7 +85,6 @@ final class LocalNotificationService implements ILocalNotificationService {
         originalTZDateTime,
         await notificationDetails(),
         androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.dateAndTime,
       );
     } catch (e) {

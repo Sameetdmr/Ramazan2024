@@ -1,44 +1,27 @@
-// ignore_for_file: prefer_constructors_over_static_methods
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ramadan/utils/constants/color_constant.dart';
-import 'package:ramadan/utils/theme/CustomTextTheme.dart';
 
-class AppThemeLight {
-  AppThemeLight._init(this.context);
-  final BuildContext context;
+abstract final class AppThemeLight {
+  static ThemeData get theme {
+    final base = ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: ColorTextConstant.forestMaid,
+      ),
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      textTheme: GoogleFonts.nunitoTextTheme(),
+    );
 
-  static AppThemeLight? _instance;
-
-  static AppThemeLight getInstance(BuildContext context) {
-    _instance ??= AppThemeLight._init(context);
-    return _instance!;
+    return base.copyWith(
+      appBarTheme: base.appBarTheme.copyWith(
+        backgroundColor: ColorCommonConstant.transparent,
+        elevation: 0,
+        centerTitle: false,
+      ),
+    );
   }
 
-  ThemeData get theme => ThemeData(
-        primaryTextTheme: _textThemes,
-        textTheme: _textThemes,
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        appBarTheme: appBarTheme,
-      );
-
-  AppBarTheme get appBarTheme {
-    return ThemeData.light().appBarTheme.copyWith(
-          backgroundColor: ColorCommonConstant.transparent,
-          elevation: 0,
-          centerTitle: false,
-        );
-  }
-
-  TextTheme get _textThemes {
-    return ThemeData.light().textTheme.copyWith(
-          bodyMedium: CustomTextTheme(context).bodyMedium,
-          titleMedium: CustomTextTheme(context).titleMedium,
-          labelMedium: CustomTextTheme(context).labelMedium,
-          bodySmall: CustomTextTheme(context).bodySmall,
-          headlineMedium: CustomTextTheme(context).headlineMedium,
-          labelSmall: CustomTextTheme(context).labelSmall,
-        );
-  }
+  static ThemeData getInstance(BuildContext context) => theme;
 }

@@ -1,5 +1,6 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:kartal/kartal.dart';
+import 'package:ramadan/core/config/app_environment.dart';
 import 'package:ramadan/utils/constants/string_constant.dart';
 import 'package:ramadan/utils/exceptions/CustomException.dart';
 
@@ -26,8 +27,11 @@ class AppVersionChecker implements IAppVersionChecker {
       final activeAppVersion = _firebaseRemoteConfig.getString(StringCommonConstant.appVersion);
 
       return isVersionLessThan(currentAppVersion, activeAppVersion);
-    } catch (e) {
-      throw CustomException('message');
+    } catch (_) {
+      if (AppEnvironment.relaxVersionCheck) {
+        return true;
+      }
+      throw CustomException(StringCommonConstant.anErrorOccured);
     }
   }
 

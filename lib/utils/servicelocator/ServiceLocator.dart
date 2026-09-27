@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, unnecessary_lambdas, cascade_invocations
-
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:ramadan/rest/ramadan/RamadanDataProvider.dart';
 import 'package:ramadan/services/common/ExceptionHandlingService.dart';
 import 'package:ramadan/services/common/core/AuthService.dart';
@@ -13,29 +11,31 @@ import 'package:ramadan/services/home/HadithService.dart';
 import 'package:ramadan/utils/initialize/AppPreferences.dart';
 import 'package:ramadan/utils/initialize/AppVersionChecker.dart';
 
+final GetIt getIt = GetIt.instance;
+
 class ServiceLocator {
-  factory ServiceLocator() {
-    return _singleton;
-  }
+  factory ServiceLocator() => _singleton;
 
   ServiceLocator._internal();
   static final ServiceLocator _singleton = ServiceLocator._internal();
 
-  T get<T>() {
-    return Get.find<T>();
-  }
+  T get<T extends Object>() => getIt<T>();
 
   void init() {
-    Get.lazyPut<IExceptionHandlingService>(() => ExceptionHandlingService(), fenix: true);
-    Get.lazyPut<ILocalNotificationService>(() => LocalNotificationService(), fenix: true);
-    Get.lazyPut<IPerformanceMonitoringService>(() => PerformanceMonitoringService(), fenix: true);
-    Get.lazyPut<IAuthService>(() => AuthService(), fenix: true);
-    Get.lazyPut<IPermissionManager>(() => PermissionManager(), fenix: true);
-    Get.lazyPut<IAppVersionChecker>(() => AppVersionChecker(), fenix: true);
-    Get.lazyPut<IAppPreferences>(() => AppPreferences(), fenix: true);
-    Get.lazyPut<IConfigurationService>(() => ConfigurationService(), fenix: true);
-    Get.lazyPut<IRamadanDataProvider>(() => RamadanDataProvider(), fenix: true);
-    Get.lazyPut<ILocationService>(() => LocationService(), fenix: true);
-    Get.lazyPut<IHadithService>(() => HadithService(), fenix: true);
+    if (getIt.isRegistered<IExceptionHandlingService>()) {
+      return;
+    }
+
+    getIt.registerLazySingleton<IExceptionHandlingService>(ExceptionHandlingService.new);
+    getIt.registerLazySingleton<ILocalNotificationService>(LocalNotificationService.new);
+    getIt.registerLazySingleton<IPerformanceMonitoringService>(PerformanceMonitoringService.new);
+    getIt.registerLazySingleton<IAuthService>(AuthService.new);
+    getIt.registerLazySingleton<IPermissionManager>(PermissionManager.new);
+    getIt.registerLazySingleton<IAppVersionChecker>(AppVersionChecker.new);
+    getIt.registerLazySingleton<IAppPreferences>(AppPreferences.new);
+    getIt.registerLazySingleton<IConfigurationService>(ConfigurationService.new);
+    getIt.registerLazySingleton<IRamadanDataProvider>(RamadanDataProvider.new);
+    getIt.registerLazySingleton<ILocationService>(LocationService.new);
+    getIt.registerLazySingleton<IHadithService>(HadithService.new);
   }
 }

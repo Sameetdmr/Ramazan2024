@@ -5,6 +5,19 @@
 
 This application aims to provide users with easy and fast access to daily fasting hours, prayer times, and spiritual content during the month of Ramadan.
 
+## Local development
+
+Requirements: Flutter stable (3.6+), Android SDK and/or Xcode for mobile targets.
+
+```bash
+flutter pub get
+flutter run   # pick a connected device or emulator
+```
+
+For a quick UI check without Firebase on web, use debug mode (`flutter run -d chrome`). Version checks are relaxed in debug when Remote Config is unavailable.
+
+Firebase is configured for **Android** in `lib/firebase_options.dart`. Re-run [FlutterFire CLI](https://firebase.flutter.dev/docs/cli/) for iOS/web/desktop if you need those platforms.
+
 ## Key Features:
 
 1. **Fasting Hours and Prayer Times:** Daily fasting hours and prayer times can be instantly viewed. Organize your worship with accurate and up-to-date information.

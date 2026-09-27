@@ -13,9 +13,9 @@ import 'package:ramadan/utils/servicelocator/ServiceLocator.dart';
 
 FirebasePerformance performance = FirebasePerformance.instance;
 
-final IPerformanceMonitoringService _iPerformanceMonitoringService = ServiceLocator().get<IPerformanceMonitoringService>();
-
 class RestServiceManager {
+  static IPerformanceMonitoringService get _performanceMonitoring =>
+      ServiceLocator().get<IPerformanceMonitoringService>();
   static const defaultheader = {'Content-Type': 'application/json'};
 
   static Future<List<String>> call(String url, String endpoint, Map<String, String>? requestHeader) async {
@@ -26,14 +26,14 @@ class RestServiceManager {
       header.addAll(requestHeader);
     }
 
-    HttpMetric metric = await _iPerformanceMonitoringService.startHttpMetric(endpoint, HttpMethod.Get);
+    HttpMetric metric = await _performanceMonitoring.startHttpMetric(endpoint, HttpMethod.Get);
 
     try {
       Response response;
       Uri uri = Uri.parse(url + endpoint);
 
       response = await http.get(uri, headers: header);
-      await _iPerformanceMonitoringService.stopHttpMetric(endpoint, metric, response);
+      await _performanceMonitoring.stopHttpMetric(endpoint, metric, response);
       switch (response.statusCode) {
         case 200:
           dom.Document ramadanTimesHtmlSource = dom.Document.html(response.body);

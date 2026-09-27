@@ -10,6 +10,11 @@ analyzer:
     - "lib/generated_plugin_registrant.dart"
     - test
     - "lib/firebase_options.dart"
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
 
 linter:
   rules:
